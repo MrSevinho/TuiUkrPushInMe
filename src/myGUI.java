@@ -24,7 +24,6 @@ import java.util.List;
 import static com.company.Task23.*;
 import static com.company.Task4.solveTask4;
 import static com.company.Task5.*;
-import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
 import static java.lang.Math.sqrt;
 
 public class myGUI extends JFrame {
@@ -151,20 +150,37 @@ public class myGUI extends JFrame {
                     final int SATURATION_MIN = 40;
                     final int VALUE_MIN = 100;
 
-                    for (int y = 0; y < hsv.cols(); y++) {
-                        for (int x = 0; x < hsv.rows(); x++) {
-                            // получаем HSV-компоненты пикселя
-                            int H = (int) splitedHsv.get(0).get(x, y)[0];        // Тон
-                            int S = (int) splitedHsv.get(1).get(x, y)[0];          // Интенсивность
-                            int V = (int) splitedHsv.get(2).get(x, y)[0];          // Яркость
-                            //System.out.println(V);
-                            //Если яркость слишком низкая либо Тон не попадает у заданный диапазон, то закрашиваем белым
-                            if ((H >= HUE_MIN && H <= HUE_MAX)) {
-                                double a[] = {(double) (H - HUE_MIN) / HUE_MAX * 255, (double) (H - HUE_MIN) / HUE_MAX * 100, 0};
-                                src.put(x, y, a);
-                            } else if (S <= SATURATION_MIN) {
-                                double a[] = {255, 160, 90};
-                                src.put(x, y, a);
+                    final int COUNT = 50;
+                    int di = hsv.cols() / COUNT, dj = hsv.rows() / COUNT;
+                    for (int i = 0; i < COUNT; ++i) {
+                        for (int j = 0; j < COUNT; ++j) {
+                            List<double[]> cur = new ArrayList<>();
+                            for (int y = di * i; y < di * (i + 1); y++) {
+                                for (int x = dj * j; x < dj * (j + 1); x++) {
+                                    // получаем HSV-компоненты пикселя
+                                    int H = (int) splitedHsv.get(0).get(x, y)[0];        // Тон
+                                    int S = (int) splitedHsv.get(1).get(x, y)[0];          // Интенсивность
+                                    int V = (int) splitedHsv.get(2).get(x, y)[0];          // Яркость
+                                    //System.out.println(V);
+                                    //Если яркость слишком низкая либо Тон не попадает у заданный диапазон, то закрашиваем белым
+
+                                    if ((H >= HUE_MIN && H <= HUE_MAX)) {
+//                                        double[] a = {(double) (H - HUE_MIN) / HUE_MAX * 255, (double) (H - HUE_MIN) / HUE_MAX * 100, 0};
+//                                        src.put(x, y, a);
+                                        double[] v = {x, y, (double) (H - HUE_MIN) / HUE_MAX * 255, (double) (H - HUE_MIN) / HUE_MAX * 100, 0};
+                                        cur.add(v);
+                                    } else if (S <= SATURATION_MIN) {
+//                                        double a[] = {255, 160, 90};
+//                                        src.put(x, y, a);
+                                        double[] v = {x, y, 255, 160, 90};
+                                        cur.add(v);
+                                    }
+                                }
+                            }
+                            if (cur.size() >= di * dj / 2) {
+                                for (double a[] : cur) {
+                                    src.put((int) a[0], (int) a[1], new double[]{a[2], a[3], a[4]});
+                                }
                             }
                         }
                     }
