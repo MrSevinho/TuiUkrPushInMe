@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+   <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFLZwNZ3j2KNxR6_G4kqL4kO34cUxDZyU&sensor=false"></script>
+   <script type="text/javascript">
+    var map;
+	var cnt = 0;
+	var poly;
+    function initialize(zoom = 7, x = 50, y = 32) {
+        var myLatlng = new google.maps.LatLng(x, y);
+
+        var myOptions = {
+            zoom:zoom,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+
+        poly = new google.maps.Polyline({
+            strokeColor: '#000000',
+            strokeOpacity: 1.0,
+            strokeWeight: 3
+        });
+
+        poly.setMap(map);
+
+
+    }
+
+
+
+    function drawPolygon (polygon, col) {
+        var bermudaTriangle = new google.maps.Polygon({
+          paths: polygon,
+          strokeColor: col,
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: col,
+          fillOpacity: 0
+        });
+        bermudaTriangle.setMap(map);
+    }
+    window.onload = function () { initialize() };
+    </script>
+</head>
+<body>
+    <div id="gmap"></div>
+</body>
+</html>

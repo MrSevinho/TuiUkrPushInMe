@@ -18,13 +18,17 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.company.Task23.*;
+import static com.company.Task4.listOfCoords;
 import static com.company.Task4.solveTask4;
 import static com.company.Task5.*;
-import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
 import static java.lang.Math.sqrt;
 
 public class myGUI extends JFrame {
@@ -57,6 +61,7 @@ public class myGUI extends JFrame {
     private JButton buttonTask23FirstImage;
     private JButton buttonTask23SecondImage;
     private JButton buttonTask23FinalImage;
+    private JButton button3;
     private JLabel label2;
     public static JFrame mainFrame;
     boolean task5 = false, task6 = false;
@@ -169,9 +174,9 @@ public class myGUI extends JFrame {
                         }
                     }
 
-                    Mat tmp = new Mat();
-                    int an = 5;
-                    Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(an * 2 + 1, an * 2 + 1), new Point(an, an));
+                    //  Mat tmp = new Mat();
+                    // int an = 5;
+                  /*  Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(an * 2 + 1, an * 2 + 1), new Point(an, an));
                     Imgproc.dilate(src, tmp, element);
                     Imgproc.erode(tmp, tmp, element);
                     Mat grayscaleMat = new Mat();
@@ -180,9 +185,9 @@ public class myGUI extends JFrame {
                     Mat mask = new Mat(grayscaleMat.size(), grayscaleMat.type());
                     Imgproc.threshold(grayscaleMat, mask, 200, 255, Imgproc.THRESH_BINARY_INV);
                     //Финальное изображение предварительно красим в белый цвет
-                    Mat out = new Mat(src.size(), src.type(), Scalar.all(255));
+                    Mat out = new Mat(src.size(), src.type(), Scalar.all(255));*/
                     //Копируем зашумленное изображение через маску
-                    src.copyTo(out, mask);
+                    // src.copyTo(out, mask);
                     try {
                         endImageTask6 = Mat2BufferedImage(src);
                         imageTask6.setIcon(new ImageIcon(endImageTask6));
@@ -390,13 +395,103 @@ public class myGUI extends JFrame {
                     int ret;
                     String path1;
                     Image IMG = null;
+
+                    List<String> lines;
                     ret = fileopen.showDialog(null, "Открыть файл");
                     if (ret == JFileChooser.APPROVE_OPTION) {
                         File file = fileopen.getSelectedFile();
                         path1 = file.getPath();
 
                         try {
-                            IMG = ImageIO.read(new File(path1));
+                            lines = Files.readAllLines(Paths.get(file.getPath()), Charset.defaultCharset());
+                            System.out.println(lines.size() + " ");
+                            int cnt = 0, fff = 0;
+                            for (String s : lines) {
+                                if (s.contains("img_idx")) {
+                                    int currIndex = 10;
+                                    String lat = "", lng = "", rel = "", roll = "", pitch = "", yaw = "";
+                                    for (; currIndex < s.length(); currIndex++) {
+                                        if (s.charAt(currIndex) == 't' && s.charAt(currIndex - 1) == 'a' && s.charAt(currIndex - 2) == 'l') {
+                                            currIndex++;
+                                            currIndex++;
+                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
+                                                if (s.charAt(currIndex) == ',') lat += '.';
+                                                else lat += s.charAt(currIndex);
+                                                currIndex++;
+                                            }
+                                        }
+                                        if (s.charAt(currIndex) == 'g' && s.charAt(currIndex - 1) == 'n' && s.charAt(currIndex - 2) == 'l') {
+                                            currIndex++;
+                                            currIndex++;
+                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
+                                                if (s.charAt(currIndex) == ',') lng += '.';
+                                                else lng += s.charAt(currIndex);
+                                                currIndex++;
+                                            }
+                                        }
+                                        if (s.charAt(currIndex) == 'l' && s.charAt(currIndex - 1) == 'e' && s.charAt(currIndex - 2) == 'r') {
+                                            currIndex++;
+                                            currIndex++;
+                                            rel += s.charAt(currIndex);
+                                            currIndex++;
+                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
+                                                if (s.charAt(currIndex) == ',') rel += '.';
+                                                else rel += s.charAt(currIndex);
+                                                currIndex++;
+                                            }
+                                        }
+                                        if (s.charAt(currIndex) == 'l' && s.charAt(currIndex - 1) == 'l' && s.charAt(currIndex - 2) == 'o' && s.charAt(currIndex - 3) == 'r') {
+                                            currIndex++;
+                                            currIndex++;
+                                            roll += s.charAt(currIndex);
+                                            currIndex++;
+                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
+                                                if (s.charAt(currIndex) == ',') roll += '.';
+                                                else roll += s.charAt(currIndex);
+                                                currIndex++;
+                                            }
+                                        }
+                                        if (s.charAt(currIndex) == 'h' && s.charAt(currIndex - 1) == 'c' && s.charAt(currIndex - 2) == 't' && s.charAt(currIndex - 3) == 'i') {
+                                            currIndex++;
+                                            currIndex++;
+                                            pitch += s.charAt(currIndex);
+                                            currIndex++;
+                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
+                                                if (s.charAt(currIndex) == ',') pitch += '.';
+                                                else pitch += s.charAt(currIndex);
+                                                currIndex++;
+                                            }
+                                        }
+                                        if (s.charAt(currIndex) == 'w' && s.charAt(currIndex - 1) == 'a' && s.charAt(currIndex - 2) == 'y') {
+                                            currIndex++;
+                                            currIndex++;
+                                            yaw += s.charAt(currIndex);
+                                            currIndex++;
+                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
+                                                if (s.charAt(currIndex) == ',') yaw += '.';
+                                                else yaw += s.charAt(currIndex);
+                                                currIndex++;
+                                            }
+                                        }
+                                    }
+                                  /*  System.out.println(lat + " ");
+                                    System.out.println(lng + " ");
+                                    System.out.println(rel + " ");
+                                    System.out.println(roll + " ");
+                                    System.out.println(pitch + " ");
+                                    System.out.println(yaw + " ");*/
+                                    if (cnt > 3)
+                                        photosInfo.receivePhoto(cnt + " ", Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
+                                                Double.parseDouble(lat) / 10000000.0, Double.parseDouble(yaw),
+                                                Double.parseDouble(roll), Double.parseDouble(pitch));
+                                    cnt++;
+                                }
+
+                            }
+                            solveTask4();
+                            System.out.println(cnt + " ");
+                            //  System.out.println("sosi moi sui");
+                            // IMG = ImageIO.read(new File(path1));
                         } catch (IOException a) {
                         }
 
@@ -462,9 +557,7 @@ public class myGUI extends JFrame {
                             verify = true;
                             break;
                         }
-                        photosInfo.receivePhoto(IMG, Double.parseDouble(valueZ), Double.parseDouble(valueX),
-                                Double.parseDouble(valueY), Double.parseDouble(valueYaw),
-                                Double.parseDouble(valueRoll), Double.parseDouble(valuePitch));
+
                     } else {
                         verify = true;
                         break;
@@ -473,7 +566,7 @@ public class myGUI extends JFrame {
                 }
                 if (!verify) {
 
-                    lsImages = solveTask4();
+                    //   lsImages = solveTask4();
                     if (lsImages.size() != 0) {
                         reSizelsImages();
                         currIndexInLsImages = 0;
@@ -572,6 +665,31 @@ public class myGUI extends JFrame {
                 imageTask23.setIcon(new ImageIcon(task23Imgage));
             }
         });
+        button3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+
+                Browser view = new Browser("file:///D:/myProjects/tui_ukr/TuiUkrPushInMe/src/com/company/map.html");
+                //
+                JFrame frame;
+                frame = new JFrame("Карта");
+                frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+                frame.setSize(1200, 775);
+                view.setSize(1200, 775);
+                frame.add(view);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+
+
+            }
+        });
+    }
+
+    public double[] getData() {
+        System.out.println("_______");
+        return listOfCoords;
     }
 
     // 2000
@@ -637,6 +755,19 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
+        String model = System.getProperty("sun.arch.data.model");
+        // the path the .dll lib location D:\myProjects\TUI\opencv
+        String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
+        // check for if system is 64 or 32
+        if (model.equals("64")) {
+            libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
+        }
+        // set the path
+        System.setProperty("java.library.path", libraryPath);
+        Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
+        sysPath.setAccessible(true);
+        sysPath.set(null, null);
+        // load the lib
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
@@ -694,12 +825,17 @@ public class myGUI extends JFrame {
         MyPanel = new JPanel();
         MyPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         MyPanel.setBackground(new Color(-986896));
+        MyPanel.setMinimumSize(new Dimension(818, 800));
+        MyPanel.setPreferredSize(new Dimension(818, 800));
         JTable = new JTabbedPane();
         JTable.setBackground(new Color(-986896));
+        JTable.setTabPlacement(2);
         MyPanel.add(JTable, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         Task1 = new JPanel();
         Task1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         Task1.setBackground(new Color(-986947));
+        Task1.setMinimumSize(new Dimension(814, 800));
+        Task1.setPreferredSize(new Dimension(814, 800));
         JTable.addTab("Завдання 1", Task1);
         TestButt = new JButton();
         TestButt.setText("Запустити");
@@ -736,7 +872,7 @@ public class myGUI extends JFrame {
         buttonTask23FinalImage.setText("Фінальне зображення");
         Task2.add(buttonTask23FinalImage, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Task4 = new JPanel();
-        Task4.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
+        Task4.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 5, new Insets(0, 0, 0, 0), -1, -1));
         Task4.setBackground(new Color(-986947));
         JTable.addTab("Завдання 4", Task4);
         final JLabel label3 = new JLabel();
@@ -745,24 +881,27 @@ public class myGUI extends JFrame {
         imageTask4 = new JLabel();
         imageTask4.setIcon(new ImageIcon(getClass().getResource("/dron.jpg")));
         imageTask4.setText("");
-        Task4.add(imageTask4, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Task4.add(imageTask4, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         button2 = new JButton();
         button2.setBackground(new Color(-7741153));
         button2.setText("Вибрати зображення");
         Task4.add(button2, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         a5TextField = new JTextField();
         a5TextField.setText("5");
-        Task4.add(a5TextField, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 2, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        Task4.add(a5TextField, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 2, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         buttonTask4Previous = new JButton();
         buttonTask4Previous.setBackground(new Color(-1987561));
-        buttonTask4Previous.setEnabled(false);
+        buttonTask4Previous.setEnabled(true);
         buttonTask4Previous.setText("Попередне зображення");
-        Task4.add(buttonTask4Previous, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Task4.add(buttonTask4Previous, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         buttonTask4Next = new JButton();
         buttonTask4Next.setBackground(new Color(-1987561));
         buttonTask4Next.setEnabled(false);
         buttonTask4Next.setText("Наступне зображення");
-        Task4.add(buttonTask4Next, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        Task4.add(buttonTask4Next, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        button3 = new JButton();
+        button3.setText("Button");
+        Task4.add(button3, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Task5 = new JPanel();
         Task5.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 10, new Insets(0, 0, 0, 0), -1, -1));
         Task5.setBackground(new Color(-986947));
@@ -812,6 +951,7 @@ public class myGUI extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return MyPanel;
     }
+
 }
 
 

@@ -7,6 +7,8 @@
     </constraints>
     <properties>
       <background color="-986896"/>
+      <minimumSize width="818" height="800"/>
+      <preferredSize width="818" height="800"/>
     </properties>
     <border type="none"/>
     <children>
@@ -16,6 +18,7 @@
         </constraints>
         <properties>
           <background color="-986896"/>
+          <tabPlacement value="2"/>
         </properties>
         <border type="none"/>
         <children>
@@ -26,6 +29,8 @@
             </constraints>
             <properties>
               <background color="-986947"/>
+              <minimumSize width="814" height="800"/>
+              <preferredSize width="814" height="800"/>
             </properties>
             <border type="none"/>
             <children>
@@ -112,7 +117,7 @@
               </component>
             </children>
           </grid>
-          <grid id="38b02" binding="Task4" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="38b02" binding="Task4" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Завдання 4"/>
@@ -132,7 +137,7 @@
               </component>
               <component id="2ddfd" class="javax.swing.JLabel" binding="imageTask4">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="dron.jpg"/>
@@ -150,7 +155,7 @@
               </component>
               <component id="a144f" class="javax.swing.JTextField" binding="a5TextField" default-binding="true">
                 <constraints>
-                  <grid row="1" column="1" row-span="2" col-span="3" vsize-policy="0" hsize-policy="6" anchor="9" fill="0" indent="0" use-parent-layout="false">
+                  <grid row="1" column="1" row-span="2" col-span="4" vsize-policy="0" hsize-policy="6" anchor="9" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -160,22 +165,30 @@
               </component>
               <component id="e9773" class="javax.swing.JButton" binding="buttonTask4Previous">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-1987561"/>
-                  <enabled value="false"/>
+                  <enabled value="true"/>
                   <text value="Попередне зображення"/>
                 </properties>
               </component>
               <component id="8ef52" class="javax.swing.JButton" binding="buttonTask4Next">
                 <constraints>
-                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-1987561"/>
                   <enabled value="false"/>
                   <text value="Наступне зображення"/>
+                </properties>
+              </component>
+              <component id="57bba" class="javax.swing.JButton" binding="button3" default-binding="true">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Button"/>
                 </properties>
               </component>
             </children>
