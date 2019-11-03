@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <applet id="app"
-           code="Task4.java" >
-   </applet>
    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
    <style type="text/css">
-       html { height: 90% }
-       body { height: 90%; margin: 0; padding: 0 }
-       #map-canvas { height: 90% }
+       html { height: 97% }
+       body { height: 97%; margin: 0; padding: 0 }
+       #map-canvas { height: 97% }
    </style>
    <script type="text/javascript"
            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFLZwNZ3j2KNxR6_G4kqL4kO34cUxDZyU&sensor=false"></script>
@@ -27,7 +24,9 @@
 
         var reader = new FileReader();
         reader.onloadend = function(evt) {
+
             if (evt.target.readyState == FileReader.DONE) {
+
                 text = evt.target.result.toString();
                 data = [];
                 var cur = '';
@@ -39,10 +38,13 @@
                     else cur += text[i];
                 }
                 if (cur.length > 0) data.push(Number(cur));
+
+
+
                 for (var i = 0; i < data.length / 8; i++) {
                     var pathCoords = [];
                     for (var j = 0; j < 4; j++) {
-                       pathCoords.push({lat: data[i * 8 + j * 2 + 1], lng: data[i * 8 + j * 2]});
+                        pathCoords.push({lat: data[i * 8 + j * 2 + 1], lng: data[i * 8 + j * 2]});
                     }
                     drawPolygon(pathCoords, "#FF0000");
                 }
@@ -84,8 +86,8 @@
    </script>
    <style>
  div#gmap {
-        width: 100%;
-        height: 100%;
+        width: 99%;
+        height: 99%;
         border:double;
  }
     </style>
@@ -94,7 +96,7 @@
 	<div id="gmap"></div>
 	<div>
         <input type="file" id="files" name="files[]" multiple />
-	    <button>asd</button>
+	    <button>Draw</button>
     </div>
 </body>
 </html>
