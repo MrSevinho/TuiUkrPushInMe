@@ -1,14 +1,13 @@
 $(function(){
-    var message = window.onload;
     $('.panel1').tabSlideOut({
         tabHandle: '.handle1',
         pathToTabImage: '1.png',
-        imageHeight: '200px',
-        imageWidth: '200px',
+        imageHeight: '52px',
+        imageWidth: '72px',
         tabLocation: 'left',
         speed: 300,
         action: 'click',
-        topPos: '190px',
+        topPos: '200px',
         fixedPosition: true						//Позиционирование блока false - position: absolute, true - position: fixed
     });
 });
@@ -20,8 +19,6 @@ $(function(){
 
         settings.tabHandle = $(settings.tabHandle);
         var obj = this;
-        obj.a = 1;
-        if (settings.pathToTabImage == '3.png') obj.a = 2;
         if (settings.fixedPosition === true) {
             settings.positioning = 'fixed';
         } else {
@@ -112,16 +109,7 @@ $(function(){
             } else if (settings.tabLocation === 'bottom') {
                 obj.animate({bottom: '-' + properties.containerHeight}, settings.speed).removeClass('open');
             }
-            if (obj.a == 2) {
-                document.getElementById("cool1").style.backgroundImage = 'url(3.png)';
-            }
-            else {
-                document.getElementById("cool2").style.backgroundImage = 'url(1.png)';
-            }
-            //alert("open");
-            //settings.tabHandle.animate({background: 'url('+ settings.pathToTabImage +') no-repeat'}, settings.speed);
-            //alert(document.getElementById("cool1").style.backgroundImage);
-            //alert(cool);
+
         };
 
         var slideOut = function() {
@@ -135,18 +123,13 @@ $(function(){
             } else if (settings.tabLocation == 'bottom') {
                 obj.animate({bottom:'-3px'},  settings.speed).addClass('open');
             }
-            if (obj.a == 2) {
-                document.getElementById("cool1").style.backgroundImage = 'url(2.png)';
-            }
-            else {
-                document.getElementById("cool2").style.backgroundImage = 'url(4.png)';
-            }
         };
 
         var clickScreenToClose = function() {
             obj.click(function(event){
                 event.stopPropagation();
             });
+
             $(document).click(function(){
                 slideIn();
             });

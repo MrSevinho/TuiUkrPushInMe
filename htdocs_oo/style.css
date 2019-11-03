@@ -1,7 +1,7 @@
 .panel {
     padding: 20px;
     width: 100%;
-    background: #DEEAFA;
+    background: #ff3333;
     border: #282828 2px solid;
     font-family: Georgia;
 }
@@ -13,7 +13,7 @@ div#gmap {
 .panel1 {
     padding: 10px;
     height: 100%;
-    background: #DEEAFA;
+    background: #ff3333;
     border: #282828 2px solid;
     font-family: Georgia;
 }

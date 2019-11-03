@@ -152,7 +152,7 @@ public class Task23 {
                 }
             }
         }
-        int val1, val2, im;
+        int val1, val2;
         for(int i = 0; i < cnt; ++i) {
             for(int j = 0; j < cnt; ++j) {
                 if(ok[i][j]) {
@@ -203,7 +203,7 @@ public class Task23 {
             if (dist < min_dist) min_dist = dist;
             if (dist > max_dist) max_dist = dist;
         }
-        //System.out.println("min = " + min_dist + " max = " + max_dist); // Находим лучшие совпадения
+        // Находим лучшие совпадения
         LinkedList<DMatch> list_good = new LinkedList<DMatch>();
         for (int i = 0, j = list.size(); i < j; i++) {
             if (list.get(i).distance < min_dist * 3) {
@@ -213,10 +213,6 @@ public class Task23 {
 
         MatOfDMatch mat_good = new MatOfDMatch();
         mat_good.fromList(list_good);
-        // Отрисовываем результат
-     //   Mat outImg = new Mat(img.rows() + img2.rows() + 10, img.cols() + img2.cols() + 10, CvType.CV_8UC3, new Scalar(0, 0, 0));
-    //    Features2d.drawMatches(img, kp_img, img2, kp_img2, mat_good, outImg, new Scalar(255, 255, 255), Scalar.all(-1), new MatOfByte(), Features2d.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS);
-        //panel.setImageFromMat(outImg, ".jpg");
         Collections.sort(list_good, new Comparator<DMatch>() {
             @Override
             public int compare(DMatch lhs, DMatch rhs) {
@@ -246,7 +242,6 @@ public class Task23 {
         Mat h = Calib3d.findHomography(p1, p2, Calib3d.RANSAC, 3);
         if (h.empty()) {
             System.out.println("Не удалось рассчитать матрицу трансформации");
-            // hhjjhjhhjhjhjjhjjhhj
             diffFound = false;
             return;
         }

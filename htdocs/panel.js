@@ -1,14 +1,15 @@
 $(function(){
+    var message = window.onload;
     $('.panel').tabSlideOut({
         tabHandle: '.handle',
-        pathToTabImage: '1.png',
-        imageHeight: '52px',
-        imageWidth: '72px',
+        pathToTabImage: '3.png',
+        imageHeight: '100px',
+        imageWidth: '70px',
         tabLocation: 'top',
         speed: 300,
         action: 'click',
-        topPos: '200px',
-        fixedPosition: false						//Позиционирование блока false - position: absolute, true - position: fixed
+        leftPos: "-30px",//-Number(document.documentElement.clientWidth / 2),
+        fixedPosition: true						//Позиционирование блока false - position: absolute, true - position: fixed
     });
 });
 (function($){
@@ -109,6 +110,7 @@ $(function(){
             } else if (settings.tabLocation === 'bottom') {
                 obj.animate({bottom: '-' + properties.containerHeight}, settings.speed).removeClass('open');
             }
+            document.getElementById("cool1").style.backgroundImage = 'url(2.png)';
 
         };
 
@@ -123,6 +125,8 @@ $(function(){
             } else if (settings.tabLocation == 'bottom') {
                 obj.animate({bottom:'-3px'},  settings.speed).addClass('open');
             }
+            alert(1);
+            document.getElementById("cool1").style.backgroundImage = 'url(3.png)';
         };
 
         var clickScreenToClose = function() {

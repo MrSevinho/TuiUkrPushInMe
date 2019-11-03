@@ -1,9 +1,7 @@
 import com.company.Browser;
-import com.company.JavaObject;
 import com.company.PhotosInfo;
 
 import org.opencv.core.*;
-import org.opencv.core.Point;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import com.company.Task23;
@@ -18,7 +16,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -36,8 +33,6 @@ public class myGUI extends JFrame {
     private JTabbedPane JTable;
     private JPanel Task1;
     private JPanel Task2;
-    // private JLabel Rofloturik;
-    // private JLabel solo332;
     private JButton TestButt;
     private JPanel Task4;
     private JPanel Task5;
@@ -81,7 +76,7 @@ public class myGUI extends JFrame {
                 // mainFrame.setEnabled(false);
 
                 SwingUtilities.invokeLater(() -> {
-                    Browser view = new Browser(pathToFile);
+                    Browser view = new Browser("file:///" + pathToFile + "/htdocs/index.html");
                     //
                     JFrame frame;
                     frame = new JFrame("Карта");
@@ -91,7 +86,6 @@ public class myGUI extends JFrame {
                     frame.add(view);
                     frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
-                    //browser.navigation().loadUrl(pathToFile + "\\htdocs\\index.html");
                     mainFrame.setVisible(false);
                     frame.addWindowListener(new WindowAdapter() {
                         @Override
@@ -162,12 +156,9 @@ public class myGUI extends JFrame {
                             int S = (int) splitedHsv.get(1).get(x, y)[0];          // Интенсивность
                             int V = (int) splitedHsv.get(2).get(x, y)[0];          // Яркость
                             //System.out.println(V);
-                            //Если яркость слишком низкая либо Тон не попадает у заданный диапазон, то закрашиваем белым
-                            if ((H >= HUE_MIN && H <= HUE_MAX)) {
+                            //Если яркость не низкая и тон не попадает у заданный диапазон, то закрашиваем белым
+                            if (H >= HUE_MIN && H <= HUE_MAX && S >= SATURATION_MIN) {
                                 double a[] = {(double) (H - HUE_MIN) / HUE_MAX * 255, (double) (H - HUE_MIN) / HUE_MAX * 100, 0};
-                                src.put(x, y, a);
-                            } else if (S <= SATURATION_MIN) {
-                                double a[] = {255, 160, 90};
                                 src.put(x, y, a);
                             }
                         }
@@ -669,7 +660,7 @@ public class myGUI extends JFrame {
                 super.mouseClicked(e);
 
 
-                Browser view = new Browser("file:///D:/Users/User/Desktop/TuiUkrPushInMe-rofl/src/com/company/map.html");
+                Browser view = new Browser("file:///" + pathToFile + "/src/com/company/map.html");
                 //
                 JFrame frame;
                 frame = new JFrame("Карта");
@@ -749,7 +740,6 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
-
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
@@ -933,7 +923,6 @@ public class myGUI extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return MyPanel;
     }
-
 }
 
 
