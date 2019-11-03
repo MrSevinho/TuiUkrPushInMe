@@ -11,19 +11,24 @@ public class PhotosInfo {
 
     public void receivePhoto(String image, double height, double longitude, double latitude,
                              double yaw, double roll, double pitch){
-        yaw = roll = pitch = 0;
+
+        MathTransform.height = -height;
+
+        double rad = (latitude * Math.PI) / 180;
+        double dist = (40000 * Math.cos(rad) / 360) * 1000;
+
+        roll *= -1;
         Matrices.buildYawMatrix(MathTransform.degreeToRadian(yaw));
         Matrices.buildRollMatrix(MathTransform.degreeToRadian(roll));
         Matrices.buildPitchMatrix(MathTransform.degreeToRadian(pitch));
-        Point3 leftTopCorner = MathTransform.getMatrixPointOnGround(new Point3(0, 0, height/* * 1000*/), "leftTopCorner");
-    Point3 rightTopCorner = MathTransform.getMatrixPointOnGround(new Point3(0, 0, height/* * 1000*/), "rightTopCorner");
-    Point3 leftBottomCorner = MathTransform.getMatrixPointOnGround(new Point3(0, 0, height/* * 1000*/), "leftBottomCorner");
-    Point3 rightBottomCorner = MathTransform.getMatrixPointOnGround(new Point3(0, 0, height/* * 1000*/), "rightBottomCorner");
-
-        photos.add(new Photo(image, height, new Point3(longitude + leftTopCorner.x / 71500.0, latitude + leftTopCorner.y / 111320.0, 0),
-                new Point3(longitude + rightTopCorner.x / 71500.0, latitude + rightTopCorner.y / 111320.0, 0),
-                new Point3(longitude + rightBottomCorner.x / 71500.0, latitude + rightBottomCorner.y / 111320.0, 0),
-                new Point3(longitude + leftBottomCorner.x / 71500.0, latitude + leftBottomCorner.y / 111320.0, 0)));
+        Point3 leftTopCorner = MathTransform.getMatrixPointOnGround(new Point3(0, 0, 0), "leftTopCorner");
+        Point3 rightTopCorner = MathTransform.getMatrixPointOnGround(new Point3(0, 0, 0), "rightTopCorner");
+        Point3 leftBottomCorner = MathTransform.getMatrixPointOnGround(new Point3(0, 0, 0), "leftBottomCorner");
+        Point3 rightBottomCorner = MathTransform.getMatrixPointOnGround(new Point3(0, 0, 0), "rightBottomCorner");
+        photos.add(new Photo(image, height, new Point3(longitude + leftTopCorner.x / dist, latitude + leftTopCorner.y / 111320.0, 0),
+                new Point3(longitude + rightTopCorner.x / dist, latitude + rightTopCorner.y / 111320.0, 0),
+                new Point3(longitude + rightBottomCorner.x / dist, latitude + rightBottomCorner.y / 111320.0, 0),
+                new Point3(longitude + leftBottomCorner.x / dist, latitude + leftBottomCorner.y / 111320.0, 0)));
 }
     public static void clearPhotos(){
         photos.clear();

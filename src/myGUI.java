@@ -473,16 +473,15 @@ public class myGUI extends JFrame {
                                             }
                                         }
                                     }
-                                    System.out.println(lat + " lat");
-                                    System.out.println(lng + " lng");
+                                    System.out.println(Double.parseDouble(lat) / 10000000.0 + " lat");
+                                    System.out.println(Double.parseDouble(lng) / 10000000.0 + " lng");
                                     System.out.println(rel + " rel");
                                     System.out.println(roll + " roll");
                                     System.out.println(pitch + " pitch");
                                     System.out.println(yaw + " yaw");
-                                    if (cnt > 3)
-                                        photosInfo.receivePhoto(cnt + " ", Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
-                                                Double.parseDouble(lat) / 10000000.0, Double.parseDouble(yaw),
-                                                Double.parseDouble(roll), Double.parseDouble(pitch));
+                                    photosInfo.receivePhoto(cnt + " ", Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
+                                            Double.parseDouble(lat) / 10000000.0, Double.parseDouble(yaw),
+                                            Double.parseDouble(roll), Double.parseDouble(pitch));
                                     cnt++;
                                 }
 
@@ -670,7 +669,7 @@ public class myGUI extends JFrame {
                 super.mouseClicked(e);
 
 
-                Browser view = new Browser("file:///D:/TUI2/TuiUkrPushInMe-rofl/src/com/company/map.html");
+                Browser view = new Browser("file:///D:/Users/User/Desktop/TuiUkrPushInMe-rofl/src/com/company/map.html");
                 //
                 JFrame frame;
                 frame = new JFrame("Карта");

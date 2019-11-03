@@ -6,8 +6,8 @@ import org.opencv.core.Point3;
 public class MathTransform {
     public static double matrixWidth = 9;
     public static double matrixHeight = 6;
-    public static double focalLength = 2;
-
+    public static double focalLength = 8;
+    public static double height;
     public static double degreeToRadian(double degree){
         return degree * Math.PI / 180;
     }
@@ -56,15 +56,15 @@ public class MathTransform {
         groundMatrix.z = 0;
 
         double[][] resultMatrix = multiply(Matrices.yawMatrix, multiply(Matrices.rollMatrix, Matrices.pitchMatrix));
-        double[][] focusMatrix = multiply(resultMatrix, getMatrixPointOnAir(centerMatrix, "focus"));
-        double[][] airMatrix = new double[4][1];
 
-        airMatrix = multiply(resultMatrix, getMatrixPointOnAir(centerMatrix, point));
+        double[][] focusMatrix = multiply(resultMatrix, getMatrixPointOnAir(centerMatrix, "focus"));
+        double[][] airMatrix = multiply(resultMatrix, getMatrixPointOnAir(centerMatrix, point));
+
         Point3 directVector = getDirectingVector(airMatrix, focusMatrix);
 
-        double param = -airMatrix[2][0] / directVector.z;
-        groundMatrix.x = airMatrix[0][0] + directVector.x * param;
-        groundMatrix.y = airMatrix[1][0] + directVector.y * param;
+        double param = (height - focusMatrix[2][0]) / directVector.z;
+        groundMatrix.x = focusMatrix[0][0] + directVector.x * param;
+        groundMatrix.y = focusMatrix[1][0] + directVector.y * param;
 
         return groundMatrix;
     }
@@ -73,29 +73,29 @@ public class MathTransform {
         double[][] cornerMatrix = new double[4][1];
 
         if(point == "rightTopCorner"){
-            cornerMatrix[0][0] = center.x + convertMmToM(matrixWidth);
-            cornerMatrix[1][0] = center.y + convertMmToM(matrixHeight);
+            cornerMatrix[0][0] = center.x + convertMmToM(matrixWidth) / 2;
+            cornerMatrix[1][0] = center.y + convertMmToM(matrixHeight) / 2;
             cornerMatrix[2][0] = center.z;
             cornerMatrix[3][0] = 1;
         }
 
         if(point == "leftTopCorner"){
-            cornerMatrix[0][0] = center.x - convertMmToM(matrixWidth);
-            cornerMatrix[1][0] = center.y + convertMmToM(matrixHeight);
+            cornerMatrix[0][0] = center.x - convertMmToM(matrixWidth) / 2;
+            cornerMatrix[1][0] = center.y + convertMmToM(matrixHeight) / 2;
             cornerMatrix[2][0] = center.z;
             cornerMatrix[3][0] = 1;
         }
 
         if(point == "rightBottomCorner"){
-            cornerMatrix[0][0] = center.x + convertMmToM(matrixWidth);
-            cornerMatrix[1][0] = center.y - convertMmToM(matrixHeight);
+            cornerMatrix[0][0] = center.x + convertMmToM(matrixWidth) / 2;
+            cornerMatrix[1][0] = center.y - convertMmToM(matrixHeight) / 2;
             cornerMatrix[2][0] = center.z;
             cornerMatrix[3][0] = 1;
         }
 
         if(point == "leftBottomCorner"){
-            cornerMatrix[0][0] = center.x - convertMmToM(matrixWidth);
-            cornerMatrix[1][0] = center.y - convertMmToM(matrixHeight);
+            cornerMatrix[0][0] = center.x - convertMmToM(matrixWidth) / 2;
+            cornerMatrix[1][0] = center.y - convertMmToM(matrixHeight) / 2;
             cornerMatrix[2][0] = center.z;
             cornerMatrix[3][0] = 1;
         }
