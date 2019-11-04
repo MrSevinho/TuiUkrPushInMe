@@ -1,8 +1,11 @@
 package com.company;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +14,12 @@ import java.util.List;
 public class Task4 {
     public static double[] listOfCoords;
     public static boolean ok;
-    public static void solveTask4(){
+    public static List<Image> lsImages;
+    public static String pathToDocument = "";
+    public static List<Integer> listOfIndex = new ArrayList<>();
+    public static boolean check = false;
+    public static void solveTask4() throws Exception {
+        check = true;
         int n = PhotosInfo.photos.size();
         List<Area> areaList = new ArrayList<>();
         Image[] arrayOfImages = new Image[n];
@@ -59,7 +67,7 @@ public class Task4 {
         if(ok) {
             listOfCoords = new double[n * 8];
             for(int i = 0; i < PhotosInfo.photos.size(); ++i) {
-                //    System.out.print(a[i] + " ");
+                listOfIndex.add(a[i]);
                 listOfCoords[currIndex] = ( PhotosInfo.photos.get(a[i]).getLeftBottomCorner().x);  currIndex++;
                 listOfCoords[currIndex] = ( PhotosInfo.photos.get(a[i]).getLeftBottomCorner().y);  currIndex++;
                 listOfCoords[currIndex] = ( PhotosInfo.photos.get(a[i]).getRightBottomCorner().x);  currIndex++;
@@ -77,7 +85,7 @@ public class Task4 {
         else {
             listOfCoords = new double[n * 8];
             for(int i = 0; i < PhotosInfo.photos.size(); ++i) {
-                //    System.out.print(a[i] + " ");
+                listOfIndex.add(a[i]);
                 listOfCoords[currIndex] = ( PhotosInfo.photos.get(a[i]).getLeftBottomCorner().x);  currIndex++;
                 listOfCoords[currIndex] = ( PhotosInfo.photos.get(a[i]).getLeftBottomCorner().y);  currIndex++;
                 listOfCoords[currIndex] = ( PhotosInfo.photos.get(a[i]).getRightBottomCorner().x);  currIndex++;

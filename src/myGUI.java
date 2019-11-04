@@ -25,9 +25,14 @@ import java.util.List;
 import static com.company.Functions.Mat2BufferedImage;
 import static com.company.Functions.reSizeOnlyOne;
 import static com.company.Task23.*;
+import static com.company.Task23.img;
 import static com.company.Task4.solveTask4;
 import static com.company.Task5.*;
 import static java.lang.Math.sqrt;
+import static com.company.Task4.lsImages;
+import static com.company.Task4.pathToDocument;
+import static com.company.Task4.listOfIndex;
+import static com.company.Task4.check;
 
 public class myGUI extends JFrame {
     private JPanel MyPanel;
@@ -60,10 +65,10 @@ public class myGUI extends JFrame {
     boolean task5 = false, task6 = false;
     BufferedImage startImageTask6 = null, endImageTask6 = null,
             task23Imgage = null, task23ImageFirst = null, task23ImageSecond = null;
-    List<Image> lsImages;
     int currIndexInLsImages = 0;
     public static String pathToFile = new File("").getAbsolutePath();
     Functions functions = new Functions();
+
 
     public myGUI() {
         mainFrame.addWindowListener(new WindowAdapter() {
@@ -72,10 +77,10 @@ public class myGUI extends JFrame {
                 super.windowOpened(e);
                 BufferedImage img = null, img2 = null, img3 = null, img4 = null, img5 = null;
                 JLabel lbl = new JLabel("Побудова маршруту дрона");
-                JLabel lbl2 = new JLabel("Найчиткіше зображення");
+                JLabel lbl2 = new JLabel("Найчіткіше зображення");
                 JLabel lbl3 = new JLabel("Послідовність зображень");
-                JLabel lbl4 = new JLabel("Знаходження відміностей");
-                JLabel lbl5 = new JLabel("Рекомендованний полив");
+                JLabel lbl4 = new JLabel("Знаходження відмінностей");
+                JLabel lbl5 = new JLabel("Рекомендований полив");
                 ImageIcon icon, icon2, icon3, icon4, icon5;
                 try {
                     img = ImageIO.read(new File(pathToFile + "\\src\\first.png"));
@@ -373,6 +378,15 @@ public class myGUI extends JFrame {
                 if (ret == JFileChooser.APPROVE_OPTION) {
                     File file = fileopen.getSelectedFile();
                     try {
+                        String s = file.getPath();
+                        int index = s.length() - 1;
+
+                        while (s.charAt(index) != pathToFile.charAt(2))
+                            index--;
+                        for (int i = 0; i <= index; i++)
+                            pathToDocument += s.charAt(i);
+
+                        System.out.println(pathToDocument);
                         lines = Files.readAllLines(Paths.get(file.getPath()), Charset.defaultCharset());
                         System.out.println(lines.size() + " ");
                         functions.readInfo(lines);
@@ -382,7 +396,16 @@ public class myGUI extends JFrame {
 
                 }
                 if (!verify) {
-                    solveTask4();
+                    try {
+                        //listOfIndex = new ArrayList<>();
+                        if (check) {
+                            listOfIndex.clear();
+                        }
+                        solveTask4();
+                        System.out.println(listOfIndex.size());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                     button3.setEnabled(true);
                     buttonTask4Previous.setEnabled(true);
                     buttonTask4Next.setEnabled(true);
@@ -406,12 +429,19 @@ public class myGUI extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 currIndexInLsImages++;
-                if (currIndexInLsImages + 1 == lsImages.size()) buttonTask4Next.setEnabled(false);
+                if (currIndexInLsImages + 1 == listOfIndex.size()) buttonTask4Next.setEnabled(false);
                 buttonTask4Previous.setEnabled(true);
-                if (currIndexInLsImages >= 0 && currIndexInLsImages < lsImages.size())
-                    imageTask4.setIcon(new ImageIcon(lsImages.get(currIndexInLsImages)));
-                if (currIndexInLsImages >= lsImages.size()) {
-                    currIndexInLsImages = lsImages.size() - 1;
+                if (currIndexInLsImages >= 0 && currIndexInLsImages < listOfIndex.size()) {
+                    try {
+                        BufferedImage img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (listOfIndex.get(currIndexInLsImages) + 1) + ".JPG"));
+                        img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
+                        imageTask4.setIcon(new ImageIcon(img));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                if (currIndexInLsImages >= listOfIndex.size()) {
+                    currIndexInLsImages = listOfIndex.size() - 1;
                     buttonTask4Next.setEnabled(false);
                 }
 
@@ -424,8 +454,16 @@ public class myGUI extends JFrame {
                 currIndexInLsImages--;
                 if (currIndexInLsImages <= 0) buttonTask4Previous.setEnabled(false);
                 buttonTask4Next.setEnabled(true);
-                if (currIndexInLsImages >= 0 && currIndexInLsImages < lsImages.size())
-                    imageTask4.setIcon(new ImageIcon(lsImages.get(currIndexInLsImages)));
+                if (currIndexInLsImages >= 0 && currIndexInLsImages < listOfIndex.size()) {
+                    BufferedImage img = null;
+                    try {
+                        img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (listOfIndex.get(currIndexInLsImages) + 1) + ".JPG"));
+                        img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
+                        imageTask4.setIcon(new ImageIcon(img));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
                 if (currIndexInLsImages <= 0) {
                     currIndexInLsImages = 0;
                     buttonTask4Previous.setEnabled(false);
@@ -481,19 +519,17 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
-        String model = System.getProperty("sun.arch.data.model");
-        String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
+        /*String model = System.getProperty("sun.arch.data.model");
+        String libraryPath = "D:\\Users\\User\\Desktop\\opencv\\build\\java\\x86\\";
         if (model.equals("64")) {
-            libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
+            libraryPath = "D:\\Users\\User\\Desktop\\opencv\\build\\java\\x64\\";
         }
         System.setProperty("java.library.path", libraryPath);
         Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
         sysPath.setAccessible(true);
-        sysPath.set(null, null);
+        sysPath.set(null, null);*/
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
-
-
 
 
     public static void main(String[] args) throws Exception {
