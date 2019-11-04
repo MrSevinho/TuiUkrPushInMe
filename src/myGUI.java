@@ -1,4 +1,5 @@
 import com.company.Browser;
+import com.company.Functions;
 import com.company.PhotosInfo;
 
 import org.opencv.core.*;
@@ -12,23 +13,23 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.company.Functions.Mat2BufferedImage;
+import static com.company.Functions.reSizeOnlyOne;
 import static com.company.Task23.*;
 import static com.company.Task4.solveTask4;
 import static com.company.Task5.*;
 import static java.lang.Math.sqrt;
 
 public class myGUI extends JFrame {
-    private JButton clickMeButton;
     private JPanel MyPanel;
     private JTabbedPane JTable;
     private JPanel Task1;
@@ -38,7 +39,6 @@ public class myGUI extends JFrame {
     private JPanel Task5;
     private JPanel Task6;
     private JButton button1;
-    private JButton buttonReadImages;
     private JButton buttonSolveTask23;
     private JButton buttonReadImages2;
     private JButton buttonSolveTask5;
@@ -48,7 +48,6 @@ public class myGUI extends JFrame {
     private JLabel imageTask6;
     private JButton task6btnChange;
     private JButton button2;
-    private JTextField a5TextField;
     private JLabel imageTask4;
     private JButton buttonTask4Previous;
     private JButton buttonTask4Next;
@@ -61,23 +60,55 @@ public class myGUI extends JFrame {
     boolean task5 = false, task6 = false;
     BufferedImage startImageTask6 = null, endImageTask6 = null,
             task23Imgage = null, task23ImageFirst = null, task23ImageSecond = null;
-    PhotosInfo photosInfo = new PhotosInfo();
     List<Image> lsImages;
     int currIndexInLsImages = 0;
     public static String pathToFile = new File("").getAbsolutePath();
-
+    Functions functions = new Functions();
 
     public myGUI() {
-
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                super.windowOpened(e);
+                BufferedImage img = null, img2 = null, img3 = null, img4 = null, img5 = null;
+                JLabel lbl = new JLabel("Побудова маршруту дрона");
+                JLabel lbl2 = new JLabel("Найчиткіше зображення");
+                JLabel lbl3 = new JLabel("Послідовність зображень");
+                JLabel lbl4 = new JLabel("Знаходження відміностей");
+                JLabel lbl5 = new JLabel("Рекомендованний полив");
+                ImageIcon icon, icon2, icon3, icon4, icon5;
+                try {
+                    img = ImageIO.read(new File(pathToFile + "\\src\\first.png"));
+                    img2 = ImageIO.read(new File(pathToFile + "\\src\\secondthird.png"));
+                    img3 = ImageIO.read(new File(pathToFile + "\\src\\fourth.png"));
+                    img4 = ImageIO.read(new File(pathToFile + "\\src\\fifth.png"));
+                    img5 = ImageIO.read(new File(pathToFile + "\\src\\sixth.png"));
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                icon = new ImageIcon(img);
+                icon2 = new ImageIcon(img2);
+                icon3 = new ImageIcon(img3);
+                icon4 = new ImageIcon(img4);
+                icon5 = new ImageIcon(img5);
+                lbl.setIcon(icon);
+                lbl2.setIcon(icon2);
+                lbl3.setIcon(icon3);
+                lbl4.setIcon(icon4);
+                lbl5.setIcon(icon5);
+                JTable.setTabComponentAt(0, lbl);
+                JTable.setTabComponentAt(1, lbl2);
+                JTable.setTabComponentAt(2, lbl3);
+                JTable.setTabComponentAt(3, lbl4);
+                JTable.setTabComponentAt(4, lbl5);
+            }
+        });
         TestButt.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                // mainFrame.setEnabled(false);
-
                 SwingUtilities.invokeLater(() -> {
                     Browser view = new Browser("file:///" + pathToFile + "/htdocs/index.html");
-                    //
                     JFrame frame;
                     frame = new JFrame("Карта");
                     frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -91,11 +122,7 @@ public class myGUI extends JFrame {
                         @Override
                         public void windowClosing(WindowEvent e) {
                             super.windowClosing(e);
-                            //mainFrame.setEnabled(true);
                             mainFrame.setVisible(true);
-                            System.out.println("ralf");
-
-
                         }
                     });
                 });
@@ -143,41 +170,19 @@ public class myGUI extends JFrame {
                     List<Mat> splitedHsv = new ArrayList<>();
                     Imgproc.cvtColor(src, hsv, Imgproc.COLOR_BGR2HSV);
                     Core.split(hsv, splitedHsv);
-
                     final int HUE_MIN = 7;
                     final int HUE_MAX = 30;
                     final int SATURATION_MIN = 40;
-                    final int VALUE_MIN = 100;
-
                     for (int y = 0; y < hsv.cols(); y++) {
                         for (int x = 0; x < hsv.rows(); x++) {
-                            // получаем HSV-компоненты пикселя
-                            int H = (int) splitedHsv.get(0).get(x, y)[0];        // Тон
-                            int S = (int) splitedHsv.get(1).get(x, y)[0];          // Интенсивность
-                            int V = (int) splitedHsv.get(2).get(x, y)[0];          // Яркость
-                            //System.out.println(V);
-                            //Если яркость не низкая и тон не попадает у заданный диапазон, то закрашиваем белым
+                            int H = (int) splitedHsv.get(0).get(x, y)[0];
+                            int S = (int) splitedHsv.get(1).get(x, y)[0];
                             if (H >= HUE_MIN && H <= HUE_MAX && S >= SATURATION_MIN) {
                                 double a[] = {(double) (H - HUE_MIN) / HUE_MAX * 255, (double) (H - HUE_MIN) / HUE_MAX * 100, 0};
                                 src.put(x, y, a);
                             }
                         }
                     }
-
-                    //  Mat tmp = new Mat();
-                    // int an = 5;
-                  /*  Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(an * 2 + 1, an * 2 + 1), new Point(an, an));
-                    Imgproc.dilate(src, tmp, element);
-                    Imgproc.erode(tmp, tmp, element);
-                    Mat grayscaleMat = new Mat();
-                    Imgproc.cvtColor(tmp, grayscaleMat, Imgproc.COLOR_BGR2HSV);
-                    //Делаем бинарную маску
-                    Mat mask = new Mat(grayscaleMat.size(), grayscaleMat.type());
-                    Imgproc.threshold(grayscaleMat, mask, 200, 255, Imgproc.THRESH_BINARY_INV);
-                    //Финальное изображение предварительно красим в белый цвет
-                    Mat out = new Mat(src.size(), src.type(), Scalar.all(255));*/
-                    //Копируем зашумленное изображение через маску
-                    // src.copyTo(out, mask);
                     try {
                         endImageTask6 = Mat2BufferedImage(src);
                         imageTask6.setIcon(new ImageIcon(endImageTask6));
@@ -359,237 +364,40 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String b = a5TextField.getText();
-                int f = 0;
-                boolean checktmp = false;
-                for (int i = 0; i < b.length(); i++) {
-                    f = f * 10 + (int) (b.charAt(i) - '0');
-                    if (b.charAt(i) < '0' || b.charAt(i) > '9') {
-                        checktmp = true;
-                        break;
-                    }
-                }
                 boolean verify = false;
-                if (checktmp) f = 0;
-                if (f < 2) {
-                    verify = true;
-                    f = 0;
-                }
-                if (f > 9) {
-                    verify = true;
-                    f = 0;
-                }
                 PhotosInfo.clearPhotos();
-                for (int i = 0; i < f; i++) {
-                    JFileChooser fileopen = new JFileChooser();
-                    int ret;
-                    String path1;
-                    Image IMG = null;
-
-                    List<String> lines;
-                    ret = fileopen.showDialog(null, "Открыть файл");
-                    if (ret == JFileChooser.APPROVE_OPTION) {
-                        File file = fileopen.getSelectedFile();
-                        path1 = file.getPath();
-
-                        try {
-                            lines = Files.readAllLines(Paths.get(file.getPath()), Charset.defaultCharset());
-                            System.out.println(lines.size() + " ");
-                            int cnt = 0, fff = 0;
-                            for (String s : lines) {
-                                if (s.contains("img_idx")) {
-                                    int currIndex = 10;
-                                    String lat = "", lng = "", rel = "", roll = "", pitch = "", yaw = "";
-                                    for (; currIndex < s.length(); currIndex++) {
-                                        if (s.charAt(currIndex) == 't' && s.charAt(currIndex - 1) == 'a' && s.charAt(currIndex - 2) == 'l') {
-                                            currIndex++;
-                                            currIndex++;
-                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
-                                                if (s.charAt(currIndex) == ',') lat += '.';
-                                                else lat += s.charAt(currIndex);
-                                                currIndex++;
-                                            }
-                                        }
-                                        if (s.charAt(currIndex) == 'g' && s.charAt(currIndex - 1) == 'n' && s.charAt(currIndex - 2) == 'l') {
-                                            currIndex++;
-                                            currIndex++;
-                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
-                                                if (s.charAt(currIndex) == ',') lng += '.';
-                                                else lng += s.charAt(currIndex);
-                                                currIndex++;
-                                            }
-                                        }
-                                        if (s.charAt(currIndex) == 'l' && s.charAt(currIndex - 1) == 'e' && s.charAt(currIndex - 2) == 'r') {
-                                            currIndex++;
-                                            currIndex++;
-                                            rel += s.charAt(currIndex);
-                                            currIndex++;
-                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
-                                                if (s.charAt(currIndex) == ',') rel += '.';
-                                                else rel += s.charAt(currIndex);
-                                                currIndex++;
-                                            }
-                                        }
-                                        if (s.charAt(currIndex) == 'l' && s.charAt(currIndex - 1) == 'l' && s.charAt(currIndex - 2) == 'o' && s.charAt(currIndex - 3) == 'r') {
-                                            currIndex++;
-                                            currIndex++;
-                                            roll += s.charAt(currIndex);
-                                            currIndex++;
-                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
-                                                if (s.charAt(currIndex) == ',') roll += '.';
-                                                else roll += s.charAt(currIndex);
-                                                currIndex++;
-                                            }
-                                        }
-                                        if (s.charAt(currIndex) == 'h' && s.charAt(currIndex - 1) == 'c' && s.charAt(currIndex - 2) == 't' && s.charAt(currIndex - 3) == 'i') {
-                                            currIndex++;
-                                            currIndex++;
-                                            pitch += s.charAt(currIndex);
-                                            currIndex++;
-                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
-                                                if (s.charAt(currIndex) == ',') pitch += '.';
-                                                else pitch += s.charAt(currIndex);
-                                                currIndex++;
-                                            }
-                                        }
-                                        if (s.charAt(currIndex) == 'w' && s.charAt(currIndex - 1) == 'a' && s.charAt(currIndex - 2) == 'y') {
-                                            currIndex++;
-                                            currIndex++;
-                                            yaw += s.charAt(currIndex);
-                                            currIndex++;
-                                            while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
-                                                if (s.charAt(currIndex) == ',') yaw += '.';
-                                                else yaw += s.charAt(currIndex);
-                                                currIndex++;
-                                            }
-                                        }
-                                    }
-                                    System.out.println(Double.parseDouble(lat) / 10000000.0 + " lat");
-                                    System.out.println(Double.parseDouble(lng) / 10000000.0 + " lng");
-                                    System.out.println(rel + " rel");
-                                    System.out.println(roll + " roll");
-                                    System.out.println(pitch + " pitch");
-                                    System.out.println(yaw + " yaw");
-                                    photosInfo.receivePhoto(cnt + " ", Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
-                                            Double.parseDouble(lat) / 10000000.0, Double.parseDouble(yaw),
-                                            Double.parseDouble(roll), Double.parseDouble(pitch));
-                                    cnt++;
-                                }
-
-                            }
-                            solveTask4();
-                            System.out.println(cnt + " ");
-                            //  System.out.println("sosi moi sui");
-                            // IMG = ImageIO.read(new File(path1));
-                        } catch (IOException a) {
-                        }
-
-                    }
-                    if (IMG == null) {
+                JFileChooser fileopen = new JFileChooser();
+                int ret;
+                List<String> lines;
+                ret = fileopen.showDialog(null, "Открыть файл");
+                if (ret == JFileChooser.APPROVE_OPTION) {
+                    File file = fileopen.getSelectedFile();
+                    try {
+                        lines = Files.readAllLines(Paths.get(file.getPath()), Charset.defaultCharset());
+                        System.out.println(lines.size() + " ");
+                        functions.readInfo(lines);
+                    } catch (IOException a) {
                         verify = true;
-                        break;
-                    }
-                    JTextField field1 = new JTextField();
-                    JTextField field2 = new JTextField();
-                    JTextField field3 = new JTextField();
-                    JTextField field4 = new JTextField();
-                    JTextField field5 = new JTextField();
-                    JTextField field6 = new JTextField();
-                    field1.setText("0");
-                    field2.setText("0");
-                    field3.setText("1");
-                    field4.setText("0");
-                    field5.setText("0");
-                    field6.setText("0");
-                    Object[] message = {
-                            "Довгота", field1,
-                            "Широта", field2,
-                            "Висота(м)", field3,
-                            "Рискання", field4,
-                            "Крен", field5,
-                            "Тангаж", field6,
-                    };
-                    int option = JOptionPane.showConfirmDialog(null, message, "Введіть значення", JOptionPane.OK_CANCEL_OPTION);
-                    if (option == JOptionPane.OK_OPTION) {
-                        String valueX = field1.getText().replace(',', '.');
-                        String valueY = field2.getText().replace(',', '.');
-                        String valueZ = field3.getText().replace(',', '.');
-                        String valueYaw = field4.getText().replace(',', '.');
-                        String valueRoll = field5.getText().replace(',', '.');
-                        String valuePitch = field6.getText().replace(',', '.');
-                        if (!checkDouble(valueX) || !checkDouble(valueY) || !checkDouble(valueZ) ||
-                                !checkDouble(valueYaw) || !checkDouble(valueRoll) || !checkDouble(valuePitch)) {
-                            verify = true;
-                            break;
-                        }
-                        if (Double.parseDouble(valueZ) <= 0 || Double.parseDouble(valueZ) > 2000) {
-                            verify = true;
-                            break;
-                        }
-                        if (Double.parseDouble(valueX) < -180 || Double.parseDouble(valueX) > 180) {
-                            verify = true;
-                            break;
-                        }
-                        if (Double.parseDouble(valueY) < -90 || Double.parseDouble(valueY) > 90) {
-                            verify = true;
-                            break;
-                        }
-                        if (Double.parseDouble(valueYaw) < -50 || Double.parseDouble(valueYaw) > 50) {
-                            verify = true;
-                            break;
-                        }
-                        if (Double.parseDouble(valueRoll) < -50 || Double.parseDouble(valueRoll) > 50) {
-                            verify = true;
-                            break;
-                        }
-                        if (Double.parseDouble(valuePitch) < -50 || Double.parseDouble(valuePitch) > 50) {
-                            verify = true;
-                            break;
-                        }
-
-                    } else {
-                        verify = true;
-                        break;
                     }
 
                 }
                 if (!verify) {
-
-                    //   lsImages = solveTask4();
-                    if (lsImages.size() != 0) {
-                        reSizelsImages();
-                        currIndexInLsImages = 0;
-                        buttonTask4Next.setEnabled(true);
-                        buttonTask4Previous.setEnabled(false);
-                        try {
-                            imageTask4.setIcon(new ImageIcon(lsImages.get(0)));
-                        } catch (Exception e1) {
-                            e1.printStackTrace();
-                        }
-                    } else {
-                        buttonTask4Next.setEnabled(false);
-                        buttonTask4Previous.setEnabled(false);
-
-                        JOptionPane.showMessageDialog(myGUI.this,
-                                new String[]{"Не можливо побудувати послідовність зображень"},
-                                "Відповідь",
-                                JOptionPane.WARNING_MESSAGE);
-                    }
+                    solveTask4();
+                    button3.setEnabled(true);
+                    buttonTask4Previous.setEnabled(true);
+                    buttonTask4Next.setEnabled(true);
                 } else {
                     JOptionPane.showMessageDialog(myGUI.this,
                             new String[]{"Не коректні вхідні данні"},
                             "Помилка",
                             JOptionPane.ERROR_MESSAGE);
                     JOptionPane.showMessageDialog(myGUI.this,
-                            new String[]{"Кількість зображень має бути натуральним числом, яке більше за 1 та менше за 10",
-                                    "Ви маєте вибрати зображення",
-                                    "Висота повина бути від 0 до 2000",
-                                    "Широта має бути від -90 до 90",
-                                    "Довгота має бути від -180 до 180",
-                                    "Кути мають бути від -50 до 50"},
+                            new String[]{"Ви маєте вибрати текстовий файл з данними",},
                             "Вхідні дані",
                             JOptionPane.INFORMATION_MESSAGE);
-
+                    button3.setEnabled(false);
+                    buttonTask4Previous.setEnabled(false);
+                    buttonTask4Next.setEnabled(false);
                 }
             }
         });
@@ -658,10 +466,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
-
                 Browser view = new Browser("file:///" + pathToFile + "/src/com/company/map.html");
-                //
                 JFrame frame;
                 frame = new JFrame("Карта");
                 frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -670,94 +475,26 @@ public class myGUI extends JFrame {
                 frame.add(view);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
-
-
             }
         });
     }
 
 
-    // 2000
-    //
-    boolean checkDouble(String a) {
-        if (a == null || a.length() == 0) return false;
-        if (a.charAt(0) == '0' && a.length() > 1 && a.charAt(1) != '.') return false;
-        if (a.charAt(0) == '-' && a.length() == 1) return false;
-        if (a.charAt(0) == '.' || a.charAt(a.length() - 1) == '.') return false;
-        if (a.length() > 1 && a.charAt(1) == '.' && a.charAt(0) == '-') return false;
-        int kol = 0, i = 0;
-        if (a.charAt(0) == '-') i++;
-        for (; i < a.length(); i++) {
-            if ((a.charAt(i) < '0' || a.charAt(i) > '9') && a.charAt(i) != '.') return false;
-            if (a.charAt(i) == '.') kol++;
-        }
-        if (kol <= 1) return true;
-        return false;
-    }
-
-    void reSizelsImages() {
-        List<Image> lsNewImg = new ArrayList<>();
-        for (int i = 0; i < lsImages.size(); i++) {
-            BufferedImage tmp123 = (BufferedImage) lsImages.get(i);
-            Mat src = null;
-            try {
-                src = BufferedImage2Mat(tmp123);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-            double normalS = 500 * 500;
-            double Sc = src.width() * src.height();
-            double k = sqrt(Sc / normalS);
-            if (k < 1) k = 1;
-            Mat tra = new Mat(2, 3, CvType.CV_32FC1);
-            tra.put(0, 0,
-                    1 / k, 0, 0,
-                    0, 1 / k, 0
-            );
-            Imgproc.warpAffine(src, src, tra, new Size(src.width() / k, src.height() / k));
-            try {
-                lsNewImg.add(((Image) (Mat2BufferedImage(src))));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        lsImages = lsNewImg;
-    }
-
-    Mat reSizeOnlyOne(Mat src) {
-        double normalS = 500 * 500;
-        double Sc = src.width() * src.height();
-        double k = sqrt(Sc / normalS);
-        if (k < 1) k = 1;
-        Mat tra = new Mat(2, 3, CvType.CV_32FC1);
-        tra.put(0, 0,
-                1 / k, 0, 0,
-                0, 1 / k, 0
-        );
-        Imgproc.warpAffine(src, src, tra, new Size(src.width() / k, src.height() / k));
-        return src;
-    }
-
-
     public static void loadOpenCV_Lib() throws Exception {
+        String model = System.getProperty("sun.arch.data.model");
+        String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
+        if (model.equals("64")) {
+            libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
+        }
+        System.setProperty("java.library.path", libraryPath);
+        Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
+        sysPath.setAccessible(true);
+        sysPath.set(null, null);
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
-    public static Mat BufferedImage2Mat(BufferedImage image) throws IOException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ImageIO.write(image, "jpg", byteArrayOutputStream);
-        byteArrayOutputStream.flush();
-        return Imgcodecs.imdecode(new MatOfByte(byteArrayOutputStream.toByteArray()), Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
-    }
 
-    static BufferedImage Mat2BufferedImage(Mat matrix) throws Exception {
-        MatOfByte mob = new MatOfByte();
-        Imgcodecs.imencode(".jpg", matrix, mob);
-        byte ba[] = mob.toArray();
 
-        BufferedImage bi = ImageIO.read(new ByteArrayInputStream(ba));
-        return bi;
-    }
 
     public static void main(String[] args) throws Exception {
         loadOpenCV_Lib();
@@ -768,7 +505,7 @@ public class myGUI extends JFrame {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
-        mainFrame.setSize(800, 650);
+        mainFrame.setSize(1100, 600);
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
         System.out.println(new File("").getAbsolutePath() + " ");
@@ -804,78 +541,174 @@ public class myGUI extends JFrame {
         JTable.setTabPlacement(2);
         MyPanel.add(JTable, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         Task1 = new JPanel();
-        Task1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        Task1.setLayout(new GridBagLayout());
         Task1.setBackground(new Color(-986947));
         Task1.setMinimumSize(new Dimension(814, 800));
         Task1.setPreferredSize(new Dimension(814, 800));
         JTable.addTab("Завдання 1", Task1);
         TestButt = new JButton();
+        TestButt.setAlignmentY(0.0f);
         TestButt.setText("Запустити");
-        Task1.add(TestButt, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(160, 50), null, 1, false));
+        GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0.1;
+        Task1.add(TestButt, gbc);
         final JLabel label1 = new JLabel();
+        label1.setAlignmentY(0.0f);
         label1.setIcon(new ImageIcon(getClass().getResource("/dron3.jpg")));
         label1.setText("");
-        Task1.add(label1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(500, 500), null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0.1;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task1.add(label1, gbc);
         Task2 = new JPanel();
-        Task2.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 5, new Insets(0, 0, 0, 0), -1, -1));
+        Task2.setLayout(new GridBagLayout());
+        Task2.setAlignmentX(0.0f);
+        Task2.setAlignmentY(0.0f);
         Task2.setBackground(new Color(-855875));
         JTable.addTab("Завдання 2,3", Task2);
         imageTask23 = new JLabel();
+        imageTask23.setAlignmentY(0.0f);
         imageTask23.setIcon(new ImageIcon(getClass().getResource("/dron.jpg")));
         imageTask23.setText("");
-        Task2.add(imageTask23, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        buttonSolveTask23 = new JButton();
-        buttonSolveTask23.setBackground(new Color(-7741153));
-        buttonSolveTask23.setText("Вибрати зображення");
-        Task2.add(buttonSolveTask23, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        buttonTask23FirstImage = new JButton();
-        buttonTask23FirstImage.setBackground(new Color(-1987561));
-        buttonTask23FirstImage.setEnabled(false);
-        buttonTask23FirstImage.setText("Перше зображення");
-        Task2.add(buttonTask23FirstImage, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        buttonTask23SecondImage = new JButton();
-        buttonTask23SecondImage.setBackground(new Color(-1987561));
-        buttonTask23SecondImage.setEnabled(false);
-        buttonTask23SecondImage.setText("Друге зображення");
-        Task2.add(buttonTask23SecondImage, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 5;
+        gbc.weighty = 0.01;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task2.add(imageTask23, gbc);
         buttonTask23FinalImage = new JButton();
+        buttonTask23FinalImage.setAlignmentY(0.1f);
         buttonTask23FinalImage.setBackground(new Color(-1987561));
         buttonTask23FinalImage.setEnabled(false);
         buttonTask23FinalImage.setText("Фінальне зображення");
-        Task2.add(buttonTask23FinalImage, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task2.add(buttonTask23FinalImage, gbc);
+        buttonTask23SecondImage = new JButton();
+        buttonTask23SecondImage.setAlignmentY(0.0f);
+        buttonTask23SecondImage.setBackground(new Color(-1987561));
+        buttonTask23SecondImage.setEnabled(false);
+        buttonTask23SecondImage.setText("Друге зображення");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 3;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task2.add(buttonTask23SecondImage, gbc);
+        buttonTask23FirstImage = new JButton();
+        buttonTask23FirstImage.setAlignmentY(0.0f);
+        buttonTask23FirstImage.setBackground(new Color(-1987561));
+        buttonTask23FirstImage.setEnabled(false);
+        buttonTask23FirstImage.setText("Перше зображення");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0E-4;
+        Task2.add(buttonTask23FirstImage, gbc);
+        buttonSolveTask23 = new JButton();
+        buttonSolveTask23.setAlignmentY(0.1f);
+        buttonSolveTask23.setBackground(new Color(-7741153));
+        buttonSolveTask23.setText("Вибрати зображення");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task2.add(buttonSolveTask23, gbc);
         Task4 = new JPanel();
-        Task4.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 5, new Insets(0, 0, 0, 0), -1, -1));
+        Task4.setLayout(new GridBagLayout());
+        Task4.setAlignmentX(0.0f);
+        Task4.setAlignmentY(0.0f);
         Task4.setBackground(new Color(-986947));
         JTable.addTab("Завдання 4", Task4);
-        final JLabel label3 = new JLabel();
-        label3.setText("Кількість зображень:");
-        Task4.add(label3, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         imageTask4 = new JLabel();
+        imageTask4.setAlignmentY(0.0f);
         imageTask4.setIcon(new ImageIcon(getClass().getResource("/dron.jpg")));
         imageTask4.setText("");
-        Task4.add(imageTask4, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.weighty = 1.0E-4;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task4.add(imageTask4, gbc);
         button2 = new JButton();
+        button2.setAlignmentY(0.0f);
         button2.setBackground(new Color(-7741153));
         button2.setText("Вибрати зображення");
-        Task4.add(button2, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        a5TextField = new JTextField();
-        a5TextField.setText("5");
-        Task4.add(a5TextField, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 2, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task4.add(button2, gbc);
+        button3 = new JButton();
+        button3.setAlignmentY(0.0f);
+        button3.setBackground(new Color(-1987561));
+        button3.setEnabled(false);
+        button3.setText("Виконати");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task4.add(button3, gbc);
         buttonTask4Previous = new JButton();
+        buttonTask4Previous.setAlignmentY(0.0f);
         buttonTask4Previous.setBackground(new Color(-1987561));
-        buttonTask4Previous.setEnabled(true);
+        buttonTask4Previous.setEnabled(false);
         buttonTask4Previous.setText("Попередне зображення");
-        Task4.add(buttonTask4Previous, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.1;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task4.add(buttonTask4Previous, gbc);
         buttonTask4Next = new JButton();
+        buttonTask4Next.setAlignmentY(0.0f);
         buttonTask4Next.setBackground(new Color(-1987561));
         buttonTask4Next.setEnabled(false);
         buttonTask4Next.setText("Наступне зображення");
-        Task4.add(buttonTask4Next, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        button3 = new JButton();
-        button3.setText("Button");
-        Task4.add(button3, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.1;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task4.add(buttonTask4Next, gbc);
+        final JPanel spacer1 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        Task4.add(spacer1, gbc);
+        final JPanel spacer2 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        Task4.add(spacer2, gbc);
+        final JPanel spacer3 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        Task4.add(spacer3, gbc);
         Task5 = new JPanel();
-        Task5.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 10, new Insets(0, 0, 0, 0), -1, -1));
+        Task5.setLayout(new GridBagLayout());
         Task5.setBackground(new Color(-986947));
         JTable.addTab("Завдання 5", Task5);
         task5Image = new JLabel();
@@ -883,38 +716,77 @@ public class myGUI extends JFrame {
         task5Image.setText("");
         task5Image.setVerticalAlignment(0);
         task5Image.setVerticalTextPosition(0);
-        Task5.add(task5Image, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 10, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 3;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.01;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task5.add(task5Image, gbc);
         buttonNextTask5 = new JButton();
         buttonNextTask5.setBackground(new Color(-1987561));
         buttonNextTask5.setEnabled(false);
         buttonNextTask5.setText("Друге зображення");
-        Task5.add(buttonNextTask5, new com.intellij.uiDesigner.core.GridConstraints(0, 6, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task5.add(buttonNextTask5, gbc);
         buttonReadImages2 = new JButton();
         buttonReadImages2.setBackground(new Color(-7741153));
         buttonReadImages2.setText("Вибрати зображення");
-        Task5.add(buttonReadImages2, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task5.add(buttonReadImages2, gbc);
         buttonSolveTask5 = new JButton();
         buttonSolveTask5.setBackground(new Color(-1987561));
         buttonSolveTask5.setEnabled(false);
         buttonSolveTask5.setText("Виконати");
-        Task5.add(buttonSolveTask5, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task5.add(buttonSolveTask5, gbc);
         Task6 = new JPanel();
-        Task6.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        Task6.setLayout(new GridBagLayout());
         Task6.setBackground(new Color(-986947));
         JTable.addTab("Завдання 6", Task6);
         imageTask6 = new JLabel();
         imageTask6.setIcon(new ImageIcon(getClass().getResource("/dron.jpg")));
         imageTask6.setText("");
-        Task6.add(imageTask6, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.01;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task6.add(imageTask6, gbc);
         button1 = new JButton();
         button1.setBackground(new Color(-7741153));
         button1.setText("Вибрати зображення");
-        Task6.add(button1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task6.add(button1, gbc);
         task6btnChange = new JButton();
         task6btnChange.setBackground(new Color(-1987561));
         task6btnChange.setEnabled(false);
         task6btnChange.setText(" Стартове зображення");
-        Task6.add(task6btnChange, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task6.add(task6btnChange, gbc);
     }
 
     /**
@@ -923,6 +795,7 @@ public class myGUI extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return MyPanel;
     }
+
 }
 
 
