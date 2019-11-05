@@ -6,7 +6,6 @@
         <element id="file-copy" path="$PROJECT_DIR$/src/com/company/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="TUI" />
-      <element id="library" level="project" name="lib" />
       <element id="extracted-dir" path="$PROJECT_DIR$/javafx-sdk-13.0.1/lib/src.zip" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/javafx-sdk-13.0.1/lib/javafx-swt.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/javafx-sdk-13.0.1/lib/javafx.web.jar" path-in-jar="/" />
