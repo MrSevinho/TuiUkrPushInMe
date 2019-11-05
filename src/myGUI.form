@@ -161,7 +161,7 @@
                 <properties>
                   <alignmentY value="0.0"/>
                   <background color="-7741153"/>
-                  <text value="Вибрати зображення"/>
+                  <text value="Вибрати файл"/>
                 </properties>
               </component>
               <component id="57bba" class="javax.swing.JButton" binding="button3" default-binding="true">
@@ -185,7 +185,7 @@
                   <alignmentY value="0.0"/>
                   <background color="-1987561"/>
                   <enabled value="false"/>
-                  <text value="Попередне зображення"/>
+                  <text value="Наступне зображення"/>
                 </properties>
               </component>
               <component id="8ef52" class="javax.swing.JButton" binding="buttonTask4Next">
@@ -197,7 +197,7 @@
                   <alignmentY value="0.0"/>
                   <background color="-1987561"/>
                   <enabled value="false"/>
-                  <text value="Наступне зображення"/>
+                  <text value="Попереднє зображення"/>
                 </properties>
               </component>
               <vspacer id="ddf0b">

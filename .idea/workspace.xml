@@ -7,24 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa6ada6-a918-42c4-a493-0dacfa0f9cd1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/TUI_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/TUI_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TUI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/META-INF/TUI.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/META-INF/TUI.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Browser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Browser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Functions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Matrices.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Matrices.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo$Photo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo$Photo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PlanPath.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PlanPath.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task23$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task23$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/getLaplac.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/getLaplac.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/map.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$11.class" afterDir="false" />
@@ -33,7 +22,7 @@
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$14.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$15.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$2$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$4.class" afterDir="false" />
@@ -43,7 +32,9 @@
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Task4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Task4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/map.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/myGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/myGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myGUI.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,6 +57,7 @@
   <component name="ProjectId" id="1T6QdKMZPJ3JE9J2xMogHAKaolJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.STATE" value="ToolWindow" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
@@ -73,14 +65,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572868537909" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/javafx-sdk-13.0.1/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/company" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="xpath.settings" />
@@ -162,6 +154,9 @@
       <updated>1570017105127</updated>
       <workItem from="1572778163507" duration="17875000" />
       <workItem from="1572888579481" duration="6478000" />
+      <workItem from="1572900507956" duration="697000" />
+      <workItem from="1572940005388" duration="1938000" />
+      <workItem from="1572949265021" duration="1955000" />
     </task>
     <servers />
   </component>

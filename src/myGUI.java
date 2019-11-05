@@ -16,6 +16,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -112,7 +114,15 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                SwingUtilities.invokeLater(() -> {
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    try {
+                        String browseTask1 = (pathToFile + "\\htdocs\\index.html").replace('\\', '/');
+                        Desktop.getDesktop().browse(new URI(browseTask1));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                /*SwingUtilities.invokeLater(() -> {
                     Browser view = new Browser("file:///" + pathToFile + "/htdocs/index.html");
                     JFrame frame;
                     frame = new JFrame("Карта");
@@ -130,7 +140,7 @@ public class myGUI extends JFrame {
                             mainFrame.setVisible(true);
                         }
                     });
-                });
+                });*/
             }
         });
         button1.addMouseListener(new MouseAdapter() {
@@ -396,12 +406,20 @@ public class myGUI extends JFrame {
 
                 }
                 if (!verify) {
+
                     try {
                         //listOfIndex = new ArrayList<>();
                         if (check) {
                             listOfIndex.clear();
                         }
                         solveTask4();
+                        try {
+                            BufferedImage img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (listOfIndex.get(0) + 1) + ".JPG"));
+                            img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
+                            imageTask4.setIcon(new ImageIcon(img));
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                         System.out.println(listOfIndex.size());
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -428,29 +446,6 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                currIndexInLsImages++;
-                if (currIndexInLsImages + 1 == listOfIndex.size()) buttonTask4Next.setEnabled(false);
-                buttonTask4Previous.setEnabled(true);
-                if (currIndexInLsImages >= 0 && currIndexInLsImages < listOfIndex.size()) {
-                    try {
-                        BufferedImage img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (listOfIndex.get(currIndexInLsImages) + 1) + ".JPG"));
-                        img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
-                        imageTask4.setIcon(new ImageIcon(img));
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-                if (currIndexInLsImages >= listOfIndex.size()) {
-                    currIndexInLsImages = listOfIndex.size() - 1;
-                    buttonTask4Next.setEnabled(false);
-                }
-
-            }
-        });
-        buttonTask4Previous.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
                 currIndexInLsImages--;
                 if (currIndexInLsImages <= 0) buttonTask4Previous.setEnabled(false);
                 buttonTask4Next.setEnabled(true);
@@ -468,6 +463,29 @@ public class myGUI extends JFrame {
                     currIndexInLsImages = 0;
                     buttonTask4Previous.setEnabled(false);
                 }
+            }
+        });
+        buttonTask4Previous.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                currIndexInLsImages++;
+                if (currIndexInLsImages + 1 == listOfIndex.size()) buttonTask4Next.setEnabled(false);
+                buttonTask4Previous.setEnabled(true);
+                if (currIndexInLsImages >= 0 && currIndexInLsImages < listOfIndex.size()) {
+                    try {
+                        BufferedImage img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (listOfIndex.get(currIndexInLsImages) + 1) + ".JPG"));
+                        img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
+                        imageTask4.setIcon(new ImageIcon(img));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                if (currIndexInLsImages >= listOfIndex.size()) {
+                    currIndexInLsImages = listOfIndex.size() - 1;
+                    buttonTask4Next.setEnabled(false);
+                }
+
             }
         });
         buttonTask23FirstImage.addMouseListener(new MouseAdapter() {
@@ -504,7 +522,15 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Browser view = new Browser("file:///" + pathToFile + "/src/com/company/map.html");
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    try {
+                        String browseTask4 = (pathToFile + "\\htdocs\\map.html").replace('\\', '/');
+                        Desktop.getDesktop().browse(new URI(browseTask4));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                /*Browser view = new Browser("file:///" + pathToFile + "/src/com/company/map.html");
                 JFrame frame;
                 frame = new JFrame("Карта");
                 frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -512,7 +538,7 @@ public class myGUI extends JFrame {
                 view.setSize(1200, 775);
                 frame.add(view);
                 frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                frame.setVisible(true);*/
             }
         });
     }
@@ -683,7 +709,7 @@ public class myGUI extends JFrame {
         button2 = new JButton();
         button2.setAlignmentY(0.0f);
         button2.setBackground(new Color(-7741153));
-        button2.setText("Вибрати зображення");
+        button2.setText("Вибрати файл");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -705,7 +731,7 @@ public class myGUI extends JFrame {
         buttonTask4Previous.setAlignmentY(0.0f);
         buttonTask4Previous.setBackground(new Color(-1987561));
         buttonTask4Previous.setEnabled(false);
-        buttonTask4Previous.setText("Попередне зображення");
+        buttonTask4Previous.setText("Наступне зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 5;
@@ -717,7 +743,7 @@ public class myGUI extends JFrame {
         buttonTask4Next.setAlignmentY(0.0f);
         buttonTask4Next.setBackground(new Color(-1987561));
         buttonTask4Next.setEnabled(false);
-        buttonTask4Next.setText("Наступне зображення");
+        buttonTask4Next.setText("Попереднє зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 5;

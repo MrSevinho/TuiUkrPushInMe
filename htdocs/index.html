@@ -142,7 +142,7 @@
     
     function buildPath(){
         var minHeight = 0.02;
-        var maxHeight = Number(document.getElementById("maxheight").value);
+        var maxHeight = Number(document.getElementById("maxheight").value) / 1000.0;
         var cam_height = Number(document.getElementById("cam_height").value);
         var cam_width = Number(document.getElementById("cam_width").value);
         var focus = Number(document.getElementById("fokus").value);
@@ -249,30 +249,30 @@
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Максимальна висота польоту</span>
-                    <span class="input-group-text">км</span>
+                    <span class="input-group-text">м</span>
                   </div>
-                  <input min="0.02" maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="maxheight" value="2">
+                  <input min="0.02" maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="maxheight" value="200">
                 </div>
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm1">Фокальна відстань</span>
                     <span class="input-group-text">мм</span>
                   </div>
-                  <input maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="fokus" value="2">
+                  <input maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="fokus" value="6">
                 </div>
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm2">Ширина матриці камери</span>
                     <span class="input-group-text">мм</span>
                   </div>
-                  <input maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="cam_height" value="2">
+                  <input maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="cam_height" value="9">
                 </div>
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm3">Довжина матриці камери</span>
                     <span class="input-group-text">мм</span>
                   </div>
-                  <input maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="cam_width" value="2">
+                  <input maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="cam_width" value="6">
                 </div>
                 <div class="input-group input-group-sm mb-3">
                   <div class="input-group-prepend">
