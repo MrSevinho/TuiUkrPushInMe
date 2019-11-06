@@ -38,54 +38,35 @@ public class Task5 {
             if(BuffIMG == null) imageIsSet = false;
             else{
             mat1 = BufferedImage2Mat(BuffIMG);
-            double normalS = 500 * 500;
-            double Sc = mat1.width() * mat1.height();
-            double k2 = sqrt(Sc / normalS);
-            if (k2 < 1) k2 = 1;
-            Mat tra2 = new Mat(2, 3, CvType.CV_32FC1);
-            tra2.put(0, 0,
-                    1 / k2, 0, 0,
-                    0, 1 / k2, 0
-            );
-            Imgproc.warpAffine(mat1, mat1, tra2, new Size(mat1.width() / k2, mat1.height() / k2));
+            mat1 = Functions.reSizeOnlyOne(mat1);
             // img = Imgcodecs.imread(path1);
         }}
         else {
             imageIsSet = false;
         }
         if(imageIsSet){
-        ret = fileopen.showDialog(null, "Открыть файл");
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            File file = fileopen.getSelectedFile();
-            path2 = file.getPath();
-            BufferedImage BuffIMG2 = null;
-            try {
-                BuffIMG2 = ImageIO.read(new File(path2));
-            } catch (IOException a) {
+            ret = fileopen.showDialog(null, "Открыть файл");
+            if (ret == JFileChooser.APPROVE_OPTION) {
+                File file = fileopen.getSelectedFile();
+                path2 = file.getPath();
+                BufferedImage BuffIMG2 = null;
+                try {
+                    BuffIMG2 = ImageIO.read(new File(path2));
+                } catch (IOException a) {
 
+                }
+                if(BuffIMG2 == null) imageIsSet = false;
+                else{
+                    mat2 = BufferedImage2Mat(BuffIMG2);
+                    mat2 = Functions.reSizeOnlyOne(mat2);
+                }
             }
-            if(BuffIMG2 == null) imageIsSet = false;
-            else{
-            mat2 =BufferedImage2Mat(BuffIMG2);
-            double normalS = 500 * 500;
-            double Sc = mat2.width() * mat2.height();
-            double k2 = sqrt(Sc / normalS);
-            if (k2 < 1) k2 = 1;
-            Mat tra2 = new Mat(2, 3, CvType.CV_32FC1);
-            tra2.put(0, 0,
-                    1 / k2, 0, 0,
-                    0, 1 / k2, 0
-            );
-            Imgproc.warpAffine(mat2, mat2, tra2, new Size(mat2.width() / k2, mat2.height() / k2));
-            //img2 = Imgcodecs.imread(path2);
-        }
-        }
-        else {
-            imageIsSet = false;
-        }
+            else {
+                imageIsSet = false;
+            }
         }
     }
-   public static void solvetask5(){
+    public static void solvetask5(){
         Mat greymat1 = new Mat();
         Mat greymat2 = new Mat();
         Imgproc.cvtColor(mat1, greymat1, Imgproc.COLOR_BGR2GRAY);

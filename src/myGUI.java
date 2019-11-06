@@ -183,16 +183,7 @@ public class myGUI extends JFrame {
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
-                    double normalS = 500 * 500;
-                    double Sc = src.width() * src.height();
-                    double k = sqrt(Sc / normalS);
-                    if (k < 1) k = 1;
-                    Mat tra = new Mat(2, 3, CvType.CV_32FC1);
-                    tra.put(0, 0,
-                            1 / k, 0, 0,
-                            0, 1 / k, 0
-                    );
-                    Imgproc.warpAffine(src, src, tra, new Size(src.width() / k, src.height() / k));
+                    src = Functions.reSizeOnlyOne(src);
                     try {
                         startImageTask6 = Mat2BufferedImage(src);
                     } catch (Exception e1) {
@@ -287,7 +278,7 @@ public class myGUI extends JFrame {
                             "Помилка",
                             JOptionPane.ERROR_MESSAGE);
                     JOptionPane.showMessageDialog(myGUI.this,
-                            new String[]{"Ви маєте вибрати два зображення"},
+                            new String[]{"Ви маєте вибрати два зображення однакового розміру"},
                             "Вхідні дані",
                             JOptionPane.INFORMATION_MESSAGE);
                     buttonTask23FirstImage.setEnabled(false);
@@ -610,7 +601,7 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
-        String model = System.getProperty("sun.arch.data.model");
+        /*String model = System.getProperty("sun.arch.data.model");
         String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
         if (model.equals("64")) {
             libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
@@ -618,7 +609,7 @@ public class myGUI extends JFrame {
         System.setProperty("java.library.path", libraryPath);
         Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
         sysPath.setAccessible(true);
-        sysPath.set(null, null);
+        sysPath.set(null, null);*/
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 

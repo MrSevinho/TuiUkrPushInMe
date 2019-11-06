@@ -16,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import static java.lang.Math.max;
 import static java.lang.Math.sqrt;
 
 public class Functions {
@@ -35,16 +36,20 @@ public class Functions {
     }
 
     public static Mat reSizeOnlyOne(Mat src) {
-        double normalS = 500 * 500;
-        double Sc = src.width() * src.height();
-        double k = sqrt(Sc / normalS);
-        if (k < 1) k = 1;
+        double normalHeight = 400, normalWidth = 600;
+        double k1 = src.width() / normalWidth;
+        double k2 = src.height() / normalHeight;
+        if (k1 < 1) k1 = 1;
+        if (k2 < 1) k2 = 1;
+        System.out.println(k1 + " " + k2);
+        k1 = Math.max(k1, k2);
+        System.out.println(k1);
         Mat tra = new Mat(2, 3, CvType.CV_32FC1);
         tra.put(0, 0,
-                1 / k, 0, 0,
-                0, 1 / k, 0
+                1 / k1, 0, 0,
+                0, 1 / k1, 0
         );
-        Imgproc.warpAffine(src, src, tra, new Size(src.width() / k, src.height() / k));
+        Imgproc.warpAffine(src, src, tra, new Size(src.width() / k1, src.height() / k1));
         return src;
     }
     public static Mat BufferedImage2Mat(BufferedImage image) throws IOException {
@@ -58,7 +63,6 @@ public class Functions {
         MatOfByte mob = new MatOfByte();
         Imgcodecs.imencode(".jpg", matrix, mob);
         byte ba[] = mob.toArray();
-
         BufferedImage bi = ImageIO.read(new ByteArrayInputStream(ba));
         return bi;
     }
