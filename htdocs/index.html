@@ -67,8 +67,8 @@
         var path = poly.getPath();
         for(var i = 1; i < cnt; i++){
             path.push(new google.maps.LatLng(arrLat[i], arrLon[i]));
-            document.getElementById("buttonBuildPath").disabled = false;
         }
+        document.getElementById("buttonBuildPath").disabled = false;
         path.push(new google.maps.LatLng(arrLat[1],arrLon[1]));
     }
 
@@ -85,7 +85,6 @@
             path.removeAt(0);
             cnt--;
         }
-        setMapOnAll(null);
         markers = [];
         arrLat = [];
         arrLon = [];
@@ -196,9 +195,13 @@
         h = Math.floor(h * 100.0) / 100.0;
         document.getElementById("fly_height").value = h;
         document.getElementById("cnt_vertexes").value = m;
-        var proc = document.getElementById("battery").value;
+        var proc = Number(document.getElementById("battery").value);
+        opt = Math.floor(opt * 100.0) / 100.0;
         if (opt > proc) {
-            alert("Недостатньо заряду. Треба " + opt + " %");
+            document.getElementById("to_answer").innerHTML = "Недостатньо заряду. Треба " + opt + " %";
+        }
+        else {
+            document.getElementById("to_answer").innerHTML = "Потрібно " + opt + " % заряду";
         }
         document.getElementById("energy").value = Math.floor(opt * 100.0) / 100.0;
         to_write = [];
@@ -209,6 +212,7 @@
         }
         to_write.push(ans[0].x + " " + ans[0].y);
         download('answer.txt', 'text/plain');
+        document.getElementById("to_click").click();
     }
 
 
@@ -233,6 +237,26 @@
     </script>
 </head>
 <body>
+    <div class="container">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display: none;" id="to_click">
+        </button>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Інформація о витратах на політ</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <label id="to_answer"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="gmap"></div>
     <div class="panel">
         <a class="handle" href="#" id="cool1"></a>

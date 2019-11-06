@@ -34,24 +34,17 @@ class PlanPath {
     static init (p) {
         let n = p.length;
         let res = new Array(n);
-        //alert("cur " + p.length);
         for (let i = 0; i < n; i++) {
             res[i] = i;
         }
         if (n > 1500) return res;
         this.init_matrix(p);
-        /*for (let i = 0; i < n; i++) {
-            let to = this.nextInt(n);
-            [res[i], res[to]] = [res[to], res[i]];
-        }*/
-        // let kol = 0;
         let now = 0;
         res[0] = now;
         let used = new Array(n);
         for (let i = 1;  i < n; i++) {
             used[i] = 0;
         }
-       // alert("COOL");
         used[0] = 1;
         for (let i = 1; i < n; i++) {
             let mn = 10000000000000, pos = 0;
@@ -65,10 +58,8 @@ class PlanPath {
             used[now] = 1;
             res[i] = now;
         }
-     //   alert("SUPER");
         let cur = this.calc_res(res);
         for (let t = initialT; t > endT; t *= mul) {
-            // ++kol;
             let x = this.nextInt(n);
             let y = this.nextInt(n);
             if (x > y) {
@@ -107,7 +98,6 @@ class PlanPath {
         for (let i = 0; i < n; i++) {
             answer[i] = p[res[i]];
         }
-        // alert(kol);
         return answer;
     }
 }
@@ -204,9 +194,9 @@ class SalesmanPrepare {
         }
         let optimalPath = 1000000000000000;
         let ans = [];
-        let d = (maxHeight - minHeight) / 10.0;
+        let d = Math.max((maxHeight - minHeight) / 10.0, 0.005);
         let o = 0;
-        for (let cur = minHeight; cur <= maxHeight && o < 10; cur += d) {
+        for (let cur = minHeight; cur <= maxHeight && o < 11; cur += d) {
             let P = [];
             for (let j = 1; j < n; j++) {
                 P.push(p[j]);
@@ -227,31 +217,6 @@ class SalesmanPrepare {
     }
 }
 var cm_height = 0, cm_width = 0, focu = 0;
-/*class Matrices {
-
-     constructor(yaw){
-        this.yawMatrix = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-        this.yawMatrix[0][0] = Math.cos(yaw);
-        this.yawMatrix[0][1] = Math.sin(yaw);
-        this.yawMatrix[0][2] = 0;
-        this.yawMatrix[0][3] = 0;
-
-        this.yawMatrix[1][0] = -Math.sin(yaw);
-        this.yawMatrix[1][1] = Math.cos(yaw);
-        this.yawMatrix[1][2] = 0;
-        this.yawMatrix[1][3] = 0;
-
-        this.yawMatrix[2][0] = 0;
-        this.yawMatrix[2][1] = 0;
-        this.yawMatrix[2][2] = 1;
-        this.yawMatrix[2][3] = 0;
-
-        this.yawMatrix[3][0] = 0;
-        this.yawMatrix[3][1] = 0;
-        this.yawMatrix[3][2] = 0;
-        this.yawMatrix[3][3] = 1;
-    }
-}*/
 class Point3 {
     constructor (x, y, z) {
         this.x = x;
@@ -263,70 +228,57 @@ class MathTransform {
     constructor() {}
     static getMatrixPointOnGround(centerMatrix, point) {
         let groundMatrix = new Point3(0, 0, 0);
-
         let airMatrix = [[0], [0], [0], [0]];
         let focusMatrix = this.getMatrixPointOnAir(centerMatrix, "focus");
-
         airMatrix = this.getMatrixPointOnAir(centerMatrix, point);
         let directVector = this.getDirectingVector(airMatrix, focusMatrix);
-
         let param = -airMatrix[2][0] / directVector.z;
         groundMatrix.x = airMatrix[0][0] + directVector.x * param;
         groundMatrix.y = airMatrix[1][0] + directVector.y * param;
-
         return groundMatrix;
     }
     static getMatrixPointOnAir(center, point) {
         let cornerMatrix = [[0], [0], [0], [0]];
-
         if(point == "rightTopCorner"){
             cornerMatrix[0][0] = center.x + this.convertMmToM(cm_width);
             cornerMatrix[1][0] = center.y + this.convertMmToM(cm_height);
             cornerMatrix[2][0] = center.z;
             cornerMatrix[3][0] = 1;
         }
-
         if(point == "leftTopCorner"){
             cornerMatrix[0][0] = center.x - this.convertMmToM(cm_width);
             cornerMatrix[1][0] = center.y + this.convertMmToM(cm_height);
             cornerMatrix[2][0] = center.z;
             cornerMatrix[3][0] = 1;
         }
-
         if(point == "rightBottomCorner"){
             cornerMatrix[0][0] = center.x + this.convertMmToM(cm_width);
             cornerMatrix[1][0] = center.y - this.convertMmToM(cm_height);
             cornerMatrix[2][0] = center.z;
             cornerMatrix[3][0] = 1;
         }
-
         if(point == "leftBottomCorner"){
             cornerMatrix[0][0] = center.x - this.convertMmToM(cm_width);
             cornerMatrix[1][0] = center.y - this.convertMmToM(cm_height);
             cornerMatrix[2][0] = center.z;
             cornerMatrix[3][0] = 1;
         }
-
         if(point == "focus"){
             cornerMatrix[0][0] = center.x;
             cornerMatrix[1][0] = center.y;
             cornerMatrix[2][0] = center.z - this.convertMmToM(focu);
             cornerMatrix[3][0] = 1;
         }
-
         return  cornerMatrix;
     }
     static convertMmToM(mm){
         return mm / 1000.0;
     }
-
     static getDirectingVector(pointMatrix, focus){
         let vector = new Point3(0, 0, 0);
-
         vector.x = pointMatrix[0][0] - focus[0][0];
         vector.y = pointMatrix[1][0]- focus[1][0];
         vector.z = pointMatrix[2][0] - focus[2][0];
-
         return vector;
     }
 }

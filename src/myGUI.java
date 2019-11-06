@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -65,8 +66,13 @@ public class myGUI extends JFrame {
     private JButton button5;
     private JButton button6;
     private JLabel task6Color2;
+    private JButton інструкціяButton;
+    private JButton інструкціяButton1;
+    private JButton інструкціяButton3;
+    private JButton інструкціяButton4;
+    private JButton button7;
     private JLabel label2;
-    public static JFrame mainFrame;
+    public static JFrame mainFrame = new JFrame();
     boolean task5 = false, task6 = false;
     BufferedImage startImageTask6 = null, endImageTask6 = null,
             task23Imgage = null, task23ImageFirst = null, task23ImageSecond = null;
@@ -76,42 +82,61 @@ public class myGUI extends JFrame {
     private Color color1 = new Color(255, 34, 0), color2 = new Color(255, 149, 0);
 
     public myGUI() {
+        {
+            $$$setupUI$$$();
+            try {
+                loadOpenCV_Lib();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            System.out.println("rofl");
+            mainFrame = new JFrame("TUI");
+            mainFrame.setContentPane(this.MyPanel);
+            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.pack();
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setSize(1100, 600);
+            mainFrame.setResizable(false);
+            mainFrame.setVisible(true);
+            System.out.println(new File("").getAbsolutePath() + " ");
+            BufferedImage img = null, img2 = null, img3 = null, img4 = null, img5 = null;
+            JLabel lbl  = new JLabel("<html>Побудова маршруту дрона</html>");
+            JLabel lbl2 = new JLabel("<html>Найчіткіше зображення</html>");
+            JLabel lbl3 = new JLabel("<html>Послідовність зображень</html>");
+            JLabel lbl4 = new JLabel("<html>Знаходження відмінностей</html>");
+            JLabel lbl5 = new JLabel("<html>Рекомендований полив</html>");
+            ImageIcon icon, icon2, icon3, icon4, icon5;
+            try {
+                img = ImageIO.read(new File(pathToFile + "\\src\\first.png"));
+                img2 = ImageIO.read(new File(pathToFile + "\\src\\secondthird.png"));
+                img3 = ImageIO.read(new File(pathToFile + "\\src\\fourth.png"));
+                img4 = ImageIO.read(new File(pathToFile + "\\src\\fifth.png"));
+                img5 = ImageIO.read(new File(pathToFile + "\\src\\sixth.png"));
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            icon = new ImageIcon(img);
+            icon2 = new ImageIcon(img2);
+            icon3 = new ImageIcon(img3);
+            icon4 = new ImageIcon(img4);
+            icon5 = new ImageIcon(img5);
+            lbl.setIcon(icon);
+            lbl2.setIcon(icon2);
+            lbl3.setIcon(icon3);
+            lbl4.setIcon(icon4);
+            lbl5.setIcon(icon5);
+            JTable.setTabComponentAt(0, lbl);
+            JTable.setTabComponentAt(1, lbl2);
+            JTable.setTabComponentAt(2, lbl3);
+            JTable.setTabComponentAt(3, lbl4);
+            JTable.setTabComponentAt(4, lbl5);
+            drawColors();
+        }
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
                 super.windowOpened(e);
-                BufferedImage img = null, img2 = null, img3 = null, img4 = null, img5 = null;
-                JLabel lbl = new JLabel("Побудова маршруту дрона");
-                JLabel lbl2 = new JLabel("Найчіткіше зображення");
-                JLabel lbl3 = new JLabel("Послідовність зображень");
-                JLabel lbl4 = new JLabel("Знаходження відмінностей");
-                JLabel lbl5 = new JLabel("Рекомендований полив");
-                ImageIcon icon, icon2, icon3, icon4, icon5;
-                try {
-                    img = ImageIO.read(new File(pathToFile + "\\src\\first.png"));
-                    img2 = ImageIO.read(new File(pathToFile + "\\src\\secondthird.png"));
-                    img3 = ImageIO.read(new File(pathToFile + "\\src\\fourth.png"));
-                    img4 = ImageIO.read(new File(pathToFile + "\\src\\fifth.png"));
-                    img5 = ImageIO.read(new File(pathToFile + "\\src\\sixth.png"));
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-                icon = new ImageIcon(img);
-                icon2 = new ImageIcon(img2);
-                icon3 = new ImageIcon(img3);
-                icon4 = new ImageIcon(img4);
-                icon5 = new ImageIcon(img5);
-                lbl.setIcon(icon);
-                lbl2.setIcon(icon2);
-                lbl3.setIcon(icon3);
-                lbl4.setIcon(icon4);
-                lbl5.setIcon(icon5);
-                JTable.setTabComponentAt(0, lbl);
-                JTable.setTabComponentAt(1, lbl2);
-                JTable.setTabComponentAt(2, lbl3);
-                JTable.setTabComponentAt(3, lbl4);
-                JTable.setTabComponentAt(4, lbl5);
-                drawColors();
+
             }
         });
         TestButt.addMouseListener(new MouseAdapter() {
@@ -572,6 +597,7 @@ public class myGUI extends JFrame {
                 task6Color2.setIcon(createIcon(color2, 16, 16));
             }
         });
+
     }
 
     //Mat color1, color2, hsvColor1, hsvColor2;
@@ -584,32 +610,21 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
-        /*String model = System.getProperty("sun.arch.data.model");
-        String libraryPath = "D:\\Users\\User\\Desktop\\opencv\\build\\java\\x86\\";
+        String model = System.getProperty("sun.arch.data.model");
+        String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
         if (model.equals("64")) {
-            libraryPath = "D:\\Users\\User\\Desktop\\opencv\\build\\java\\x64\\";
+            libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
         }
         System.setProperty("java.library.path", libraryPath);
         Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
         sysPath.setAccessible(true);
-        sysPath.set(null, null);*/
+        sysPath.set(null, null);
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
 
     public static void main(String[] args) throws Exception {
-        loadOpenCV_Lib();
-        System.out.println("rofl");
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        mainFrame = new JFrame("TUI");
-        mainFrame.setContentPane(new myGUI().MyPanel);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.pack();
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setSize(1100, 600);
-        mainFrame.setResizable(false);
-        mainFrame.setVisible(true);
-        System.out.println(new File("").getAbsolutePath() + " ");
+
     }
 
 
@@ -621,7 +636,7 @@ public class myGUI extends JFrame {
 // GUI initializer generated by IntelliJ IDEA GUI Designer
 // >>> IMPORTANT!! <<<
 // DO NOT EDIT OR ADD ANY CODE HERE!
-        $$$setupUI$$$();
+        //   $$$setupUI$$$();
     }
 
     /**
@@ -643,7 +658,7 @@ public class myGUI extends JFrame {
         MyPanel.add(JTable, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         Task1 = new JPanel();
         Task1.setLayout(new GridBagLayout());
-        Task1.setBackground(new Color(-986947));
+        Task1.setBackground(new Color(-2953488));
         Task1.setMinimumSize(new Dimension(814, 800));
         Task1.setPreferredSize(new Dimension(814, 800));
         JTable.addTab("Завдання 1", Task1);
@@ -672,7 +687,7 @@ public class myGUI extends JFrame {
         Task2.setLayout(new GridBagLayout());
         Task2.setAlignmentX(0.0f);
         Task2.setAlignmentY(0.0f);
-        Task2.setBackground(new Color(-855875));
+        Task2.setBackground(new Color(-2953488));
         JTable.addTab("Завдання 2,3", Task2);
         imageTask23 = new JLabel();
         imageTask23.setAlignmentY(0.0f);
@@ -681,20 +696,32 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 5;
+        gbc.gridwidth = 4;
         gbc.weighty = 0.01;
-        gbc.anchor = GridBagConstraints.NORTH;
         Task2.add(imageTask23, gbc);
+        buttonTask23FirstImage = new JButton();
+        buttonTask23FirstImage.setAlignmentY(0.0f);
+        buttonTask23FirstImage.setBackground(new Color(-1987561));
+        buttonTask23FirstImage.setEnabled(false);
+        buttonTask23FirstImage.setText("Перше зображення");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.1;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task2.add(buttonTask23FirstImage, gbc);
         buttonTask23FinalImage = new JButton();
         buttonTask23FinalImage.setAlignmentY(0.1f);
         buttonTask23FinalImage.setBackground(new Color(-1987561));
         buttonTask23FinalImage.setEnabled(false);
         buttonTask23FinalImage.setText("Фінальне зображення");
         gbc = new GridBagConstraints();
-        gbc.gridx = 4;
-        gbc.gridy = 0;
+        gbc.gridx = 3;
+        gbc.gridy = 2;
         gbc.weightx = 1.0;
-        gbc.weighty = 0.001;
+        gbc.weighty = 0.1;
+        gbc.anchor = GridBagConstraints.NORTH;
         Task2.add(buttonTask23FinalImage, gbc);
         buttonTask23SecondImage = new JButton();
         buttonTask23SecondImage.setAlignmentY(0.0f);
@@ -702,22 +729,12 @@ public class myGUI extends JFrame {
         buttonTask23SecondImage.setEnabled(false);
         buttonTask23SecondImage.setText("Друге зображення");
         gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 0;
-        gbc.weightx = 1.0;
-        gbc.weighty = 0.001;
-        Task2.add(buttonTask23SecondImage, gbc);
-        buttonTask23FirstImage = new JButton();
-        buttonTask23FirstImage.setAlignmentY(0.0f);
-        buttonTask23FirstImage.setBackground(new Color(-1987561));
-        buttonTask23FirstImage.setEnabled(false);
-        buttonTask23FirstImage.setText("Перше зображення");
-        gbc = new GridBagConstraints();
         gbc.gridx = 2;
-        gbc.gridy = 0;
+        gbc.gridy = 2;
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0E-4;
-        Task2.add(buttonTask23FirstImage, gbc);
+        gbc.weighty = 0.1;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task2.add(buttonTask23SecondImage, gbc);
         buttonSolveTask23 = new JButton();
         buttonSolveTask23.setAlignmentY(0.1f);
         buttonSolveTask23.setBackground(new Color(-7741153));
@@ -726,13 +743,21 @@ public class myGUI extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
-        gbc.weighty = 0.001;
+        gbc.weighty = 0.01;
         Task2.add(buttonSolveTask23, gbc);
+        інструкціяButton3 = new JButton();
+        інструкціяButton3.setText("Інструкція");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        Task2.add(інструкціяButton3, gbc);
         Task4 = new JPanel();
         Task4.setLayout(new GridBagLayout());
         Task4.setAlignmentX(0.0f);
         Task4.setAlignmentY(0.0f);
-        Task4.setBackground(new Color(-986947));
+        Task4.setBackground(new Color(-2953488));
         JTable.addTab("Завдання 4", Task4);
         imageTask4 = new JLabel();
         imageTask4.setAlignmentY(0.0f);
@@ -741,7 +766,7 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         gbc.weighty = 1.0E-4;
         gbc.anchor = GridBagConstraints.NORTH;
         Task4.add(imageTask4, gbc);
@@ -775,6 +800,8 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 2;
         gbc.weightx = 1.0;
         gbc.weighty = 0.1;
         gbc.anchor = GridBagConstraints.NORTH;
@@ -793,9 +820,16 @@ public class myGUI extends JFrame {
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.insets = new Insets(10, 0, 0, 0);
         Task4.add(buttonTask4Next, gbc);
+        інструкціяButton4 = new JButton();
+        інструкціяButton4.setText("Інструкція");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        Task4.add(інструкціяButton4, gbc);
         Task5 = new JPanel();
         Task5.setLayout(new GridBagLayout());
-        Task5.setBackground(new Color(-986947));
+        Task5.setBackground(new Color(-2953488));
         JTable.addTab("Завдання 5", Task5);
         task5Image = new JLabel();
         task5Image.setIcon(new ImageIcon(getClass().getResource("/dron.jpg")));
@@ -806,6 +840,7 @@ public class myGUI extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 3;
+        gbc.gridheight = 2;
         gbc.weightx = 1.0;
         gbc.weighty = 0.01;
         gbc.anchor = GridBagConstraints.NORTH;
@@ -828,6 +863,7 @@ public class myGUI extends JFrame {
         gbc.gridy = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 0.001;
+        gbc.insets = new Insets(10, 0, 10, 0);
         Task5.add(buttonReadImages2, gbc);
         buttonSolveTask5 = new JButton();
         buttonSolveTask5.setBackground(new Color(-1987561));
@@ -839,27 +875,72 @@ public class myGUI extends JFrame {
         gbc.weightx = 1.0;
         gbc.weighty = 0.001;
         Task5.add(buttonSolveTask5, gbc);
+        інструкціяButton1 = new JButton();
+        інструкціяButton1.setText("Інструкція");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        gbc.insets = new Insets(0, 0, 250, 0);
+        Task5.add(інструкціяButton1, gbc);
         Task6 = new JPanel();
         Task6.setLayout(new GridBagLayout());
-        Task6.setBackground(new Color(-986947));
+        Task6.setBackground(new Color(-2953488));
         JTable.addTab("Завдання 6", Task6);
         task6btnChange = new JButton();
         task6btnChange.setBackground(new Color(-1987561));
         task6btnChange.setEnabled(false);
         task6btnChange.setText(" Стартове зображення");
         gbc = new GridBagConstraints();
-        gbc.gridx = 2;
+        gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 0.001;
         Task6.add(task6btnChange, gbc);
+        imageTask6 = new JLabel();
+        imageTask6.setIcon(new ImageIcon(getClass().getResource("/dron.jpg")));
+        imageTask6.setText("");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridheight = 3;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.01;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task6.add(imageTask6, gbc);
+        button4 = new JButton();
+        button4.setBackground(new Color(-7741153));
+        button4.setText("Вибрати зображення");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        Task6.add(button4, gbc);
+        button1 = new JButton();
+        button1.setBackground(new Color(-7741153));
+        button1.setText("Обробити зображення");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weighty = 0.001;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        Task6.add(button1, gbc);
+        task6Wheel = new JLabel();
+        task6Wheel.setIcon(new ImageIcon(getClass().getResource("/color-wheel.jpg")));
+        task6Wheel.setText("");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        Task6.add(task6Wheel, gbc);
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
-        panel1.setBackground(new Color(-986947));
+        panel1.setBackground(new Color(-2953488));
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
         gbc.weighty = 0.01;
         gbc.anchor = GridBagConstraints.NORTH;
@@ -885,40 +966,16 @@ public class myGUI extends JFrame {
         labelValue2 = new JLabel();
         labelValue2.setText("Другий колір");
         panel1.add(labelValue2, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        imageTask6 = new JLabel();
-        imageTask6.setIcon(new ImageIcon(getClass().getResource("/dron.jpg")));
-        imageTask6.setText("");
+        інструкціяButton = new JButton();
+        інструкціяButton.setText("Інструкція");
         gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 2;
-        gbc.gridheight = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
         gbc.weightx = 1.0;
-        gbc.weighty = 0.01;
-        gbc.anchor = GridBagConstraints.NORTH;
-        Task6.add(imageTask6, gbc);
-        button4 = new JButton();
-        button4.setBackground(new Color(-7741153));
-        button4.setText("Вибрати зображення");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        Task6.add(button4, gbc);
-        button1 = new JButton();
-        button1.setBackground(new Color(-7741153));
-        button1.setText("Обробити зображення");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 1;
         gbc.weighty = 0.001;
-        Task6.add(button1, gbc);
-        task6Wheel = new JLabel();
-        task6Wheel.setIcon(new ImageIcon(getClass().getResource("/color-wheel.jpg")));
-        task6Wheel.setText("");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.weightx = 1.0;
-        Task6.add(task6Wheel, gbc);
+        gbc.anchor = GridBagConstraints.SOUTH;
+        gbc.insets = new Insets(0, 0, 300, 0);
+        Task6.add(інструкціяButton, gbc);
     }
 
     /**
@@ -927,6 +984,7 @@ public class myGUI extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return MyPanel;
     }
+
 }
 
 
