@@ -13,7 +13,7 @@ public class StartMenu {
             @Override
             public void windowOpened(WindowEvent e) {
                 super.windowOpened(e);
-                Info.setText("<html>Роботи виконали учні <br> Дніпровського ліцею інформаційних технологій <br> імені Олеся Гончара:" +
+                Info.setText("<html>Роботу виконали учні <br> Дніпровського ліцею інформаційних технологій <br> імені Олеся Гончара:" +
                         "<br> Арчаков Всеволод <br> Єрмаков Сергій <br> Перекопський Михайло <br> Денисов Костянтин <br> Карпусь Артур</html>");
                 Info.setHorizontalAlignment(SwingConstants.RIGHT);
             }

@@ -8,6 +8,7 @@ public class MathTransform {
     public static double matrixHeight = 6;
     public static double focalLength = 8;
     public static double height;
+
     public static double degreeToRadian(double degree){
         return degree * Math.PI / 180;
     }
@@ -47,6 +48,16 @@ public class MathTransform {
         vector.x = pointMatrix[0][0] - focus[0][0];
         vector.y = pointMatrix[1][0]- focus[1][0];
         vector.z = pointMatrix[2][0] - focus[2][0];
+
+        return vector;
+    }
+
+    public static Point3 getDirectingVector(Point3 pointMatrix, Point3 focus){
+        Point3 vector = new Point3();
+
+        vector.x = pointMatrix.x - focus.x;
+        vector.y = pointMatrix.y - focus.y;
+        vector.z = pointMatrix.z - focus.z;
 
         return vector;
     }
@@ -110,5 +121,37 @@ public class MathTransform {
         return  cornerMatrix;
     }
 
+    public static Plane getPlain(Point3 m0, Point3 m1, Point3 m2){
+        double X1 = m1.x - m0.x;
+        double X2 = m2.x - m0.x;
+        double Y1 = m1.y - m0.y;
+        double Y2 = m2.y - m0.y;
+        double Z1 = m1.z - m0.z;
+        double Z2 = m2.z - m0.z;
+
+        Plane plane = new Plane();
+
+        plane.A = Y1 * Z2 - Z1 * Y2;
+        plane.B = Z1 * X2 - X1 * Z2;
+        plane.C = X1 * Y2 - Y1 * X2;
+        plane.D = -m0.x * plane.A - m0.y * plane.B - m0.z * plane.C;
+
+        return plane;
+    }
+
+    public static Point3 getIntersect(Point3 p1, Point3 p2, Plane plane){
+        Point3 directVector = getDirectingVector(p1, p2);
+
+        double t = -(plane.D + plane.A * p1.x + plane.B * p1.y + plane.C * p1.z) /
+                (plane.A * directVector.x + plane.B * directVector.y + plane.C * directVector.z);
+
+        Point3 intersect = new Point3();
+
+        intersect.x = p1.x + t * directVector.x;
+        intersect.y = p1.y + t * directVector.y;
+        intersect.z = p1.z + t * directVector.z;
+
+        return intersect;
+    }
 
 }

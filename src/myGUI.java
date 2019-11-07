@@ -197,8 +197,8 @@ public class myGUI extends JFrame {
                     hsv1 = Color.RGBtoHSB(color1.getRed(), color1.getGreen(), color1.getBlue(), null);
                     hsv2 = Color.RGBtoHSB(color2.getRed(), color2.getGreen(), color2.getBlue(), null);
                     //System.out.println(hsv1[0] + " " + hsv2[0]);
-                    int HUE_MIN = (int) Math.min(hsv1[0] * 360, hsv2[0] * 360);
-                    int HUE_MAX = (int) Math.max(hsv1[0] * 360, hsv2[0] * 360);
+                    int HUE_MIN = (int) Math.min(hsv1[0] * 180, hsv2[0] * 180);
+                    int HUE_MAX = (int) Math.max(hsv1[0] * 180, hsv2[0] * 180);
                     final int SATURATION_MIN = 40;
                     for (int y = 0; y < hsv.cols(); y++) {
                         for (int x = 0; x < hsv.rows(); x++) {
