@@ -7,25 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa6ada6-a918-42c4-a493-0dacfa0f9cd1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/company/Plane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TUI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/META-INF/TUI.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/123.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/LayoutState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/LayoutState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StartMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/MathTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MathTransform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PhotosInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PhotosInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/myGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myGUI.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -168,7 +152,8 @@
       <workItem from="1572900507956" duration="697000" />
       <workItem from="1572940005388" duration="1938000" />
       <workItem from="1572949265021" duration="1955000" />
-      <workItem from="1573146148340" duration="687000" />
+      <workItem from="1573146148340" duration="761000" />
+      <workItem from="1573160318702" duration="2731000" />
     </task>
     <servers />
   </component>

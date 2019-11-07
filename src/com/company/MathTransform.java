@@ -154,4 +154,19 @@ public class MathTransform {
         return intersect;
     }
 
+    public static double distanceFromPointToStraight(Point3 from, Point3 p1, Point3 p2){
+        Point3 directVector = getDirectingVector(p1, p2);
+        double l1 = directVector.x;
+        double m1 = directVector.y;
+        double n1 = directVector.z;
+
+        double X = from.x - p1.x;
+        double Y = from.y - p1.y;
+        double Z = from.z - p1.z;
+
+        double dist = (Math.sqrt((X * m1 - Y * l1) * (X * m1 - Y * l1) + (Y * n1 - Z * m1) * (Y * n1 - Z * m1) + (Z * l1 - X * n1) * (Z * l1 - X * n1)))
+                / (Math.sqrt(l1 * l1 + m1 * m1 + n1 * n1));
+
+        return dist;
+    }
 }
