@@ -38,7 +38,7 @@ public class Functions {
     }
 
     public static Mat reSizeOnlyOne(Mat src) {
-        double normalHeight = 400, normalWidth = 600;
+        double normalHeight = 500, normalWidth = 700;
         double k1 = src.width() / normalWidth;
         double k2 = src.height() / normalHeight;
         if (k1 < 1) k1 = 1;
@@ -54,6 +54,7 @@ public class Functions {
         Imgproc.warpAffine(src, src, tra, new Size(src.width() / k1, src.height() / k1));
         return src;
     }
+
     public static Mat BufferedImage2Mat(BufferedImage image) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", byteArrayOutputStream);

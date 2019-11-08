@@ -192,6 +192,10 @@ class SalesmanPrepare {
             rght.x = Math.max(rght.x, p[i].x);
             rght.y = Math.max(rght.y, p[i].y);
         }
+        lft.x -= 0.01 / 111;
+        lft.y -= 0.01 / 111;
+        rght.x += 0.01 / 111;
+        rght.y += 0.01 / 111;
         let optimalPath = 1000000000000000;
         let ans = [];
         let d = Math.max((maxHeight - minHeight) / 10.0, 0.005);

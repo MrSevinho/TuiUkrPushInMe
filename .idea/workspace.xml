@@ -7,26 +7,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa6ada6-a918-42c4-a493-0dacfa0f9cd1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TUI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/answer.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/map.html" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/map.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/panel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/panel1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/solver.js" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/solver.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/style.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Functions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Matrices.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Matrices.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo$Photo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo$Photo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PlanPath.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PlanPath.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Plane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Plane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task23$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task23$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/getLaplac.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/getLaplac.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$11.class" afterDir="false" />
@@ -52,10 +48,7 @@
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Functions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/MathTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MathTransform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PhotosInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PhotosInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Task23.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Task23.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Task5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Task5.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/myGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/myGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/myGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myGUI.java" afterDir="false" />
     </list>
@@ -198,7 +191,7 @@
       <workItem from="1573160318702" duration="3946000" />
       <workItem from="1573218372604" duration="3072000" />
       <workItem from="1573226786743" duration="679000" />
-      <workItem from="1573242287036" duration="5504000" />
+      <workItem from="1573242287036" duration="7826000" />
     </task>
     <servers />
   </component>
