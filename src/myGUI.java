@@ -132,6 +132,7 @@ public class myGUI extends JFrame {
             JTable.setTabComponentAt(3, lbl4);
             JTable.setTabComponentAt(4, lbl5);
             drawColors();
+            System.out.println(MathTransform.distanceFromPointToStraight(new Point3(4, 3, 0), new Point3(3, 5, 1), new Point3(2, 2, 4)));
         }
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
