@@ -1,10 +1,7 @@
-import com.company.Functions;
-import com.company.MathTransform;
-import com.company.PhotosInfo;
+import com.company.*;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
-import com.company.Task23;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,6 +10,7 @@ import java.awt.event.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URI;
@@ -25,6 +23,7 @@ import java.util.List;
 import static com.company.Functions.Mat2BufferedImage;
 import static com.company.Functions.createIcon;
 import static com.company.Functions.reSizeOnlyOne;
+import static com.company.MathTransform.*;
 import static com.company.Task23.*;
 import static com.company.Task4.solveTask4;
 import static com.company.Task5.*;
@@ -101,7 +100,7 @@ public class myGUI extends JFrame {
             mainFrame.setVisible(true);
             System.out.println(new File("").getAbsolutePath() + " ");
             BufferedImage img = null, img2 = null, img3 = null, img4 = null, img5 = null;
-            JLabel lbl  = new JLabel("<html>Побудова маршруту дрона</html>");
+            JLabel lbl = new JLabel("<html>Побудова маршруту дрона</html>");
             JLabel lbl2 = new JLabel("<html>Найчіткіше зображення</html>");
             JLabel lbl3 = new JLabel("<html>Послідовність зображень</html>");
             JLabel lbl4 = new JLabel("<html>Знаходження відмінностей</html>");
@@ -538,11 +537,163 @@ public class myGUI extends JFrame {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     try {
                         String browseTask4 = (pathToFile + "\\htdocs\\map.html").replace('\\', '/');
-                        Desktop.getDesktop().browse(new URI(browseTask4));
+                        //Desktop.getDesktop().browse(new URI(browseTask4));
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 }
+                double mn_x = 10000, mn_y = 10000, mx_x = -10000, mx_y = -10000;
+                int n = PhotosInfo.photos.size();
+                for (int i = 0; i < n; ++i) {
+                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getLeftBottomCorner().x);
+                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getLeftTopCorner().x);
+                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getRightBottomCorner().x);
+                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getRightTopCorner().x);
+
+                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getLeftBottomCorner().x);
+                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getLeftTopCorner().x);
+                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getRightBottomCorner().x);
+                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getRightTopCorner().x);
+
+                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getLeftBottomCorner().y);
+                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getLeftTopCorner().y);
+                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getRightBottomCorner().y);
+                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getRightTopCorner().y);
+
+                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getLeftBottomCorner().y);
+                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getLeftTopCorner().y);
+                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getRightBottomCorner().y);
+                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getRightTopCorner().y);
+                }
+                double sz = 500;
+                double dmx = mx_x - mn_x, dpx;
+                double dmy = mx_y - mn_y, dpy;
+
+                double rad = (mx_y * Math.PI) / 180;
+                double dist = (40000 * Math.cos(rad) / 360) * 1000;
+
+                dmy = dmy * 111320.0;
+                dmx = dmx * dist;
+                System.out.println(dmy + "!!! " + dmx);
+                Mat res;
+                if (dmx > dmy) {
+                    dpy = (int) (sz * dmy / dmx);
+                    dpx = sz;
+                } else {
+                    dpx = (int) (sz * dmx / dmy);
+                    dpy = sz;
+                }
+                res = new Mat((int) dpy, (int) dpx, CvType.CV_8UC3);
+                System.out.println(dpy + "!!! " + dpx);
+                double dx, dy, tmpx, tmpy, eps = 0.00000001;
+                double distx, disty, distz, width, height, I, J;
+                double[] len = new double[4];
+                double[] to_write = new double[8];
+                to_write[0] = mn_x;
+                to_write[1] = mn_y;
+
+                to_write[2] = mx_x;
+                to_write[3] = mn_y;
+
+                to_write[4] = mx_x;
+                to_write[5] = mx_y;
+
+                to_write[6] = mn_x;
+                to_write[7] = mx_y;
+
+                int cnt = 0;
+                Plane plane;
+                Point3 airPoint;
+                Mat image = null;
+                BufferedImage img = null;
+                boolean[][] used = new boolean[(int) dpy][(int) dpx];
+
+                for (int x = 0; x < dpx; ++x) {
+                    for (int y = 0; y < dpy; ++y) {
+                        res.put(y, x, new byte[]{0, 0, 0});
+                        used[y][x] = false;
+                    }
+                }
+
+                for (int k = 0; k < n; ++k) {
+                    try {
+                        img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (k + 1 + 3) + ".JPG"));
+                        image = Functions.BufferedImage2Mat(img);
+                        image = Functions.reSizeOnlyOne(image);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                    for (int x = 0; x < dpx; ++x) {
+                        for (int y = 0; y < dpy; ++y) {
+                            if (used[y][x]) continue;
+                            dx = (double) x / dpx * dmx;
+                            dx = dx / dist;
+                            dy = (double) y / dpy * dmy;
+                            dy = dy / 111320.0;
+                            tmpx = mn_x + dx;
+                            tmpy = mx_y - dy;
+
+                            distx = (tmpx - PhotosInfo.photos.get(k).getStartPoint().x);
+                            distx = distx * dist;
+                            disty = (tmpy - PhotosInfo.photos.get(k).getStartPoint().y);
+                            disty = disty * 111320.0;
+                            distz = (-PhotosInfo.photos.get(k).getStartPoint().z);
+
+                            plane = getPlain(PhotosInfo.photos.get(k).lb, PhotosInfo.photos.get(k).lt,
+                                    PhotosInfo.photos.get(k).rb);
+
+                            System.out.println(distx + " " + disty + " " + distz);
+                            System.out.println(PhotosInfo.photos.get(k).getFocusOnAir().toString());
+                            airPoint = getIntersect(new Point3(distx, disty, distz), PhotosInfo.photos.get(k).getFocusOnAir(), plane);
+                            //System.out.println(airPoint.toString());
+                            len[0] = distanceFromPointToLine(airPoint, PhotosInfo.photos.get(k).lb, PhotosInfo.photos.get(k).lt);
+                            len[1] = distanceFromPointToLine(airPoint, PhotosInfo.photos.get(k).lt, PhotosInfo.photos.get(k).rt);
+                            len[2] = distanceFromPointToLine(airPoint, PhotosInfo.photos.get(k).rt, PhotosInfo.photos.get(k).rb);
+                            len[3] = distanceFromPointToLine(airPoint, PhotosInfo.photos.get(k).rb, PhotosInfo.photos.get(k).lb);
+                            width = distance(PhotosInfo.photos.get(k).lb, PhotosInfo.photos.get(k).rb);
+                            height = distance(PhotosInfo.photos.get(k).lb, PhotosInfo.photos.get(k).lt);
+                            //System.out.println(len[0] + " " + len[1] + " " + len[2] + " " + len[3] + " " + width + " " + height);
+                            if (Math.max(len[0], len[2]) > width) {
+                                continue;
+                            }
+                            if (Math.max(len[1], len[3]) > height) {
+                                continue;
+                            }
+                            //System.out.println("??????");
+                            if (image != null) {
+                                I = len[1] / height;
+                                J = len[0] / width;
+                                I = Math.min(I * image.height(), image.height() - 1);
+                                J = Math.min(J * image.width(), image.width() - 1);
+
+                                I = image.height() - I;
+                                J = image.width() - J;
+
+                                byte[] to_put = new byte[3];
+                                image.get((int) I, (int) J, to_put);
+                                res.put(y, x, to_put);
+                                used[y][x] = true;
+                            }
+                        }
+                    }
+                }
+                /*try (FileWriter writer = new FileWriter("notes2.txt", false)) {
+                    for (int i = 0; i < to_write.length; ++i) {
+                        writer.write(to_write[i] + " ");
+                    }
+                    writer.flush();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }*/
+                try {
+                    img = Mat2BufferedImage(res);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                if (img != null)
+                    imageTask4.setIcon(new ImageIcon(img));
                 /*Browser view = new Browser("file:///" + pathToFile + "/src/com/company/map.html");
                 JFrame frame;
                 frame = new JFrame("Карта");
@@ -976,7 +1127,6 @@ public class myGUI extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return MyPanel;
     }
-
 }
 
 

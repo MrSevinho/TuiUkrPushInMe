@@ -41,9 +41,9 @@ public class Functions {
         double k2 = src.height() / normalHeight;
         if (k1 < 1) k1 = 1;
         if (k2 < 1) k2 = 1;
-        System.out.println(k1 + " " + k2);
+        //System.out.println(k1 + " " + k2);
         k1 = Math.max(k1, k2);
-        System.out.println(k1);
+        //System.out.println(k1);
         Mat tra = new Mat(2, 3, CvType.CV_32FC1);
         tra.put(0, 0,
                 1 / k1, 0, 0,
@@ -142,6 +142,7 @@ public class Functions {
                 System.out.println(roll + " roll");
                 System.out.println(pitch + " pitch");
                 System.out.println(yaw + " yaw");
+                if(cnt >= 3 && cnt <= 5)
                 photosInfo.receivePhoto(cnt + " ", Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
                         Double.parseDouble(lat) / 10000000.0, Double.parseDouble(yaw),
                         Double.parseDouble(roll), Double.parseDouble(pitch));

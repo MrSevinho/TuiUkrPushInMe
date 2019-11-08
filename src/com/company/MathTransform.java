@@ -4,9 +4,9 @@ import org.opencv.core.Point;
 import org.opencv.core.Point3;
 
 public class MathTransform {
-    public static double matrixWidth = 9;
+    public static double matrixWidth = 8;
     public static double matrixHeight = 6;
-    public static double focalLength = 8;
+    public static double focalLength = 3;
     public static double height;
 
     public static double degreeToRadian(double degree){
@@ -15,6 +15,10 @@ public class MathTransform {
 
     public static double convertMmToM(double mm){
         return mm / 1000;
+    }
+
+    public static double distance(Point3 p1, Point3 p2){
+        return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y) + (p1.z - p2.z) * (p1.z - p2.z));
     }
 
     public static double distance(Point p1, Point p2){
@@ -118,7 +122,7 @@ public class MathTransform {
             cornerMatrix[3][0] = 1;
         }
 
-        return  cornerMatrix;
+        return cornerMatrix;
     }
 
     public static Plane getPlain(Point3 m0, Point3 m1, Point3 m2){
@@ -154,7 +158,7 @@ public class MathTransform {
         return intersect;
     }
 
-    public static double distanceFromPointToStraight(Point3 from, Point3 p1, Point3 p2){
+    public static double distanceFromPointToLine(Point3 from, Point3 p1, Point3 p2){
         Point3 directVector = getDirectingVector(p1, p2);
         double l1 = directVector.x;
         double m1 = directVector.y;
