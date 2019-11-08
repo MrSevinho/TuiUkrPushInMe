@@ -6,7 +6,7 @@ import org.opencv.core.Point3;
 public class MathTransform {
     public static double matrixWidth = 8;
     public static double matrixHeight = 6;
-    public static double focalLength = 3;
+    public static double focalLength = 6;
     public static double height;
 
     public static double degreeToRadian(double degree){

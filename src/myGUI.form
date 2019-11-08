@@ -197,7 +197,7 @@
                   <text value="Виконати"/>
                 </properties>
               </component>
-              <component id="e9773" class="javax.swing.JButton" binding="buttonTask4Previous">
+              <component id="e9773" class="javax.swing.JButton" binding="buttonTask4Next">
                 <constraints>
                   <grid row="2" column="1" row-span="2" col-span="2" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag top="10" left="0" bottom="0" right="0" weightx="1.0" weighty="0.1"/>
@@ -209,7 +209,7 @@
                   <text value="Наступне зображення"/>
                 </properties>
               </component>
-              <component id="8ef52" class="javax.swing.JButton" binding="buttonTask4Next">
+              <component id="8ef52" class="javax.swing.JButton" binding="buttonTask4Previous">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag top="10" left="0" bottom="0" right="0" weightx="1.0" weighty="0.1"/>

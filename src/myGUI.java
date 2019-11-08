@@ -1,17 +1,20 @@
-import com.company.*;
-
-import org.opencv.core.*;
+import com.company.Functions;
+import com.company.PhotosInfo;
+import com.company.Plane;
+import com.company.Task23;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.Point3;
 import org.opencv.imgproc.Imgproc;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -19,16 +22,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.company.Functions.Mat2BufferedImage;
-import static com.company.Functions.createIcon;
-import static com.company.Functions.reSizeOnlyOne;
+import static com.company.Functions.*;
 import static com.company.MathTransform.*;
+import static com.company.Task23.BufferedImage2Mat;
 import static com.company.Task23.*;
-import static com.company.Task4.solveTask4;
+import static com.company.Task4.*;
 import static com.company.Task5.*;
-import static com.company.Task4.pathToDocument;
-import static com.company.Task4.listOfIndex;
-import static com.company.Task4.check;
 
 public class myGUI extends JFrame {
     private JPanel MyPanel;
@@ -50,8 +49,8 @@ public class myGUI extends JFrame {
     private JButton task6btnChange;
     private JButton button2;
     private JLabel imageTask4;
-    private JButton buttonTask4Previous;
     private JButton buttonTask4Next;
+    private JButton buttonTask4Previous;
     private JButton buttonTask23FirstImage;
     private JButton buttonTask23SecondImage;
     private JButton buttonTask23FinalImage;
@@ -74,7 +73,7 @@ public class myGUI extends JFrame {
     boolean task5 = false, task6 = false;
     BufferedImage startImageTask6 = null, endImageTask6 = null,
             task23Imgage = null, task23ImageFirst = null, task23ImageSecond = null;
-    int currIndexInLsImages = 0;
+    int currIndex = 0;
     public static String pathToFile = new File("").getAbsolutePath();
     Functions functions = new Functions();
     private Color color1 = new Color(255, 34, 0), color2 = new Color(255, 149, 0);
@@ -416,15 +415,13 @@ public class myGUI extends JFrame {
 
                 }
                 if (!verify) {
-
                     try {
-                        //listOfIndex = new ArrayList<>();
                         if (check) {
                             listOfIndex.clear();
                         }
                         solveTask4();
                         try {
-                            BufferedImage img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (listOfIndex.get(0) + 1) + ".JPG"));
+                            BufferedImage img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (PhotosInfo.photos.get(listOfIndex.get(0)).getImage() + ".JPG")));
                             img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
                             imageTask4.setIcon(new ImageIcon(img));
                         } catch (Exception ex) {
@@ -434,9 +431,10 @@ public class myGUI extends JFrame {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
+                    currIndex = 0;
                     button3.setEnabled(true);
-                    buttonTask4Previous.setEnabled(true);
                     buttonTask4Next.setEnabled(true);
+                    buttonTask4Previous.setEnabled(false);
                 } else {
                     JOptionPane.showMessageDialog(myGUI.this,
                             new String[]{"Не коректні вхідні данні"},
@@ -447,30 +445,7 @@ public class myGUI extends JFrame {
                             "Вхідні дані",
                             JOptionPane.INFORMATION_MESSAGE);
                     button3.setEnabled(false);
-                    buttonTask4Previous.setEnabled(false);
                     buttonTask4Next.setEnabled(false);
-                }
-            }
-        });
-        buttonTask4Next.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                currIndexInLsImages--;
-                if (currIndexInLsImages <= 0) buttonTask4Previous.setEnabled(false);
-                buttonTask4Next.setEnabled(true);
-                if (currIndexInLsImages >= 0 && currIndexInLsImages < listOfIndex.size()) {
-                    BufferedImage img = null;
-                    try {
-                        img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (listOfIndex.get(currIndexInLsImages) + 1) + ".JPG"));
-                        img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
-                        imageTask4.setIcon(new ImageIcon(img));
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-                if (currIndexInLsImages <= 0) {
-                    currIndexInLsImages = 0;
                     buttonTask4Previous.setEnabled(false);
                 }
             }
@@ -479,23 +454,40 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                currIndexInLsImages++;
-                if (currIndexInLsImages + 1 == listOfIndex.size()) buttonTask4Next.setEnabled(false);
-                buttonTask4Previous.setEnabled(true);
-                if (currIndexInLsImages >= 0 && currIndexInLsImages < listOfIndex.size()) {
-                    try {
-                        BufferedImage img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (listOfIndex.get(currIndexInLsImages) + 1) + ".JPG"));
-                        img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
-                        imageTask4.setIcon(new ImageIcon(img));
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+                if (currIndex > 0) {
+                    currIndex--;
                 }
-                if (currIndexInLsImages >= listOfIndex.size()) {
-                    currIndexInLsImages = listOfIndex.size() - 1;
+                BufferedImage img = null;
+                try {
+                    img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (PhotosInfo.photos.get(listOfIndex.get(currIndex)).getImage() + ".JPG")));
+                    img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
+                    imageTask4.setIcon(new ImageIcon(img));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                if (currIndex == 0)
+                    buttonTask4Previous.setEnabled(false);
+                buttonTask4Next.setEnabled(true);
+            }
+        });
+        buttonTask4Next.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (currIndex + 1 < listOfIndex.size()) {
+                    currIndex++;
+                }
+                BufferedImage img = null;
+                try {
+                    img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (PhotosInfo.photos.get(listOfIndex.get(currIndex)).getImage() + ".JPG")));
+                    img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
+                    imageTask4.setIcon(new ImageIcon(img));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                if (currIndex == listOfIndex.size() - 1)
                     buttonTask4Next.setEnabled(false);
-                }
-
+                buttonTask4Previous.setEnabled(true);
             }
         });
         buttonTask23FirstImage.addMouseListener(new MouseAdapter() {
@@ -535,7 +527,7 @@ public class myGUI extends JFrame {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     try {
                         String browseTask4 = (pathToFile + "\\htdocs\\map.html").replace('\\', '/');
-                        //Desktop.getDesktop().browse(new URI(browseTask4));
+                        Desktop.getDesktop().browse(new URI(browseTask4));
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -821,7 +813,7 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
-        String model = System.getProperty("sun.arch.data.model");
+        /*String model = System.getProperty("sun.arch.data.model");
         String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
         if (model.equals("64")) {
             libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
@@ -829,7 +821,7 @@ public class myGUI extends JFrame {
         System.setProperty("java.library.path", libraryPath);
         Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
         sysPath.setAccessible(true);
-        sysPath.set(null, null);
+        sysPath.set(null, null);*/
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
@@ -1015,11 +1007,11 @@ public class myGUI extends JFrame {
         gbc.weightx = 1.0;
         gbc.weighty = 0.001;
         Task4.add(button3, gbc);
-        buttonTask4Previous = new JButton();
-        buttonTask4Previous.setAlignmentY(0.0f);
-        buttonTask4Previous.setBackground(new Color(-1987561));
-        buttonTask4Previous.setEnabled(false);
-        buttonTask4Previous.setText("Наступне зображення");
+        buttonTask4Next = new JButton();
+        buttonTask4Next.setAlignmentY(0.0f);
+        buttonTask4Next.setBackground(new Color(-1987561));
+        buttonTask4Next.setEnabled(false);
+        buttonTask4Next.setText("Наступне зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 2;
@@ -1029,12 +1021,12 @@ public class myGUI extends JFrame {
         gbc.weighty = 0.1;
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.insets = new Insets(10, 0, 0, 0);
-        Task4.add(buttonTask4Previous, gbc);
-        buttonTask4Next = new JButton();
-        buttonTask4Next.setAlignmentY(0.0f);
-        buttonTask4Next.setBackground(new Color(-1987561));
-        buttonTask4Next.setEnabled(false);
-        buttonTask4Next.setText("Попереднє зображення");
+        Task4.add(buttonTask4Next, gbc);
+        buttonTask4Previous = new JButton();
+        buttonTask4Previous.setAlignmentY(0.0f);
+        buttonTask4Previous.setBackground(new Color(-1987561));
+        buttonTask4Previous.setEnabled(false);
+        buttonTask4Previous.setText("Попереднє зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -1042,7 +1034,7 @@ public class myGUI extends JFrame {
         gbc.weighty = 0.1;
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.insets = new Insets(10, 0, 0, 0);
-        Task4.add(buttonTask4Next, gbc);
+        Task4.add(buttonTask4Previous, gbc);
         інструкціяButton4 = new JButton();
         інструкціяButton4.setBackground(new Color(-1987561));
         інструкціяButton4.setText("Інструкція");
@@ -1141,7 +1133,7 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(10, 0, 10, 0);
         Task6.add(button4, gbc);
         button1 = new JButton();
         button1.setBackground(new Color(-7741153));
@@ -1150,7 +1142,7 @@ public class myGUI extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weighty = 0.001;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(10, 0, 10, 0);
         Task6.add(button1, gbc);
         task6Wheel = new JLabel();
         task6Wheel.setIcon(new ImageIcon(getClass().getResource("/color-wheel.jpg")));

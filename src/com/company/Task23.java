@@ -18,20 +18,20 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import static java.lang.Math.sqrt;
-
 public class Task23 {
     static public Mat img = null, img2 = null, transform;
     static public double tr[][];
-    static  public byte[] buff, buff2, tmp, tmp_gr, tmp_gr2;
+    static public byte[] buff, buff2, tmp, tmp_gr, tmp_gr2;
     static public byte[][][] gr2, gr;
-    static   public boolean isImageSet, diffFound = true;
+    static public boolean isImageSet, diffFound = true;
+
     public static Mat BufferedImage2Mat(BufferedImage image) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", byteArrayOutputStream);
         byteArrayOutputStream.flush();
         return Imgcodecs.imdecode(new MatOfByte(byteArrayOutputStream.toByteArray()), Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
     }
+
     static public void readImages() throws IOException {
         isImageSet = true;
         diffFound = true;
@@ -51,16 +51,15 @@ public class Task23 {
             } catch (IOException a) {
 
             }
-            if(BuffIMG == null) isImageSet = false;
+            if (BuffIMG == null) isImageSet = false;
             else {
                 img = BufferedImage2Mat(BuffIMG);
                 img = Functions.reSizeOnlyOne(img);
             }
-        }
-        else {
+        } else {
             isImageSet = false;
         }
-        if(isImageSet){
+        if (isImageSet) {
             ret = fileopen.showDialog(null, "Открыть файл");
             if (ret == JFileChooser.APPROVE_OPTION) {
                 File file = fileopen.getSelectedFile();
@@ -71,27 +70,27 @@ public class Task23 {
                 } catch (IOException a) {
 
                 }
-                if(BuffIMG2 == null) isImageSet = false;
+                if (BuffIMG2 == null) isImageSet = false;
                 else {
                     img2 = BufferedImage2Mat(BuffIMG2);
                     img2 = Functions.reSizeOnlyOne(img2);
                 }
-            }
-            else {
+            } else {
                 isImageSet = false;
             }
         }
-        if(isImageSet) {
-            if(img.width() != img2.width() || img.height() != img2.height()) {
+        if (isImageSet) {
+            if (img.width() != img2.width() || img.height() != img2.height()) {
                 isImageSet = false;
             }
         }
-    }
-    static  public Point get(Point a) {
-        return new Point((int)((tr[0][0] * a.x + tr[0][1] * a.y + tr[0][2]) / (tr[2][0] * a.x + tr[2][1] * a.y + tr[2][2])), (int)((tr[1][0] * a.x + tr[1][1] * a.y + tr[1][2]) / (tr[2][0] * a.x + tr[2][1] * a.y + tr[2][2])));
     }
 
-    static  public boolean in(Point a) {
+    static public Point get(Point a) {
+        return new Point((int) ((tr[0][0] * a.x + tr[0][1] * a.y + tr[0][2]) / (tr[2][0] * a.x + tr[2][1] * a.y + tr[2][2])), (int) ((tr[1][0] * a.x + tr[1][1] * a.y + tr[1][2]) / (tr[2][0] * a.x + tr[2][1] * a.y + tr[2][2])));
+    }
+
+    static public boolean in(Point a) {
         return a.x >= 0 && a.x < img2.width() && a.y >= 0 && a.y < img2.height();
     }
 
@@ -118,7 +117,7 @@ public class Task23 {
         int dy = img.height() / cnt, dx = img.width() / cnt;
         boolean[][] ok = new boolean[30][30];
         Point b;
-        for(int i = 0; i < cnt; ++i) {
+        for (int i = 0; i < cnt; ++i) {
             for (int j = 0; j < cnt; ++j) {
                 ok[i][j] = true;
                 for (int x = i * dx; x < dx * (i + 1); ++x) {
@@ -138,15 +137,15 @@ public class Task23 {
             }
         }
         int val1, val2;
-        for(int i = 0; i < cnt; ++i) {
-            for(int j = 0; j < cnt; ++j) {
-                if(ok[i][j]) {
+        for (int i = 0; i < cnt; ++i) {
+            for (int j = 0; j < cnt; ++j) {
+                if (ok[i][j]) {
                     val1 = getLaplac.get(gr[i][j], dy, dx);
                     val2 = getLaplac.get(gr2[i][j], dy, dx);
-                    if(val2 > val1) {
+                    if (val2 > val1) {
                         for (int x = i * dx; x < dx * (i + 1); ++x) {
                             for (int y = j * dy; y < dy * (j + 1); ++y) {
-                                for(int k = 0; k < img.channels(); ++k) {
+                                for (int k = 0; k < img.channels(); ++k) {
                                     buff[(y * img.cols() + x) * img.channels() + k] = buff2[(y * img.cols() + x) * img.channels() + k];
                                 }
                             }
@@ -161,7 +160,7 @@ public class Task23 {
         return ans;
     }
 
-    static public  void findTransformMatrix() {
+    static public void findTransformMatrix() {
         tr = new double[3][3];
         MatOfKeyPoint kp_img = new MatOfKeyPoint();
         MatOfKeyPoint kp_img2 = new MatOfKeyPoint();
@@ -171,7 +170,8 @@ public class Task23 {
         List<KeyPoint> kp = kp_img.toList();
         List<KeyPoint> kp2 = kp_img2.toList();
         // Вычисляем дескрипторы
-        Mat descriptors_img = new Mat(); Mat descriptors_img2 = new Mat();
+        Mat descriptors_img = new Mat();
+        Mat descriptors_img2 = new Mat();
         orb.compute(img, kp_img, descriptors_img);
         orb.compute(img2, kp_img2, descriptors_img2);
         // Сравниваем дескрипторы
@@ -230,8 +230,8 @@ public class Task23 {
             diffFound = false;
             return;
         }
-        for(int i = 0; i < 3; ++i) {
-            for(int j = 0; j < 3; ++j) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
                 tr[i][j] = h.get(i, j)[0];
             }
         }

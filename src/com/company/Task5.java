@@ -108,7 +108,7 @@ public class Task5 {
         i1 = i1.submat(0, new_rows, 0, new_cols);
         i2 = i2.submat(0, new_rows, 0, new_cols);
 
-        int d     = CvType.CV_32F;
+        int d = CvType.CV_32F;
 
         Mat I1 = new Mat();
         Mat I2 = new Mat();

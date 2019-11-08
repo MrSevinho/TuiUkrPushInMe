@@ -15,9 +15,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import static java.lang.Math.max;
 import static java.lang.Math.sqrt;
+import static com.company.PhotosInfo.photos;
 
 public class Functions {
     PhotosInfo photosInfo = new PhotosInfo();
@@ -142,12 +144,20 @@ public class Functions {
                 System.out.println(roll + " roll");
                 System.out.println(pitch + " pitch");
                 System.out.println(yaw + " yaw");
-                if(cnt >= 3 && cnt <= 5)
-                photosInfo.receivePhoto(cnt + " ", Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
+                if(cnt >= 30 && cnt <= 50)
+                photosInfo.receivePhoto((cnt + 1) + "", Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
                         Double.parseDouble(lat) / 10000000.0, Double.parseDouble(yaw),
                         Double.parseDouble(roll), Double.parseDouble(pitch));
                 cnt++;
             }
+        }
+
+        Random rand = new Random();
+        for(int i = 0; i < photos.size(); i++){
+            int x = rand.nextInt(photos.size());
+            PhotosInfo.Photo tmp = new PhotosInfo.Photo(photos.get(i));
+            photos.set(i, photos.get(x));
+            photos.set(x, tmp);
         }
 
     }

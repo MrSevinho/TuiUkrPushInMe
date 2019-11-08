@@ -50,7 +50,7 @@ public class PhotosInfo {
     public static void clearPhotos(){
         photos.clear();
     }
-    public class Photo{
+    public static class Photo{
         private String image;
         private double height;
         private Point3 leftTopCorner, rightTopCorner, leftBottomCorner, rightBottomCorner, focusOnAir;
@@ -72,6 +72,20 @@ public class PhotosInfo {
             this.rb = rb;
         }
 
+        public Photo(Photo temp){
+            this.image = temp.getImage();
+            this.height = temp.getHeight();
+            this.leftTopCorner = temp.getLeftTopCorner();
+            this.rightTopCorner = temp.getRightTopCorner();
+            this.leftBottomCorner = temp.getLeftBottomCorner();
+            this.rightBottomCorner = temp.getRightBottomCorner();
+            this.focusOnAir = temp.getFocusOnAir();
+            this.startPoint = temp.getStartPoint();
+            this.lt = temp.lt;
+            this.rt = temp.rt;
+            this.lb = temp.lb;
+            this.rb = temp.rb;
+        }
 
         public String getImage() {
             return image;
