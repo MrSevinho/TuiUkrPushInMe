@@ -100,8 +100,8 @@ public class Task23 {
         Mat grey2 = img2.clone();
         Imgproc.cvtColor(img, grey, Imgproc.COLOR_BGR2GRAY);
         Imgproc.cvtColor(img2, grey2, Imgproc.COLOR_BGR2GRAY);
-        gr = new byte[30][30][img.width() * img.height()];
-        gr2 = new byte[30][30][img2.width() * img2.height()];
+        gr = new byte[40][40][img.width() * img.height()];
+        gr2 = new byte[40][40][img2.width() * img2.height()];
         buff = new byte[img.width() * img.height() * img.channels()];
         buff2 = new byte[img2.width() * img2.height() * img2.channels()];
         tmp = new byte[img2.width() * img2.height() * img2.channels()];
@@ -114,9 +114,9 @@ public class Task23 {
     }
 
     static public Mat solve() {
-        int cnt = 30, d1 = 0, d2 = 0;
+        int cnt = 40, d1 = 0, d2 = 0;
         int dy = img.height() / cnt, dx = img.width() / cnt;
-        boolean[][] ok = new boolean[30][30];
+        boolean[][] ok = new boolean[cnt][cnt];
         Point b;
         for(int i = 0; i < cnt; ++i) {
             for (int j = 0; j < cnt; ++j) {

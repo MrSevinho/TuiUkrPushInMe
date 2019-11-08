@@ -10,11 +10,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../TUI/opencv/build/java/opencv-341.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../opencv/build/java/opencv-341.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../TUI/opencv/build/java/opencv-341.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../opencv/build/java/opencv-341.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

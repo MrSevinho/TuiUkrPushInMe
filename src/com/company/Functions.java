@@ -36,7 +36,7 @@ public class Functions {
     }
 
     public static Mat reSizeOnlyOne(Mat src) {
-        double normalHeight = 400, normalWidth = 600;
+        double normalHeight = 500, normalWidth = 700;
         double k1 = src.width() / normalWidth;
         double k2 = src.height() / normalHeight;
         if (k1 < 1) k1 = 1;

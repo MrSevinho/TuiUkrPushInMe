@@ -93,7 +93,7 @@ public class myGUI extends JFrame {
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             mainFrame.pack();
             mainFrame.setLocationRelativeTo(null);
-            mainFrame.setSize(1100, 600);
+            mainFrame.setSize(1200, 700);
             mainFrame.setResizable(false);
             mainFrame.setVisible(true);
             System.out.println(new File("").getAbsolutePath() + " ");
@@ -821,7 +821,7 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
-        String model = System.getProperty("sun.arch.data.model");
+        /*String model = System.getProperty("sun.arch.data.model");
         String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
         if (model.equals("64")) {
             libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
@@ -829,7 +829,7 @@ public class myGUI extends JFrame {
         System.setProperty("java.library.path", libraryPath);
         Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
         sysPath.setAccessible(true);
-        sysPath.set(null, null);
+        sysPath.set(null, null);*/
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
@@ -1141,7 +1141,7 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(10, 0, 10, 0);
         Task6.add(button4, gbc);
         button1 = new JButton();
         button1.setBackground(new Color(-7741153));
@@ -1150,7 +1150,7 @@ public class myGUI extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weighty = 0.001;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(10, 0, 10, 0);
         Task6.add(button1, gbc);
         task6Wheel = new JLabel();
         task6Wheel.setIcon(new ImageIcon(getClass().getResource("/color-wheel.jpg")));
@@ -1210,7 +1210,6 @@ public class myGUI extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return MyPanel;
     }
-
 }
 
 
