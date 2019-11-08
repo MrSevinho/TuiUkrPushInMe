@@ -92,9 +92,12 @@ public class myGUI extends JFrame {
             mainFrame.setContentPane(this.MyPanel);
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             mainFrame.pack();
-            mainFrame.setLocationRelativeTo(null);
             mainFrame.setSize(1200, 700);
             mainFrame.setResizable(false);
+            int x, y;
+            x = (Toolkit.getDefaultToolkit().getScreenSize().width - mainFrame.getWidth()) / 2;
+            y = (Toolkit.getDefaultToolkit().getScreenSize().height - mainFrame.getHeight()) / 2;
+            mainFrame.setLocation(x, y);
             mainFrame.setVisible(true);
             System.out.println(new File("").getAbsolutePath() + " ");
             BufferedImage img = null, img2 = null, img3 = null, img4 = null, img5 = null;
