@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -67,7 +68,7 @@ public class myGUI extends JFrame {
     private JButton інструкціяButton1;
     private JButton інструкціяButton3;
     private JButton інструкціяButton4;
-    private JButton button7;
+    private JButton інструкціяButton2;
     private JLabel label2;
     public static JFrame mainFrame = new JFrame();
     boolean task5 = false, task6 = false;
@@ -738,6 +739,76 @@ public class myGUI extends JFrame {
             }
         });
 
+        інструкціяButton3.addMouseMotionListener(new MouseMotionAdapter() {
+        });
+        інструкціяButton3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"У цьому завданні програма на вхід отримує два зображення для одного об’єкта,",
+                                "після цього будується зображення найбільшої чіткості."},
+                        "Інструкція",
+                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"Щоб вибрати зобреження треба натиснути на кнопку 'Вибрати зображення' та у діалоговому окні,",
+                                "що відкрилось, вибрати спочатку перше, а потім друге зображення."},
+                        "Як вибрати зображення",
+                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"Після введення вхідних данних на формі з'явиться оброблене зображення.",
+                                "Щоб побачити перше або друге зображення треба натиснути на відповідні кнопки."},
+                        "Інструкція",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        інструкціяButton1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"У цьому завданні програма на вхід отримує два зображення для однієї території, після цього",
+                                "на зображеннях відзначаються зміни(нові об’єкти, відсутні об’єкти, об’єкти, що рухаються, тощо)."},
+                        "Інструкція",
+                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"Щоб вибрати зобреження треба натиснути на кнопку 'Вибрати зображення' та у діалоговому окні,",
+                                "що відкрилось, вибрати спочатку перше, а потім друге зображення"},
+                        "Як вибрати зображення",
+                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"Щоб побачити результат треба натиснути на кнопку 'Виконати'",
+                                "Щоб побачити перше або друге зображення треба натиснути на відповідну кнопку."},
+                        "Інструкція",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        інструкціяButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"У цьому завданні програма рекомендує полив ділянок поля.",
+                                "На вхід отримує одне зображення поля, та правило(діапозон кольору),за яким треба поливати поля.",
+                                "після цього на зображанні синім коліром відзначаються ділянки, які треба полити.",
+                                "Чим темніший синій, тим краще треба полити поле"},
+                        "Інструкція",
+                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"Щоб вибрати зобреження треба натиснути на кнопку 'Вибрати зображення' та у діалоговому окні,",
+                                "що відкрилось, вибрати зображення.",
+                                "Для вибору діпозону кольорів треба натиснути, відповідні кнопки",
+                                "Важливо! Треба вибирати колір у форматі HSV."},
+                        "Вхідні данні",
+                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"Щоб побачити результат треба натиснути на кнопку 'Обробити зображення'",
+                                "Щоб побачити початкове зображення треба натиснути на відповідну кнопку."},
+                        "Інструкція",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
     }
 
     //Mat color1, color2, hsvColor1, hsvColor2;
@@ -750,7 +821,7 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
-        /*String model = System.getProperty("sun.arch.data.model");
+        String model = System.getProperty("sun.arch.data.model");
         String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
         if (model.equals("64")) {
             libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
@@ -758,7 +829,7 @@ public class myGUI extends JFrame {
         System.setProperty("java.library.path", libraryPath);
         Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
         sysPath.setAccessible(true);
-        sysPath.set(null, null);*/
+        sysPath.set(null, null);
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
@@ -804,12 +875,13 @@ public class myGUI extends JFrame {
         JTable.addTab("Завдання 1", Task1);
         TestButt = new JButton();
         TestButt.setAlignmentY(0.0f);
+        TestButt.setBackground(new Color(-7741153));
         TestButt.setText("Запустити");
         GridBagConstraints gbc;
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 0.1;
+        gbc.weightx = 1.0;
         gbc.weighty = 0.1;
         Task1.add(TestButt, gbc);
         final JLabel label1 = new JLabel();
@@ -819,10 +891,20 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
+        gbc.gridwidth = 2;
         gbc.weightx = 0.1;
-        gbc.weighty = 0.1;
+        gbc.weighty = 0.7;
         gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(40, 0, 0, 0);
         Task1.add(label1, gbc);
+        інструкціяButton2 = new JButton();
+        інструкціяButton2.setBackground(new Color(-1987561));
+        інструкціяButton2.setText("Інструкція");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        Task1.add(інструкціяButton2, gbc);
         Task2 = new JPanel();
         Task2.setLayout(new GridBagLayout());
         Task2.setAlignmentX(0.0f);
@@ -886,6 +968,7 @@ public class myGUI extends JFrame {
         gbc.weighty = 0.01;
         Task2.add(buttonSolveTask23, gbc);
         інструкціяButton3 = new JButton();
+        інструкціяButton3.setBackground(new Color(-1987561));
         інструкціяButton3.setText("Інструкція");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
@@ -961,6 +1044,7 @@ public class myGUI extends JFrame {
         gbc.insets = new Insets(10, 0, 0, 0);
         Task4.add(buttonTask4Next, gbc);
         інструкціяButton4 = new JButton();
+        інструкціяButton4.setBackground(new Color(-1987561));
         інструкціяButton4.setText("Інструкція");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
@@ -1016,6 +1100,7 @@ public class myGUI extends JFrame {
         gbc.weighty = 0.001;
         Task5.add(buttonSolveTask5, gbc);
         інструкціяButton1 = new JButton();
+        інструкціяButton1.setBackground(new Color(-1987561));
         інструкціяButton1.setText("Інструкція");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -1107,6 +1192,7 @@ public class myGUI extends JFrame {
         labelValue2.setText("Другий колір");
         panel1.add(labelValue2, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         інструкціяButton = new JButton();
+        інструкціяButton.setBackground(new Color(-1987561));
         інструкціяButton.setText("Інструкція");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;

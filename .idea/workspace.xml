@@ -7,19 +7,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa6ada6-a918-42c4-a493-0dacfa0f9cd1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/notes2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TUI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Functions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Matrices.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Matrices.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo$Photo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo$Photo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/LayoutState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PlanPath.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PlanPath.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Plane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Plane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task23$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task23$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/getLaplac.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/getLaplac.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/fifth.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/fifth.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/first.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/first.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/fourth.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/fourth.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$11.class" afterDir="false" />
@@ -40,20 +49,48 @@
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/LayoutState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Functions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/MathTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MathTransform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PhotosInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PhotosInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/secondthird.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/secondthird.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TUI/sixth.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/sixth.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fifth.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/fifth.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/first.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/first.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fourth.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/fourth.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/myGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/myGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secondthird.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/secondthird.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sixth.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sixth.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/myGUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="794" column="79" lean-forward="true" selection-start-line="794" selection-start-column="79" selection-end-line="794" selection-end-column="79" />
+              <folding>
+                <element signature="e#34215#35529#0" expanded="true" />
+                <element signature="e#35528#35529#0" expanded="true" />
+                <element signature="e#35567#36873#0" expanded="true" />
+                <element signature="e#36872#36873#0" expanded="true" />
+                <element signature="e#36945#38288#0" expanded="true" />
+                <element signature="e#38287#38288#0" expanded="true" />
+                <element signature="e#36178#52093#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/myGUI.form">
+          <provider selected="true" editor-type-id="ui-designer" />
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -72,8 +109,53 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/myGUI.java" />
+        <option value="$PROJECT_DIR$/src/myGUI.form" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1612" />
+    <option name="height" value="876" />
+  </component>
   <component name="ProjectId" id="1T6QdKMZPJ3JE9J2xMogHAKaolJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TuiUkrPushInMe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TuiUkrPushInMe" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TuiUkrPushInMe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TuiUkrPushInMe" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TuiUkrPushInMe" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TuiUkrPushInMe" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -83,7 +165,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573075672656" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../opencv/build/java/x64/opencv_java341.dll" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../TUI/opencv/build/java/opencv-341.jar!/" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -198,6 +280,38 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24962178" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" weight="0.3289689" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" weight="0.32980332" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -210,8 +324,28 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
               <option name="COLUMN_ORDER" />
             </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
           </value>
         </entry>
       </map>
@@ -220,5 +354,102 @@
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/myGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="794" column="79" lean-forward="true" selection-start-line="794" selection-start-column="79" selection-end-line="794" selection-end-column="79" />
+          <folding>
+            <element signature="e#34215#35529#0" expanded="true" />
+            <element signature="e#35528#35529#0" expanded="true" />
+            <element signature="e#35567#36873#0" expanded="true" />
+            <element signature="e#36872#36873#0" expanded="true" />
+            <element signature="e#36945#38288#0" expanded="true" />
+            <element signature="e#38287#38288#0" expanded="true" />
+            <element signature="e#36178#52093#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myGUI.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>TUI:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>TUI</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

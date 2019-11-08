@@ -38,24 +38,35 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false">
                     <preferred-size width="160" height="50"/>
                   </grid>
-                  <gridbag weightx="0.1" weighty="0.1"/>
+                  <gridbag weightx="1.0" weighty="0.1"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
+                  <background color="-7741153"/>
                   <text value="Запустити"/>
                 </properties>
               </component>
               <component id="9baac" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false">
+                  <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="500" height="500"/>
                   </grid>
-                  <gridbag weightx="0.1" weighty="0.1"/>
+                  <gridbag top="40" left="0" bottom="0" right="0" weightx="0.1" weighty="0.7"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
                   <icon value="dron3.jpg"/>
                   <text value=""/>
+                </properties>
+              </component>
+              <component id="4df71" class="javax.swing.JButton" binding="інструкціяButton2" default-binding="true">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-1987561"/>
+                  <text value="Інструкція"/>
                 </properties>
               </component>
             </children>
@@ -135,6 +146,7 @@
                   <gridbag weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
+                  <background color="-1987561"/>
                   <text value="Інструкція"/>
                 </properties>
               </component>
@@ -215,6 +227,7 @@
                   <gridbag weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties>
+                  <background color="-1987561"/>
                   <text value="Інструкція"/>
                 </properties>
               </component>
@@ -279,6 +292,7 @@
                   <gridbag top="0" left="0" bottom="250" right="0" weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
+                  <background color="-1987561"/>
                   <text value="Інструкція"/>
                 </properties>
               </component>
@@ -317,7 +331,7 @@
               <component id="5fa89" class="javax.swing.JButton" binding="button4" default-binding="true">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+                  <gridbag top="10" left="0" bottom="10" right="0" weightx="0.0" weighty="0.0"/>
                 </constraints>
                 <properties>
                   <background color="-7741153"/>
@@ -327,7 +341,7 @@
               <component id="1dbcd" class="javax.swing.JButton" binding="button1" default-binding="true">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.001"/>
+                  <gridbag top="10" left="0" bottom="10" right="0" weightx="0.0" weighty="0.001"/>
                 </constraints>
                 <properties>
                   <background color="-7741153"/>
@@ -413,6 +427,7 @@
                   <gridbag top="0" left="0" bottom="300" right="0" weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
+                  <background color="-1987561"/>
                   <text value="Інструкція"/>
                 </properties>
               </component>
