@@ -17,18 +17,29 @@
 	var arrLat = [];
 	var arrLon = [];
 	var markers = [];
+	var ok;
+	var saveLat, saveLon;
+	var can_click = true;
     function initialize(zoom = 7, x = 50, y = 32) {
+        if (!navigator.onLine) {
+            document.getElementById("to_answer").innerHTML = "Немає інтернет зв'язку.";
+            document.getElementById("to_click").click();
+            document.getElementById("gmap").style.width = "0%";
+            return;
+        }
+        can_click = true;
         document.getElementById("gmap").style.width = "100%";
         document.getElementById("gmap").style.height = (document.documentElement.clientHeight - 42) + "px";
         document.getElementById("buttonClear").disabled = true;
+        document.getElementById("buttonLast").disabled = true;
         document.getElementById("buttonBuildPolygon").disabled = true;
         document.getElementById("buttonBuildPath").disabled = true;
         var myLatlng = new google.maps.LatLng(x, y);
 
         var myOptions = {
-            zoom:zoom,
+            zoom: zoom,
             center: myLatlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
         }
 
         map = new google.maps.Map(document.getElementById("gmap"), myOptions);
@@ -38,24 +49,49 @@
             strokeOpacity: 1.0,
             strokeWeight: 3
         });
+        update_instructions();
 
         poly.setMap(map);
 
         google.maps.event.addListener(map, "click", function(event) {
-                // get lat/lon of click
             var clickLat = event.latLng.lat();
             var clickLon = event.latLng.lng();
-            arrLat.push(clickLat);
-            arrLon.push(clickLon);
-            cnt++;
-            document.getElementById("buttonClear").disabled = false;
-            if(cnt > 3) document.getElementById("buttonBuildPolygon").disabled = false;
-                  var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(clickLat,clickLon),
+            if (can_click == false) {
+                saveLat = clickLat;
+                saveLon = clickLon;
+                document.getElementById("to_click1").click();
+            }
+            else {
+                arrLat.push(clickLat);
+                arrLon.push(clickLon);
+                cnt++;
+                document.getElementById("buttonClear").disabled = false;
+                document.getElementById("buttonLast").disabled = false;
+                if (cnt > 3) document.getElementById("buttonBuildPolygon").disabled = false;
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(clickLat, clickLon),
                     map: map
-                 });
-            markers.push(marker);
+                });
+                markers.push(marker);
+            }
+            update_instructions();
         });
+    }
+
+    function clear_and_add() {
+        clearMap();
+        arrLat.push(saveLat);
+        arrLon.push(saveLon);
+        cnt++;
+        document.getElementById("buttonClear").disabled = false;
+        document.getElementById("buttonLast").disabled = false;
+        if (cnt > 3) document.getElementById("buttonBuildPolygon").disabled = false;
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(saveLat, saveLon),
+            map: map
+        });
+        markers.push(marker);
+        update_instructions();
     }
 
     function buildPolygon() {
@@ -65,7 +101,11 @@
             path.push(new google.maps.LatLng(arrLat[i], arrLon[i]));
         }
         document.getElementById("buttonBuildPath").disabled = false;
+        document.getElementById("buttonLast").disabled = true;
         path.push(new google.maps.LatLng(arrLat[1],arrLon[1]));
+        can_click = false;
+        document.getElementById("to_home").click();
+        update_instructions();
     }
 
     function setMapOnAll(map) {
@@ -84,9 +124,7 @@
         markers = [];
         arrLat = [];
         arrLon = [];
-        document.getElementById("buttonBuildPath").disabled = true;
-        document.getElementById("buttonClear").disabled = true;
-        document.getElementById("buttonBuildPolygon").disabled = true;
+        document.getElementById("to_home").click();
         initialize(map.zoom, map.center.lat(), map.center.lng());
     }
 
@@ -109,7 +147,6 @@
         for (var i = 0; i < to_write.length; i++) {
             text += to_write[i] + "\n";
         }
-       // alert(text);
         var a = document.getElementById("a");
         var file = new Blob([text], {type: type});
         a.href = URL.createObjectURL(file);
@@ -135,7 +172,17 @@
         return ans;
     }
     
-    function buildPath(){
+    function buildPath() {
+        if (!checkDouble(document.getElementById("maxheight").value) || !checkDouble(document.getElementById("cam_height").value) || !checkDouble(document.getElementById("cam_width").value) || !checkDouble(document.getElementById("fokus").value)
+            || !checkDouble(document.getElementById("fly").value) || !checkDouble(document.getElementById("maxheight").value)) {
+            document.getElementById("to_answer").innerHTML = "Невірний формат вхідних данних.<br>" +
+                "Мінімальна висота польоту 0.02 км.<br>Кожне значення параметра не повинно перевищувати 9999.";
+            document.getElementById("to_click").click();
+            return;
+        }
+        $('html,body').css('cursor','wait');
+        document.getElementById("buttonBuildPath").disabled = true;
+       // document.getElementById("go_load").style.visibility = "visible";
         var minHeight = 0.02;
         var maxHeight = Number(document.getElementById("maxheight").value) / 1000.0;
         var cam_height = Number(document.getElementById("cam_height").value);
@@ -143,12 +190,6 @@
         var focus = Number(document.getElementById("fokus").value);
         var en_go = Number(document.getElementById("fly").value);
         var en_photo = Number(document.getElementById("takephoto").value);
-        if (!checkDouble(maxHeight) || !checkDouble(cam_height) || !checkDouble(cam_width) || !checkDouble(focus)
-            || !checkDouble(en_go) || !checkDouble(en_photo)) {
-            alert("Невірний формат вхідних данних.\n" +
-                "Мінімальна висота польоту 0.02 км\n");
-            return;
-        }
         cm_height = cam_height;
         cm_width = cam_width;
         focu = focus;
@@ -157,6 +198,15 @@
             polygon[i] = new PointD(arrLat[i], arrLon[i]);
         }
         let ans = SalesmanPrepare.find(polygon, minHeight, maxHeight, en_go, en_photo);
+        var proc = Number(document.getElementById("battery").value);
+        opt = Math.floor(opt * 100.0) / 100.0;
+        if (opt > proc) {
+            document.getElementById("to_answer").innerHTML = "Недостатньо заряду. Треба " + opt + " %";
+            ans = [];
+        }
+        else {
+            document.getElementById("to_answer").innerHTML = "Потрібно " + opt + " % заряду";
+        }
         ans = repath(ans, polygon[0]);
         var m = ans.length;
         for (var i = 1; i < m; i++) {
@@ -170,6 +220,7 @@
                 center: {lat: ans[i].x, lng: ans[i].y},
                 radius: (h * 1000.0) / 3.0
               });
+        //    cityCircle.fillColor = "white";
         }
         var pathCoords = [];
         for (var i = 0; i < m; i++) {
@@ -188,17 +239,9 @@
             }
             drawPolygon(to_path, "#008000");
         }
-        h = Math.floor(h * 100.0) / 100.0;
+        h = Math.floor(h * 100000.0) / 100000.0;
         document.getElementById("fly_height").value = h;
         document.getElementById("cnt_vertexes").value = m;
-        var proc = Number(document.getElementById("battery").value);
-        opt = Math.floor(opt * 100.0) / 100.0;
-        if (opt > proc) {
-            document.getElementById("to_answer").innerHTML = "Недостатньо заряду. Треба " + opt + " %";
-        }
-        else {
-            document.getElementById("to_answer").innerHTML = "Потрібно " + opt + " % заряду";
-        }
         document.getElementById("energy").value = Math.floor(opt * 100.0) / 100.0;
         to_write = [];
         to_write.push("Height = " + h + " km");
@@ -209,8 +252,59 @@
         to_write.push(ans[0].x + " " + ans[0].y);
         download('answer.txt', 'text/plain');
         document.getElementById("to_click").click();
+        $('html,body').css('cursor','default');
+        document.getElementById("to_home").click();
+        update_instructions();
+       // document.getElementById("go_load").style.visibility = "hidden";
     }
 
+    function DeleteLast() {
+        //document.getElementById("to_home").click();
+        markers[markers.length - 1].setMap(null);
+        markers.pop();
+        arrLat.pop();
+        arrLon.pop();
+        --cnt;
+        if (cnt == 0) {
+            document.getElementById("buttonLast").disabled = true;
+            document.getElementById("buttonClear").disabled = true;
+        }
+        if (cnt <= 3) {
+            document.getElementById("buttonBuildPolygon").disabled = true;
+        }
+        update_instructions();
+    }
+
+    function update_instructions () {
+        if (document.getElementById("instruction").style.visibility == "hidden") {
+            return;
+        }
+        if (cnt == 0) {
+            document.getElementById("instruction").innerHTML = "Оберіть базову точку на карті.";
+        }
+        else {
+            if (document.getElementById("buttonBuildPolygon").disabled && cnt > 3) {
+                if (document.getElementById("buttonBuildPath").disabled) {
+                    document.getElementById("instruction").innerHTML = "У випадку, коли єнергії вистачає, то можно буде побачити шлях у такому вигляді:<br>" +
+                        "У центрах фіолетових кіл треба зробити фотографію.<br>" +
+                        "Зелені прямокутники &mdash; територія, що буде сфотографована навколо відповідної фотографії.<br>" +
+                        "Червона лінія &mdash; лінія обходу вершин, де треба фотографувати.<br>";
+                }
+                else {
+                    document.getElementById("instruction").innerHTML = "Натисніть кнопку \"Побудувати маршрут\" на панелі \"Кнопки керування\".";
+                }
+            }
+            else {
+                document.getElementById("instruction").innerHTML = "Оберіть територію, яку треба сфотографувати &mdash; мінімум 3 вершини.";
+                if (cnt > 3) {
+                    document.getElementById("instruction").innerHTML += "Після обрання територію натисніть кнопку \"Побудувати многокутник\"  на панелі \"Кнопки керування\".";
+                }
+            }
+        }
+        if (cnt > 0) {
+            document.getElementById("instruction").innerHTML += "Можно очистити карту, натиснувши кнопку \"Натиснути\" на панелі \"Кнопки керування\". Також можно видалити останній добавлений маркер.";
+        }
+    }
 
     function checkDouble(a) {
         if (a.length == 0) return false;
@@ -219,14 +313,29 @@
         if (a[0] == '-' && a.length == 1) return false;
         if (a[0] == '.' || a[a.length - 1] == '.') return false;
         if (a.length > 1 && a[1] == '.' && a[0] == '-') return false;
-        let kol = 0, i = 0;
+        let kol = 0, i = 0, len = 0;
+        let was = false;
         if (a[0] == '-') return false;
         for (; i < a.length; i++) {
+            if (!was && a[i] >= '0' && a[i] <= '9') ++len;
+            if (a[i] == '.') was = true;
             if ((a[i] < '0' || a[i] > '9') && a[i] != '.') return false;
             if (a[i] == '.') kol++;
         }
+        if (len > 4) return  false;
         if (kol <= 1) return true;
         return false;
+    }
+
+    function to_see () {
+        if (document.getElementById("instruction").style.visibility == "hidden") {
+            document.getElementById("instruction").style.visibility = "visible";
+            update_instructions();
+        }
+        else {
+            document.getElementById("instruction").innerHTML = "";
+            document.getElementById("instruction").style.visibility = "hidden";
+        }
     }
 
     window.onload = function () { initialize() };
@@ -239,6 +348,10 @@
         }
         html { height: 100% }
         body { height: 100%; margin: 0; padding: 0 }
+        .right {
+            position: absolute;
+            right: 0px;
+        }
     </style>
 </head>
 <body>
@@ -256,7 +369,28 @@
                         <label id="to_answer"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" style="display: none;" id="to_click1">
+        </button>
+        <div class="modal fade" id="myModal1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Підтвердження дії</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        Після обрання наступного маркера карта очиститься.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-no" data-dismiss="modal">Скасувати</button>
+                        <button type="button" class="btn btn-success btn-yes" data-dismiss="modal" onclick="clear_and_add()">Ок</button>
                     </div>
                 </div>
             </div>
@@ -265,27 +399,36 @@
     <div>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#home">Карта</a>
+                <a class="nav-link active" data-toggle="tab" href="#home" id="to_home">Карта</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu1">Кнопки керування</a>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                        Кнопки керування
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#"><input type = "button" onclick = "buildPolygon()" value = "Побудувати многокутник" style="height:50px; width:100%;" id = "buttonBuildPolygon" class="btn btn-warning"/></a>
+                        <a class="dropdown-item" href="#"><button type = "button" onclick = "buildPath()"  style="height:50px; width:100%;" id = "buttonBuildPath" class="btn btn-success">
+                            <span class='spinner-border spinner-border-sm' style="visibility: hidden;" id="go_load"></span>Побудувати маршрут
+                        </button></a>
+                        <a class="dropdown-item" href="#"><input type = "button" onclick = "clearMap()" value = "Очистити" style="height:50px; width:100%;" id = "buttonClear" class="btn btn-danger"/></a>
+                        <a class="dropdown-item" href="#"><input type = "button" onclick = "DeleteLast()" value = "Видалити минулий маркер" style="height:50px; width:100%;" id = "buttonLast" class="btn btn-info"/></a>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#menu2">Параметри дрону та польоту</a>
             </li>
+
+            <li class="nav-item right">
+                <button type="button" class="btn btn-primary" onclick="to_see()">Інструкція</button>
+            </li>
         </ul>
+        <div class="text-center" style="visibility: hidden;" id="instruction">
+        </div>
         <div class="tab-content">
             <div id="home" class="tab-pane active">
-                <div id="gmap"></div>
-            </div>
-            <div id="menu1" class="tab-pane fade"><br>
-                <div class="container">
-                    <form>
-                        <input type = "button" onclick = "buildPolygon()" value = "Побудувати многокутник" style="height:50px; width:20%; margin-left: 10%; " id = "buttonBuildPolygon" class="btn btn-warning"/>
-                        <input type = "button" onclick = "buildPath()" value = "Побудувати маршрут" style="height:50px; width:20%;  margin-left: 10%; " id = "buttonBuildPath" class="btn btn-success"/>
-                        <input type = "button" onclick = "clearMap()" value = "Очистити" style="height:50px; width:20%;  margin-left: 10%; " id = "buttonClear" class="btn btn-danger"/>
-                    </form>
-                </div>
+                <div id="gmap" ></div>
             </div>
             <div id="menu2" class="tab-pane fade"><br>
                 <div class="container">
@@ -296,28 +439,28 @@
                                     <span class="input-group-text">Максимальна висота польоту</span>
                                     <span class="input-group-text">м</span>
                                 </div>
-                                <input min="0.02" maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="maxheight" value="200">
+                                <input min="0.02" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="maxheight" value="200">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-sm1">Фокальна відстань</span>
                                     <span class="input-group-text">мм</span>
                                 </div>
-                                <input maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="fokus" value="6">
+                                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="fokus" value="6">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-sm2">Ширина матриці камери</span>
                                     <span class="input-group-text">мм</span>
                                 </div>
-                                <input maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="cam_height" value="9">
+                                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="cam_height" value="9">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-sm3">Довжина матриці камери</span>
                                     <span class="input-group-text">мм</span>
                                 </div>
-                                <input maxlength="5" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="cam_width" value="6">
+                                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="cam_width" value="6">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
@@ -363,7 +506,7 @@
                             </div>
                         </div>
                     </form>
-                    <a id="a" class="btn btn-success"/>Файл зі шляхом </a>
+                    <a id="a" class="btn btn-success" style="margin-left: 40%;">Файл зі шляхом</a>
                     </form>
                 </div>
             </div>

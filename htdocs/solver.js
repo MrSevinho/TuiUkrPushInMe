@@ -33,11 +33,17 @@ class PlanPath {
     }
     static init (p) {
         let n = p.length;
+        if (n > 1500) {
+            let p1 = [];
+            for (let i = 0; i < n; i++) {
+                p1.push(p[i]);
+            }
+            return p1;
+        }
         let res = new Array(n);
         for (let i = 0; i < n; i++) {
             res[i] = i;
         }
-        if (n > 1500) return res;
         this.init_matrix(p);
         let now = 0;
         res[0] = now;
@@ -97,6 +103,12 @@ class PlanPath {
         let answer = new Array(n);
         for (let i = 0; i < n; i++) {
             answer[i] = p[res[i]];
+        }
+        for (let i = 0; i < n; i++) {
+            while (dist[i].length > 0) {
+                dist[i].pop();
+            }
+            used.pop();
         }
         return answer;
     }
@@ -182,6 +194,22 @@ class SalesmanPrepare {
         }
         return res * 111320.0;
     }
+
+    static f (height, p, lft, rght, on_go, on_photo) {
+        let P = [];
+        for (let j = 1; j < p.length; j++) {
+            P.push(p[j]);
+        }
+        let P1 = this.get_points(P, lft, rght, this.get_sz(height));
+     //   alert(P1.length);
+        P1.push(p[0]);
+        let can = PlanPath.init(P1);
+        while (P1.length > 0) P1.pop();
+        let ene = (this.get_len(can) + height * 2000.0) / 1000.0 * on_go + can.length * on_photo;
+        this.last = can;
+        return ene;
+    }
+
     static find (p, minHeight, maxHeight, on_go, on_photo) {
         let n = p.length;
         let lft = new PointD(100000000, 100000000), rght = new PointD(-100000000, -100000000);
@@ -198,24 +226,37 @@ class SalesmanPrepare {
         rght.y += 0.01 / 111;
         let optimalPath = 1000000000000000;
         let ans = [];
-        let d = Math.max((maxHeight - minHeight) / 10.0, 0.005);
-        let o = 0;
-        for (let cur = minHeight; cur <= maxHeight && o < 11; cur += d) {
-            let P = [];
-            for (let j = 1; j < n; j++) {
-                P.push(p[j]);
-            }
-            let P1 = this.get_points(P, lft, rght, this.get_sz(cur));
-            P1.push(p[0]);
-            let can = PlanPath.init(P1);
-            let ene = (this.get_len(can) + cur * 2000.0) / 1000.0 * on_go + can.length * on_photo;
-            if (ene < optimalPath) {
-                h = cur;
-                optimalPath = ene;
-                ans = can;
-            }
-            ++o;
+        let d = Math.max((maxHeight - minHeight) / 20.0, 0.005);
+        optimalPath = this.f(maxHeight, p, lft, rght, on_go, on_photo);
+        h = maxHeight;
+        if (this.last.length > 1500) {
+            opt = optimalPath;
+            return this.last;
         }
+        let l = minHeight, r = maxHeight;
+        for (let it = 0; r - l > 0.005 && it < 100; it++) {
+            let m1 = l + (r - l) / 3.0, m2 = r - (r - l) / 3.0;
+            if (this.f(m1, p, lft, rght, on_go, on_photo) >= this.f(m2, p, lft, rght, on_go, on_photo)) {
+                l = m1;
+            }
+            else {
+                r = m2;
+            }
+        }
+        h = (l + r) / 2.0;
+      //  alert(h);
+        optimalPath = this.f(h, p, lft, rght, on_go, on_photo);
+        ans = this.last;
+        /*for (let cur = minHeight; cur <= maxHeight; cur += d) {
+            let opacha = this.f(cur, p, lft, rght, on_go, on_photo);
+            if (optimalPath > opacha) {
+                alert(opacha);
+                alert("Some mistake");
+            }
+        }*/
+        // alert(optimalPath);
+      //  alert(this.f(0.05, p, lft, rght, on_go, on_photo));
+
         opt = optimalPath;
         return ans;
     }

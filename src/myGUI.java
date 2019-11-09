@@ -12,6 +12,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -88,8 +89,7 @@ public class myGUI extends JFrame {
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            System.out.println("rofl");
-            mainFrame = new JFrame("TUI");
+            mainFrame = new JFrame("Турнір Юних Інформатиків");
             mainFrame.setContentPane(this.MyPanel);
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             mainFrame.pack();
@@ -832,7 +832,7 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
-        /*String model = System.getProperty("sun.arch.data.model");
+        String model = System.getProperty("sun.arch.data.model");
         String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
         if (model.equals("64")) {
             libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
@@ -840,7 +840,7 @@ public class myGUI extends JFrame {
         System.setProperty("java.library.path", libraryPath);
         Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
         sysPath.setAccessible(true);
-        sysPath.set(null, null);*/
+        sysPath.set(null, null);
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
@@ -886,7 +886,7 @@ public class myGUI extends JFrame {
         JTable.addTab("Завдання 1", Task1);
         TestButt = new JButton();
         TestButt.setAlignmentY(0.0f);
-        TestButt.setBackground(new Color(-7741153));
+        TestButt.setBackground(new Color(-2694187));
         TestButt.setText("Запустити");
         GridBagConstraints gbc;
         gbc = new GridBagConstraints();
@@ -909,7 +909,7 @@ public class myGUI extends JFrame {
         gbc.insets = new Insets(40, 0, 0, 0);
         Task1.add(label1, gbc);
         інструкціяButton2 = new JButton();
-        інструкціяButton2.setBackground(new Color(-1987561));
+        інструкціяButton2.setBackground(new Color(-2694187));
         інструкціяButton2.setText("Інструкція");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -934,7 +934,7 @@ public class myGUI extends JFrame {
         Task2.add(imageTask23, gbc);
         buttonTask23FirstImage = new JButton();
         buttonTask23FirstImage.setAlignmentY(0.0f);
-        buttonTask23FirstImage.setBackground(new Color(-1987561));
+        buttonTask23FirstImage.setBackground(new Color(-2694187));
         buttonTask23FirstImage.setEnabled(false);
         buttonTask23FirstImage.setText("Перше зображення");
         gbc = new GridBagConstraints();
@@ -946,7 +946,7 @@ public class myGUI extends JFrame {
         Task2.add(buttonTask23FirstImage, gbc);
         buttonTask23FinalImage = new JButton();
         buttonTask23FinalImage.setAlignmentY(0.1f);
-        buttonTask23FinalImage.setBackground(new Color(-1987561));
+        buttonTask23FinalImage.setBackground(new Color(-2694187));
         buttonTask23FinalImage.setEnabled(false);
         buttonTask23FinalImage.setText("Фінальне зображення");
         gbc = new GridBagConstraints();
@@ -958,7 +958,7 @@ public class myGUI extends JFrame {
         Task2.add(buttonTask23FinalImage, gbc);
         buttonTask23SecondImage = new JButton();
         buttonTask23SecondImage.setAlignmentY(0.0f);
-        buttonTask23SecondImage.setBackground(new Color(-1987561));
+        buttonTask23SecondImage.setBackground(new Color(-2694187));
         buttonTask23SecondImage.setEnabled(false);
         buttonTask23SecondImage.setText("Друге зображення");
         gbc = new GridBagConstraints();
@@ -970,7 +970,7 @@ public class myGUI extends JFrame {
         Task2.add(buttonTask23SecondImage, gbc);
         buttonSolveTask23 = new JButton();
         buttonSolveTask23.setAlignmentY(0.1f);
-        buttonSolveTask23.setBackground(new Color(-7741153));
+        buttonSolveTask23.setBackground(new Color(-2694187));
         buttonSolveTask23.setText("Вибрати зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -979,7 +979,7 @@ public class myGUI extends JFrame {
         gbc.weighty = 0.01;
         Task2.add(buttonSolveTask23, gbc);
         інструкціяButton3 = new JButton();
-        інструкціяButton3.setBackground(new Color(-1987561));
+        інструкціяButton3.setBackground(new Color(-2694187));
         інструкціяButton3.setText("Інструкція");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
@@ -993,20 +993,11 @@ public class myGUI extends JFrame {
         Task4.setAlignmentY(0.0f);
         Task4.setBackground(new Color(-2953488));
         JTable.addTab("Завдання 4", Task4);
-        imageTask4 = new JLabel();
-        imageTask4.setAlignmentY(0.0f);
-        imageTask4.setIcon(new ImageIcon(getClass().getResource("/dron.jpg")));
-        imageTask4.setText("");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 4;
-        gbc.weighty = 1.0E-4;
-        gbc.anchor = GridBagConstraints.NORTH;
-        Task4.add(imageTask4, gbc);
         button2 = new JButton();
         button2.setAlignmentY(0.0f);
-        button2.setBackground(new Color(-1842205));
+        button2.setBackground(new Color(-2694187));
+        Font button2Font = this.$$$getFont$$$(null, -1, 18, button2.getFont());
+        if (button2Font != null) button2.setFont(button2Font);
         button2.setText("Вибрати файл");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -1017,9 +1008,11 @@ public class myGUI extends JFrame {
         Task4.add(button2, gbc);
         button3 = new JButton();
         button3.setAlignmentY(0.0f);
-        button3.setBackground(new Color(-1842205));
+        button3.setBackground(new Color(-2694187));
         button3.setEnabled(false);
         button3.setFocusPainted(true);
+        Font button3Font = this.$$$getFont$$$(null, -1, 18, button3.getFont());
+        if (button3Font != null) button3.setFont(button3Font);
         button3.setOpaque(true);
         button3.setText("Виконати");
         gbc = new GridBagConstraints();
@@ -1030,8 +1023,10 @@ public class myGUI extends JFrame {
         Task4.add(button3, gbc);
         buttonTask4Next = new JButton();
         buttonTask4Next.setAlignmentY(0.0f);
-        buttonTask4Next.setBackground(new Color(-1987561));
+        buttonTask4Next.setBackground(new Color(-2694187));
         buttonTask4Next.setEnabled(false);
+        Font buttonTask4NextFont = this.$$$getFont$$$(null, -1, 18, buttonTask4Next.getFont());
+        if (buttonTask4NextFont != null) buttonTask4Next.setFont(buttonTask4NextFont);
         buttonTask4Next.setText("Наступне зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -1045,8 +1040,10 @@ public class myGUI extends JFrame {
         Task4.add(buttonTask4Next, gbc);
         buttonTask4Previous = new JButton();
         buttonTask4Previous.setAlignmentY(0.0f);
-        buttonTask4Previous.setBackground(new Color(-1987561));
+        buttonTask4Previous.setBackground(new Color(-2694187));
         buttonTask4Previous.setEnabled(false);
+        Font buttonTask4PreviousFont = this.$$$getFont$$$(null, -1, 18, buttonTask4Previous.getFont());
+        if (buttonTask4PreviousFont != null) buttonTask4Previous.setFont(buttonTask4PreviousFont);
         buttonTask4Previous.setText("Попереднє зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -1057,7 +1054,9 @@ public class myGUI extends JFrame {
         gbc.insets = new Insets(10, 150, 0, 0);
         Task4.add(buttonTask4Previous, gbc);
         інструкціяButton4 = new JButton();
-        інструкціяButton4.setBackground(new Color(-1987561));
+        інструкціяButton4.setBackground(new Color(-2694187));
+        Font інструкціяButton4Font = this.$$$getFont$$$(null, -1, 18, інструкціяButton4.getFont());
+        if (інструкціяButton4Font != null) інструкціяButton4.setFont(інструкціяButton4Font);
         інструкціяButton4.setText("Інструкція");
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
@@ -1065,12 +1064,27 @@ public class myGUI extends JFrame {
         gbc.weightx = 1.0;
         Task4.add(інструкціяButton4, gbc);
         buttonPanorama = new JButton();
+        buttonPanorama.setBackground(new Color(-2694187));
+        Font buttonPanoramaFont = this.$$$getFont$$$(null, -1, 18, buttonPanorama.getFont());
+        if (buttonPanoramaFont != null) buttonPanorama.setFont(buttonPanoramaFont);
         buttonPanorama.setText("Побудувати панораму");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
+        gbc.weighty = 0.001;
         Task4.add(buttonPanorama, gbc);
+        imageTask4 = new JLabel();
+        imageTask4.setAlignmentY(0.0f);
+        imageTask4.setIcon(new ImageIcon(getClass().getResource("/dron.jpg")));
+        imageTask4.setText("");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 4;
+        gbc.weighty = 1.0E-4;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Task4.add(imageTask4, gbc);
         Task5 = new JPanel();
         Task5.setLayout(new GridBagLayout());
         Task5.setBackground(new Color(-2953488));
@@ -1090,8 +1104,10 @@ public class myGUI extends JFrame {
         gbc.anchor = GridBagConstraints.NORTH;
         Task5.add(task5Image, gbc);
         buttonNextTask5 = new JButton();
-        buttonNextTask5.setBackground(new Color(-1987561));
+        buttonNextTask5.setBackground(new Color(-2694187));
         buttonNextTask5.setEnabled(false);
+        Font buttonNextTask5Font = this.$$$getFont$$$(null, -1, 18, buttonNextTask5.getFont());
+        if (buttonNextTask5Font != null) buttonNextTask5.setFont(buttonNextTask5Font);
         buttonNextTask5.setText("Друге зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
@@ -1100,7 +1116,9 @@ public class myGUI extends JFrame {
         gbc.weighty = 0.001;
         Task5.add(buttonNextTask5, gbc);
         buttonReadImages2 = new JButton();
-        buttonReadImages2.setBackground(new Color(-7741153));
+        buttonReadImages2.setBackground(new Color(-2694187));
+        Font buttonReadImages2Font = this.$$$getFont$$$(null, -1, 18, buttonReadImages2.getFont());
+        if (buttonReadImages2Font != null) buttonReadImages2.setFont(buttonReadImages2Font);
         buttonReadImages2.setText("Вибрати зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -1110,8 +1128,10 @@ public class myGUI extends JFrame {
         gbc.insets = new Insets(10, 0, 10, 0);
         Task5.add(buttonReadImages2, gbc);
         buttonSolveTask5 = new JButton();
-        buttonSolveTask5.setBackground(new Color(-1987561));
+        buttonSolveTask5.setBackground(new Color(-2694187));
         buttonSolveTask5.setEnabled(false);
+        Font buttonSolveTask5Font = this.$$$getFont$$$(null, -1, 18, buttonSolveTask5.getFont());
+        if (buttonSolveTask5Font != null) buttonSolveTask5.setFont(buttonSolveTask5Font);
         buttonSolveTask5.setText("Виконати");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -1120,7 +1140,9 @@ public class myGUI extends JFrame {
         gbc.weighty = 0.001;
         Task5.add(buttonSolveTask5, gbc);
         інструкціяButton1 = new JButton();
-        інструкціяButton1.setBackground(new Color(-1987561));
+        інструкціяButton1.setBackground(new Color(-2694187));
+        Font інструкціяButton1Font = this.$$$getFont$$$(null, -1, 18, інструкціяButton1.getFont());
+        if (інструкціяButton1Font != null) інструкціяButton1.setFont(інструкціяButton1Font);
         інструкціяButton1.setText("Інструкція");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -1135,7 +1157,7 @@ public class myGUI extends JFrame {
         Task6.setBackground(new Color(-2953488));
         JTable.addTab("Завдання 6", Task6);
         task6btnChange = new JButton();
-        task6btnChange.setBackground(new Color(-1987561));
+        task6btnChange.setBackground(new Color(-2694187));
         task6btnChange.setEnabled(false);
         task6btnChange.setText(" Стартове зображення");
         gbc = new GridBagConstraints();
@@ -1156,7 +1178,7 @@ public class myGUI extends JFrame {
         gbc.anchor = GridBagConstraints.NORTH;
         Task6.add(imageTask6, gbc);
         button4 = new JButton();
-        button4.setBackground(new Color(-7741153));
+        button4.setBackground(new Color(-2694187));
         button4.setText("Вибрати зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -1164,7 +1186,7 @@ public class myGUI extends JFrame {
         gbc.insets = new Insets(10, 0, 10, 0);
         Task6.add(button4, gbc);
         button1 = new JButton();
-        button1.setBackground(new Color(-7741153));
+        button1.setBackground(new Color(-2694187));
         button1.setText("Обробити зображення");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -1198,11 +1220,11 @@ public class myGUI extends JFrame {
         task6Color1.setText("");
         panel1.add(task6Color1, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         button5 = new JButton();
-        button5.setBackground(new Color(-7741153));
+        button5.setBackground(new Color(-2694187));
         button5.setText("Виберіть перший колір");
         panel1.add(button5, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         button6 = new JButton();
-        button6.setBackground(new Color(-7741153));
+        button6.setBackground(new Color(-2694187));
         button6.setText("Виберіть другий колір");
         panel1.add(button6, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         task6Color2 = new JLabel();
@@ -1212,9 +1234,11 @@ public class myGUI extends JFrame {
         labelValue2.setText("Другий колір");
         panel1.add(labelValue2, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         взятиКолірПіпеткиButton = new JButton();
+        взятиКолірПіпеткиButton.setBackground(new Color(-2694187));
         взятиКолірПіпеткиButton.setText("Взяти колір піпетки");
         panel1.add(взятиКолірПіпеткиButton, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         взятиКолірПіпеткиButton1 = new JButton();
+        взятиКолірПіпеткиButton1.setBackground(new Color(-2694187));
         взятиКолірПіпеткиButton1.setText("Взяти колір піпетки");
         panel1.add(взятиКолірПіпеткиButton1, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
@@ -1224,7 +1248,9 @@ public class myGUI extends JFrame {
         pipetLabel.setText("");
         panel1.add(pipetLabel, new com.intellij.uiDesigner.core.GridConstraints(6, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         інструкціяButton = new JButton();
-        інструкціяButton.setBackground(new Color(-1987561));
+        інструкціяButton.setBackground(new Color(-2694187));
+        інструкціяButton.setBorderPainted(true);
+        інструкціяButton.setContentAreaFilled(true);
         інструкціяButton.setText("Інструкція");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -1239,9 +1265,29 @@ public class myGUI extends JFrame {
     /**
      * @noinspection ALL
      */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+    }
+
+    /**
+     * @noinspection ALL
+     */
     public JComponent $$$getRootComponent$$$() {
         return MyPanel;
     }
+
 }
 
 
