@@ -34,6 +34,10 @@ public class StartMenu {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(1000, 600);
+        int x, y;
+        x = (Toolkit.getDefaultToolkit().getScreenSize().width - frame.getWidth()) / 2;
+        y = (Toolkit.getDefaultToolkit().getScreenSize().height - frame.getHeight()) / 2;
+        frame.setLocation(x, y);
         frame.setVisible(true);
     }
 

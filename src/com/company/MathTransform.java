@@ -125,6 +125,15 @@ public class MathTransform {
         return cornerMatrix;
     }
 
+    public static double[][] getMatrixPointOnAir(Point3 center, double i, double j) {
+        double[][] cornerMatrix = new double[4][1];
+        cornerMatrix[0][0] = center.x + convertMmToM(matrixWidth) * i;
+        cornerMatrix[1][0] = center.y + convertMmToM(matrixHeight) * j;
+        cornerMatrix[2][0] = center.z;
+        cornerMatrix[3][0] = 1;
+        return cornerMatrix;
+    }
+
     public static Plane getPlane(Point3 m0, Point3 m1, Point3 m2){
         double X1 = m1.x - m0.x;
         double X2 = m2.x - m0.x;

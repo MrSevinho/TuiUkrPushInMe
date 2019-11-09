@@ -1,7 +1,4 @@
-import com.company.Functions;
-import com.company.PhotosInfo;
-import com.company.Plane;
-import com.company.Task23;
+import com.company.*;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -71,6 +68,7 @@ public class myGUI extends JFrame {
     private JButton взятиКолірПіпеткиButton;
     private JButton взятиКолірПіпеткиButton1;
     private JLabel pipetLabel;
+    private JButton buttonPanorama;
     private JLabel label2;
     public static JFrame mainFrame = new JFrame();
     private Color pipetColor = null;
@@ -538,168 +536,18 @@ public class myGUI extends JFrame {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-                }
-                double mn_x = 10000, mn_y = 10000, mx_x = -10000, mx_y = -10000;
-                int n = PhotosInfo.photos.size();
-                for (int i = 0; i < n; ++i) {
-                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getLeftBottomCorner().x);
-                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getLeftTopCorner().x);
-                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getRightBottomCorner().x);
-                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getRightTopCorner().x);
-
-                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getLeftBottomCorner().x);
-                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getLeftTopCorner().x);
-                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getRightBottomCorner().x);
-                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getRightTopCorner().x);
-
-                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getLeftBottomCorner().y);
-                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getLeftTopCorner().y);
-                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getRightBottomCorner().y);
-                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getRightTopCorner().y);
-
-                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getLeftBottomCorner().y);
-                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getLeftTopCorner().y);
-                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getRightBottomCorner().y);
-                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getRightTopCorner().y);
-                }
-                double sz = 500;
-                double dmx = mx_x - mn_x, dpx;
-                double dmy = mx_y - mn_y, dpy;
-
-                double rad = (mx_y * Math.PI) / 180;
-                double dist = (40000 * Math.cos(rad) / 360) * 1000;
-
-                dmy = dmy * 111320.0;
-                dmx = dmx * dist;
-                System.out.println(dmy + " !!! " + dmx);
-                Mat res;
-                if (dmx > dmy) {
-                    dpy = (int) (sz * dmy / dmx);
-                    dpx = sz;
-                } else {
-                    dpx = (int) (sz * dmx / dmy);
-                    dpy = sz;
-                }
-                res = new Mat((int) dpy, (int) dpx, CvType.CV_8UC3);
-                System.out.println(dpy + " !!! " + dpx);
-                double dx, dy, tmpx, tmpy, eps = 0.00000001;
-                double distx, disty, distz, width, height, I, J;
-                double[] len = new double[4];
-                double[] to_write = new double[8];
-                to_write[0] = mn_x;
-                to_write[1] = mn_y;
-
-                to_write[2] = mx_x;
-                to_write[3] = mn_y;
-
-                to_write[4] = mx_x;
-                to_write[5] = mx_y;
-
-                to_write[6] = mn_x;
-                to_write[7] = mx_y;
-
-                int cnt = 0;
-                Plane plane;
-                Point3 airPoint;
-                Mat image = null;
-                BufferedImage img = null;
-                boolean[][] used = new boolean[(int) dpy][(int) dpx];
-
-                for (int x = 0; x < dpx; ++x) {
-                    for (int y = 0; y < dpy; ++y) {
-                        res.put(y, x, new byte[]{0, 0, 0});
-                        used[y][x] = false;
-                    }
-                }
-
-                for (int k = 0; k < n; ++k) {
                     try {
-                        img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (k + 1 + 3) + ".JPG"));
-                        image = Functions.BufferedImage2Mat(img);
-                        image = Functions.reSizeOnlyOne(image);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
+                        BufferedImage img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + (PhotosInfo.photos.get(listOfIndex.get(0)).getImage() + ".JPG")));
+                        img = Functions.Mat2BufferedImage(Functions.reSizeOnlyOne(Functions.BufferedImage2Mat(img)));
+                        imageTask4.setIcon(new ImageIcon(img));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                    for (int x = 0; x < dpx; ++x) {
-                        for (int y = 0; y < dpy; ++y) {
-                            if (used[y][x]) continue;
-                            dx = (double) x / dpx * dmx;
-                            dx = dx / dist;
-                            dy = (double) y / dpy * dmy;
-                            dy = dy / 111320.0;
-                            tmpx = mn_x + dx;
-                            tmpy = mx_y - dy;
-
-                            distx = (tmpx - PhotosInfo.photos.get(k).getStartPoint().x);
-                            distx = distx * dist;
-                            disty = (tmpy - PhotosInfo.photos.get(k).getStartPoint().y);
-                            disty = disty * 111320.0;
-                            distz = (-PhotosInfo.photos.get(k).getStartPoint().z);
-
-                            plane = getPlane(PhotosInfo.photos.get(k).lb, PhotosInfo.photos.get(k).lt,
-                                    PhotosInfo.photos.get(k).rb);
-
-                            System.out.println(distx + " " + disty + " " + distz);
-                            System.out.println(PhotosInfo.photos.get(k).getFocusOnAir().toString());
-                            airPoint = getIntersect(new Point3(distx, disty, distz), PhotosInfo.photos.get(k).getFocusOnAir(), plane);
-                            //System.out.println(airPoint.toString());
-                            len[0] = distanceFromPointToLine(airPoint, PhotosInfo.photos.get(k).lb, PhotosInfo.photos.get(k).lt);
-                            len[1] = distanceFromPointToLine(airPoint, PhotosInfo.photos.get(k).lt, PhotosInfo.photos.get(k).rt);
-                            len[2] = distanceFromPointToLine(airPoint, PhotosInfo.photos.get(k).rt, PhotosInfo.photos.get(k).rb);
-                            len[3] = distanceFromPointToLine(airPoint, PhotosInfo.photos.get(k).rb, PhotosInfo.photos.get(k).lb);
-                            width = distance(PhotosInfo.photos.get(k).lb, PhotosInfo.photos.get(k).rb);
-                            height = distance(PhotosInfo.photos.get(k).lb, PhotosInfo.photos.get(k).lt);
-                            //System.out.println(len[0] + " " + len[1] + " " + len[2] + " " + len[3] + " " + width + " " + height);
-                            if (Math.max(len[0], len[2]) > width) {
-                                continue;
-                            }
-                            if (Math.max(len[1], len[3]) > height) {
-                                continue;
-                            }
-                            //System.out.println("??????");
-                            if (image != null) {
-                                I = len[1] / height;
-                                J = len[0] / width;
-                                I = Math.min(I * image.height(), image.height() - 1);
-                                J = Math.min(J * image.width(), image.width() - 1);
-
-                                I = image.height() - I;
-                                J = image.width() - J;
-
-                                byte[] to_put = new byte[3];
-                                image.get((int) I, (int) J, to_put);
-                                res.put(y, x, to_put);
-                                used[y][x] = true;
-                            }
-                        }
-                    }
+                    currIndex = 0;
+                    button3.setEnabled(true);
+                    buttonTask4Next.setEnabled(true);
+                    buttonTask4Previous.setEnabled(false);
                 }
-                /*try (FileWriter writer = new FileWriter("notes2.txt", false)) {
-                    for (int i = 0; i < to_write.length; ++i) {
-                        writer.write(to_write[i] + " ");
-                    }
-                    writer.flush();
-                } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
-                }*/
-                try {
-                    img = Mat2BufferedImage(res);
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-                if (img != null)
-                    imageTask4.setIcon(new ImageIcon(img));
-                /*Browser view = new Browser("file:///" + pathToFile + "/src/com/company/map.html");
-                JFrame frame;
-                frame = new JFrame("Карта");
-                frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-                frame.setSize(1200, 775);
-                view.setSize(1200, 775);
-                frame.add(view);
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);*/
             }
         });
         button4.addMouseListener(new MouseAdapter() {
@@ -830,6 +678,146 @@ public class myGUI extends JFrame {
                     pipetColor = new Color(intColor);
                     pipetLabel.setIcon(createIcon(pipetColor, 16, 16));
                 }
+            }
+        });
+        buttonPanorama.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                double mn_x = 10000, mn_y = 10000, mx_x = -10000, mx_y = -10000;
+                int n = PhotosInfo.photos.size();
+                for (int i = 0; i < n; ++i) {
+                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getLeftBottomCorner().x);
+                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getLeftTopCorner().x);
+                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getRightBottomCorner().x);
+                    mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getRightTopCorner().x);
+
+                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getLeftBottomCorner().x);
+                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getLeftTopCorner().x);
+                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getRightBottomCorner().x);
+                    mx_x = Math.max(mx_x, PhotosInfo.photos.get(i).getRightTopCorner().x);
+
+                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getLeftBottomCorner().y);
+                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getLeftTopCorner().y);
+                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getRightBottomCorner().y);
+                    mn_y = Math.min(mn_y, PhotosInfo.photos.get(i).getRightTopCorner().y);
+
+                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getLeftBottomCorner().y);
+                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getLeftTopCorner().y);
+                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getRightBottomCorner().y);
+                    mx_y = Math.max(mx_y, PhotosInfo.photos.get(i).getRightTopCorner().y);
+                }
+                double sz = 500;
+                double dmx = mx_x - mn_x, dpx;
+                double dmy = mx_y - mn_y, dpy;
+
+                double rad = (mx_y * Math.PI) / 180;
+                double dist = (40000 * Math.cos(rad) / 360) * 1000;
+
+                dmy = dmy * 111320.0;
+                dmx = dmx * dist;
+                System.out.println(dmy + " !!! " + dmx);
+                Mat res;
+                if (dmx > dmy) {
+                    dpy = (int) (sz * dmy / dmx);
+                    dpx = sz;
+                } else {
+                    dpx = (int) (sz * dmx / dmy);
+                    dpy = sz;
+                }
+                res = new Mat((int) dpy, (int) dpx, CvType.CV_8UC3);
+                System.out.println(dpy + " !!! " + dpx);
+                double[] len = new double[4];
+                double[] to_write = new double[8];
+                to_write[0] = mn_x;
+                to_write[1] = mn_y;
+
+                to_write[2] = mx_x;
+                to_write[3] = mn_y;
+
+                to_write[4] = mx_x;
+                to_write[5] = mx_y;
+
+                to_write[6] = mn_x;
+                to_write[7] = mx_y;
+
+                int cnt = 0;
+                Plane plane;
+                Point3 airPoint, focus, groundPoint;
+                Mat image = null;
+                BufferedImage img = null;
+                //boolean[][] used = new boolean[(int) dpy][(int) dpx];
+                double hh;
+                byte[] pix = new byte[3];
+
+                for (int x = 0; x < dpx; ++x) {
+                    for (int y = 0; y < dpy; ++y) {
+                        res.put(y, x, new byte[]{0, 0, 0});
+                    }
+                }
+                for (int k = 0; k < n; ++k) {
+                    try {
+                        img = ImageIO.read(new File(pathToDocument + "DronePhotos\\" + PhotosInfo.photos.get(k).getImage() + ".JPG"));
+                        image = Functions.BufferedImage2Mat(img);
+                        image = Functions.reSizeOnlyOne(image);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                    hh = -PhotosInfo.photos.get(k).startPoint.z;
+                    plane = getPlane(new Point3(0, 0, hh), new Point3(0, 1, hh), new Point3(1, 0, hh));
+                    Matrices.buildYawMatrix(MathTransform.degreeToRadian(PhotosInfo.photos.get(k).yaw));
+                    Matrices.buildRollMatrix(MathTransform.degreeToRadian(PhotosInfo.photos.get(k).roll));
+                    Matrices.buildPitchMatrix(MathTransform.degreeToRadian(PhotosInfo.photos.get(k).pitch));
+                    double[][] resultMatrix = multiply(Matrices.yawMatrix, multiply(Matrices.rollMatrix, Matrices.pitchMatrix));
+                    focus = PhotosInfo.photos.get(k).getFocusOnAir();
+                    double[][] aa, bb, cc;
+                    double X, Y, dx, dy;
+                    for (int x = 0; x < image.width(); ++x) {
+                        for (int y = 0; y < image.height(); ++y) {
+                            //image.get(image.height() - y, image.width() - x, pix);
+                            //image.get(image.height() - y, x, pix);
+                            image.get(y, image.width() - x, pix);
+                            //image.get(y, x, pix);
+
+                            aa = getMatrixPointOnAir(new Point3(0, 0, 0), (x - image.width() / 2.0) / image.width(), (y - image.height() / 2.0) / image.height());
+                            //System.out.println(aa[0][0] + " " + aa[1][0] + " " + aa[2][0] + " " + aa[3][0]);
+                            //System.out.println(resultMatrix.toString());
+                            bb = multiply(resultMatrix, aa);
+                            airPoint = new Point3(bb[0][0], bb[1][0], bb[2][0]);
+                            groundPoint = getIntersect(airPoint, focus, plane);
+                            X = groundPoint.x / dist;
+                            Y = groundPoint.y / 111320.0;
+                            X = PhotosInfo.photos.get(k).startPoint.x + X;
+                            Y = PhotosInfo.photos.get(k).startPoint.y + Y;
+                            dx = X - mn_x;
+                            dx = dx * dist;
+                            dx = dx / dmx * dpx;
+                            dy = mx_y - Y;
+                            dy = dy * 111320.0;
+                            dy = dy / dmy * dpy;
+                            if (dx > 0 && dx < dpx && dy > 0 && dy < dpy)
+                                res.put((int) dy, (int) dx, pix);
+                        }
+                    }
+                }
+                /*try (FileWriter writer = new FileWriter("notes2.txt", false)) {
+                    for (int i = 0; i < to_write.length; ++i) {
+                        writer.write(to_write[i] + " ");
+                    }
+                    writer.flush();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }
+                */
+                try {
+                    img = Mat2BufferedImage(res);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                if (img != null)
+                    imageTask4.setIcon(new ImageIcon(img));
             }
         });
     }
@@ -1012,13 +1000,13 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 3;
+        gbc.gridwidth = 4;
         gbc.weighty = 1.0E-4;
         gbc.anchor = GridBagConstraints.NORTH;
         Task4.add(imageTask4, gbc);
         button2 = new JButton();
         button2.setAlignmentY(0.0f);
-        button2.setBackground(new Color(-7741153));
+        button2.setBackground(new Color(-1842205));
         button2.setText("Вибрати файл");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -1029,8 +1017,10 @@ public class myGUI extends JFrame {
         Task4.add(button2, gbc);
         button3 = new JButton();
         button3.setAlignmentY(0.0f);
-        button3.setBackground(new Color(-1987561));
+        button3.setBackground(new Color(-1842205));
         button3.setEnabled(false);
+        button3.setFocusPainted(true);
+        button3.setOpaque(true);
         button3.setText("Виконати");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -1046,12 +1036,12 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 2;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         gbc.gridheight = 2;
         gbc.weightx = 1.0;
         gbc.weighty = 0.1;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.anchor = GridBagConstraints.NORTHEAST;
+        gbc.insets = new Insets(10, 0, 0, 150);
         Task4.add(buttonTask4Next, gbc);
         buttonTask4Previous = new JButton();
         buttonTask4Previous.setAlignmentY(0.0f);
@@ -1063,17 +1053,24 @@ public class myGUI extends JFrame {
         gbc.gridy = 2;
         gbc.weightx = 1.0;
         gbc.weighty = 0.1;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.insets = new Insets(10, 150, 0, 0);
         Task4.add(buttonTask4Previous, gbc);
         інструкціяButton4 = new JButton();
         інструкціяButton4.setBackground(new Color(-1987561));
         інструкціяButton4.setText("Інструкція");
         gbc = new GridBagConstraints();
-        gbc.gridx = 2;
+        gbc.gridx = 3;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
         Task4.add(інструкціяButton4, gbc);
+        buttonPanorama = new JButton();
+        buttonPanorama.setText("Побудувати панораму");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        Task4.add(buttonPanorama, gbc);
         Task5 = new JPanel();
         Task5.setLayout(new GridBagLayout());
         Task5.setBackground(new Color(-2953488));
@@ -1245,7 +1242,6 @@ public class myGUI extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return MyPanel;
     }
-
 }
 
 

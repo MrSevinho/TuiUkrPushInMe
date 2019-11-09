@@ -139,13 +139,13 @@ public class Functions {
                         }
                     }
                 }
+                System.out.println(cnt + " cnt");
                 System.out.println(Double.parseDouble(lat) / 10000000.0 + " lat");
                 System.out.println(Double.parseDouble(lng) / 10000000.0 + " lng");
                 System.out.println(rel + " rel");
                 System.out.println(roll + " roll");
                 System.out.println(pitch + " pitch");
                 System.out.println(yaw + " yaw");
-                if(cnt >= 30 && cnt <= 50)
                 photosInfo.receivePhoto((cnt + 1) + "", Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
                         Double.parseDouble(lat) / 10000000.0, Double.parseDouble(yaw),
                         Double.parseDouble(roll), Double.parseDouble(pitch));
@@ -153,13 +153,13 @@ public class Functions {
             }
         }
 
-        Random rand = new Random();
+        /*Random rand = new Random();
         for(int i = 0; i < photos.size(); i++){
             int x = rand.nextInt(photos.size());
             PhotosInfo.Photo tmp = new PhotosInfo.Photo(photos.get(i));
             photos.set(i, photos.get(x));
             photos.set(x, tmp);
-        }
+        }*/
 
     }
 }
