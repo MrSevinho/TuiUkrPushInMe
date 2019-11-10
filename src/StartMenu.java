@@ -17,8 +17,8 @@ public class StartMenu {
             @Override
             public void windowOpened(WindowEvent e) {
                 super.windowOpened(e);
-                Info.setText("<html>Роботу виконали учні <br> Дніпровського ліцею інформаційних технологій <br> імені Олеся Гончара:" +
-                        "<br> Арчаков Всеволод <br> Єрмаков Сергій <br> Перекопський Михайло <br> Денисов Костянтин <br> Карпусь Артур</html>");
+                Info.setText("<html>Роботу виконали учні: <br>" +
+                        "Арчаков Всеволод <br> Єрмаков Сергій <br> Перекопський Михайло <br> Денисов Костянтин <br> Карпусь Артур</html>");
                 Info.setHorizontalAlignment(SwingConstants.RIGHT);
             }
         });
@@ -37,7 +37,8 @@ public class StartMenu {
         frame.setContentPane(new StartMenu().Panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(1000, 600);
+        frame.setSize(1200, 600);
+        frame.setResizable(false);
         try {
             BufferedImage img = ImageIO.read(new File(new File("").getAbsolutePath() + "\\src\\drone.png"));
             frame.setIconImage(img);
@@ -69,6 +70,8 @@ public class StartMenu {
     private void $$$setupUI$$$() {
         Panel = new JPanel();
         Panel.setLayout(new GridBagLayout());
+        Panel.setBackground(new Color(-1));
+        Panel.setPreferredSize(new Dimension(1200, 600));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$(null, -1, 18, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
@@ -77,6 +80,8 @@ public class StartMenu {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 5;
+        gbc.gridheight = 3;
         gbc.weightx = 1.0;
         gbc.weighty = 0.1;
         Panel.add(label1, gbc);
@@ -86,28 +91,81 @@ public class StartMenu {
         початиButton.setText("Почати");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 5;
+        gbc.gridwidth = 5;
         gbc.weightx = 1.0;
         gbc.weighty = 0.1;
         Panel.add(початиButton, gbc);
         Info = new JLabel();
+        Font InfoFont = this.$$$getFont$$$(null, -1, 16, Info.getFont());
+        if (InfoFont != null) Info.setFont(InfoFont);
         Info.setText("___");
         gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.gridwidth = 4;
         gbc.weightx = 1.0;
         gbc.weighty = 0.1;
         gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(0, 0, 0, 10);
         Panel.add(Info, gbc);
         final JLabel label2 = new JLabel();
+        Font label2Font = this.$$$getFont$$$(null, -1, 14, label2.getFont());
+        if (label2Font != null) label2.setFont(label2Font);
         label2.setText("Турнір Юних Інформатиків");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 6;
+        gbc.gridwidth = 5;
         gbc.weightx = 1.0;
         gbc.weighty = 0.05;
         gbc.anchor = GridBagConstraints.NORTH;
         Panel.add(label2, gbc);
+        final JLabel label3 = new JLabel();
+        Font label3Font = this.$$$getFont$$$(null, -1, 14, label3.getFont());
+        if (label3Font != null) label3.setFont(label3Font);
+        label3.setHorizontalAlignment(0);
+        label3.setHorizontalTextPosition(0);
+        label3.setText("Дніпровський ліцей інформаційних технологій при ДНУ ім. Олеся Гончара");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 3;
+        gbc.weighty = 0.02;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(0, 325, 0, 0);
+        Panel.add(label3, gbc);
+        final JLabel label4 = new JLabel();
+        label4.setIcon(new ImageIcon(getClass().getResource("/drone_small.png")));
+        label4.setText("");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.weightx = 3.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(0, 465, 0, 0);
+        Panel.add(label4, gbc);
+        final JPanel spacer1 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        Panel.add(spacer1, gbc);
+        final JLabel label5 = new JLabel();
+        label5.setIcon(new ImageIcon(getClass().getResource("/LIT-1-1.png")));
+        label5.setText("");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 3;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        Panel.add(label5, gbc);
+        final JPanel spacer2 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        Panel.add(spacer2, gbc);
     }
 
     /**

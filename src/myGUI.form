@@ -98,7 +98,7 @@
               <component id="28ca5" class="javax.swing.JButton" binding="buttonTask23FinalImage">
                 <constraints>
                   <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.1"/>
+                  <gridbag top="10" left="0" bottom="0" right="0" weightx="1.0" weighty="0.1"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.1"/>
@@ -111,7 +111,7 @@
               <component id="ef9e2" class="javax.swing.JButton" binding="buttonTask23SecondImage">
                 <constraints>
                   <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.1"/>
+                  <gridbag top="10" left="0" bottom="0" right="0" weightx="1.0" weighty="0.1"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
@@ -123,8 +123,8 @@
               </component>
               <component id="1540b" class="javax.swing.JButton" binding="buttonSolveTask23">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.01"/>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="20" left="0" bottom="0" right="0" weightx="1.0" weighty="0.01"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.1"/>
@@ -136,7 +136,7 @@
               <component id="9ef5c" class="javax.swing.JButton" binding="buttonTask23FirstImage">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.1"/>
+                  <gridbag top="10" left="0" bottom="0" right="0" weightx="1.0" weighty="0.1"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
@@ -148,8 +148,8 @@
               </component>
               <component id="5e474" class="javax.swing.JButton" binding="інструкціяButton3" default-binding="true">
                 <constraints>
-                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.001"/>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="20" left="0" bottom="0" right="0" weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
@@ -159,8 +159,8 @@
               </component>
               <component id="8e249" class="javax.swing.JButton" binding="buttonSolve23">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.0"/>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="20" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
@@ -185,7 +185,7 @@
               <component id="f971b" class="javax.swing.JButton" binding="button2" default-binding="true">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag top="10" left="0" bottom="10" right="0" weightx="1.0" weighty="0.001"/>
+                  <gridbag top="10" left="0" bottom="10" right="0" weightx="1.0" weighty="0.01"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
@@ -197,7 +197,7 @@
               <component id="57bba" class="javax.swing.JButton" binding="button3" default-binding="true">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.001"/>
+                  <gridbag weightx="1.0" weighty="0.01"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
@@ -238,7 +238,7 @@
               <component id="db983" class="javax.swing.JButton" binding="інструкціяButton4" default-binding="true">
                 <constraints>
                   <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.0"/>
+                  <gridbag weightx="1.0" weighty="0.01"/>
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
@@ -248,8 +248,8 @@
               </component>
               <component id="2ddfd" class="javax.swing.JLabel" binding="imageTask4">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag top="0" left="0" bottom="30" right="0" weightx="0.0" weighty="1.0E-4"/>
+                  <grid row="1" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.01"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
@@ -260,7 +260,7 @@
               <component id="4324e" class="javax.swing.JButton" binding="buttonPanorama">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.008"/>
+                  <gridbag weightx="1.0" weighty="0.01"/>
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
@@ -282,8 +282,8 @@
             <children>
               <component id="a4dd7" class="javax.swing.JLabel" binding="task5Image">
                 <constraints>
-                  <grid row="1" column="0" row-span="2" col-span="3" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.01"/>
+                  <grid row="1" column="0" row-span="3" col-span="4" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="12" left="0" bottom="0" right="0" weightx="1.0" weighty="0.01"/>
                 </constraints>
                 <properties>
                   <icon value="dron.jpg"/>
@@ -294,7 +294,7 @@
               </component>
               <component id="c5c" class="javax.swing.JButton" binding="buttonNextTask5">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
@@ -306,7 +306,7 @@
               </component>
               <component id="f5b8e" class="javax.swing.JButton" binding="buttonReadImages2">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag top="10" left="0" bottom="10" right="0" weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
@@ -317,7 +317,7 @@
               </component>
               <component id="a2bc5" class="javax.swing.JButton" binding="buttonSolveTask5">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
@@ -329,8 +329,8 @@
               </component>
               <component id="90a7" class="javax.swing.JButton" binding="інструкціяButton1" default-binding="true">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag top="0" left="0" bottom="250" right="0" weightx="1.0" weighty="0.001"/>
+                  <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="0" left="0" bottom="300" right="0" weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
                   <background color="-2694187"/>

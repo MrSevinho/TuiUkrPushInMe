@@ -96,12 +96,15 @@ public class Task23 {
     }
 
     static public void setValue() {
+        int cnt = 40;
+        int dx = img.height() / cnt;
+        int dy = img.width() / cnt;
         Mat grey = img.clone();
         Mat grey2 = img2.clone();
         Imgproc.cvtColor(img, grey, Imgproc.COLOR_BGR2GRAY);
         Imgproc.cvtColor(img2, grey2, Imgproc.COLOR_BGR2GRAY);
-        gr = new byte[40][40][img.width() * img.height()];
-        gr2 = new byte[40][40][img2.width() * img2.height()];
+        gr = new byte[cnt][cnt][dx * dy];
+        gr2 = new byte[cnt][cnt][dx * dy];
         buff = new byte[img.width() * img.height() * img.channels()];
         buff2 = new byte[img2.width() * img2.height() * img2.channels()];
         tmp = new byte[img2.width() * img2.height() * img2.channels()];

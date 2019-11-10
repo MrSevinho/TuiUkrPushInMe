@@ -509,7 +509,7 @@ public class myGUI extends JFrame {
                 super.mouseClicked(e);
                 buttonTask23FirstImage.setEnabled(false);
                 buttonTask23SecondImage.setEnabled(true);
-                buttonTask23FinalImage.setEnabled(true);
+//                buttonTask23FinalImage.setEnabled(true);
                 imageTask23.setIcon(new ImageIcon(task23ImageFirst));
             }
         });
@@ -519,7 +519,7 @@ public class myGUI extends JFrame {
                 super.mouseClicked(e);
                 buttonTask23FirstImage.setEnabled(true);
                 buttonTask23SecondImage.setEnabled(false);
-                buttonTask23FinalImage.setEnabled(true);
+//                buttonTask23FinalImage.setEnabled(true);
                 imageTask23.setIcon(new ImageIcon(task23ImageSecond));
             }
         });
@@ -529,7 +529,7 @@ public class myGUI extends JFrame {
                 super.mouseClicked(e);
                 buttonTask23FirstImage.setEnabled(true);
                 buttonTask23SecondImage.setEnabled(true);
-                buttonTask23FinalImage.setEnabled(false);
+//                buttonTask23FinalImage.setEnabled(false);
                 imageTask23.setIcon(new ImageIcon(task23Imgage));
             }
         });
@@ -869,7 +869,7 @@ public class myGUI extends JFrame {
                         }
                         buttonTask23FirstImage.setEnabled(true);
                         buttonTask23SecondImage.setEnabled(true);
-                        buttonTask23FinalImage.setEnabled(false);
+                        buttonTask23FinalImage.setEnabled(true);
                     } else {
                         JOptionPane.showMessageDialog(myGUI.this,
                                 new String[]{"Не вдалося знайти спільні точки"},
@@ -891,15 +891,15 @@ public class myGUI extends JFrame {
 
 
     public static void loadOpenCV_Lib() throws Exception {
-        String model = System.getProperty("sun.arch.data.model");
-        String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
-        if (model.equals("64")) {
-            libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
-        }
-        System.setProperty("java.library.path", libraryPath);
-        Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
-        sysPath.setAccessible(true);
-        sysPath.set(null, null);
+//        String model = System.getProperty("sun.arch.data.model");
+//        String libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x86\\";
+//        if (model.equals("64")) {
+//            libraryPath = "D:\\myProjects\\TUI\\opencv\\build\\java\\x64\\";
+//        }
+//        System.setProperty("java.library.path", libraryPath);
+//        Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
+//        sysPath.setAccessible(true);
+//        sysPath.set(null, null);
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
@@ -1008,6 +1008,7 @@ public class myGUI extends JFrame {
         gbc.weightx = 1.0;
         gbc.weighty = 0.1;
         gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(10, 0, 0, 0);
         Task2.add(buttonTask23FinalImage, gbc);
         buttonTask23SecondImage = new JButton();
         buttonTask23SecondImage.setAlignmentY(0.0f);
@@ -1022,6 +1023,7 @@ public class myGUI extends JFrame {
         gbc.weightx = 1.0;
         gbc.weighty = 0.1;
         gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(10, 0, 0, 0);
         Task2.add(buttonTask23SecondImage, gbc);
         buttonSolveTask23 = new JButton();
         buttonSolveTask23.setAlignmentY(0.1f);
@@ -1034,6 +1036,8 @@ public class myGUI extends JFrame {
         gbc.gridy = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 0.01;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(20, 0, 0, 0);
         Task2.add(buttonSolveTask23, gbc);
         buttonTask23FirstImage = new JButton();
         buttonTask23FirstImage.setAlignmentY(0.0f);
@@ -1048,6 +1052,7 @@ public class myGUI extends JFrame {
         gbc.weightx = 1.0;
         gbc.weighty = 0.1;
         gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(10, 0, 0, 0);
         Task2.add(buttonTask23FirstImage, gbc);
         інструкціяButton3 = new JButton();
         інструкціяButton3.setBackground(new Color(-2694187));
@@ -1059,6 +1064,8 @@ public class myGUI extends JFrame {
         gbc.gridy = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 0.001;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(20, 0, 0, 0);
         Task2.add(інструкціяButton3, gbc);
         buttonSolve23 = new JButton();
         buttonSolve23.setBackground(new Color(-2694187));
@@ -1070,6 +1077,8 @@ public class myGUI extends JFrame {
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(20, 0, 0, 0);
         Task2.add(buttonSolve23, gbc);
         Task4 = new JPanel();
         Task4.setLayout(new GridBagLayout());
@@ -1087,7 +1096,7 @@ public class myGUI extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
-        gbc.weighty = 0.001;
+        gbc.weighty = 0.01;
         gbc.insets = new Insets(10, 0, 10, 0);
         Task4.add(button2, gbc);
         button3 = new JButton();
@@ -1103,7 +1112,7 @@ public class myGUI extends JFrame {
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
-        gbc.weighty = 0.001;
+        gbc.weighty = 0.01;
         Task4.add(button3, gbc);
         buttonTask4Next = new JButton();
         buttonTask4Next.setAlignmentY(0.0f);
@@ -1147,6 +1156,7 @@ public class myGUI extends JFrame {
         gbc.gridx = 3;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
+        gbc.weighty = 0.01;
         Task4.add(інструкціяButton4, gbc);
         imageTask4 = new JLabel();
         imageTask4.setAlignmentY(0.0f);
@@ -1156,9 +1166,7 @@ public class myGUI extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 4;
-        gbc.weighty = 1.0E-4;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.insets = new Insets(0, 0, 30, 0);
+        gbc.weighty = 0.01;
         Task4.add(imageTask4, gbc);
         buttonPanorama = new JButton();
         buttonPanorama.setBackground(new Color(-2694187));
@@ -1170,7 +1178,7 @@ public class myGUI extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
-        gbc.weighty = 0.008;
+        gbc.weighty = 0.01;
         Task4.add(buttonPanorama, gbc);
         Task5 = new JPanel();
         Task5.setLayout(new GridBagLayout());
@@ -1184,11 +1192,12 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 3;
-        gbc.gridheight = 2;
+        gbc.gridwidth = 4;
+        gbc.gridheight = 3;
         gbc.weightx = 1.0;
         gbc.weighty = 0.01;
         gbc.anchor = GridBagConstraints.NORTH;
+        gbc.insets = new Insets(12, 0, 0, 0);
         Task5.add(task5Image, gbc);
         buttonNextTask5 = new JButton();
         buttonNextTask5.setBackground(new Color(-2694187));
@@ -1197,7 +1206,7 @@ public class myGUI extends JFrame {
         if (buttonNextTask5Font != null) buttonNextTask5.setFont(buttonNextTask5Font);
         buttonNextTask5.setText("Друге зображення");
         gbc = new GridBagConstraints();
-        gbc.gridx = 2;
+        gbc.gridx = 3;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 0.001;
@@ -1210,6 +1219,7 @@ public class myGUI extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 2;
         gbc.weightx = 1.0;
         gbc.weighty = 0.001;
         gbc.insets = new Insets(10, 0, 10, 0);
@@ -1221,7 +1231,7 @@ public class myGUI extends JFrame {
         if (buttonSolveTask5Font != null) buttonSolveTask5.setFont(buttonSolveTask5Font);
         buttonSolveTask5.setText("Виконати");
         gbc = new GridBagConstraints();
-        gbc.gridx = 1;
+        gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 0.001;
@@ -1232,12 +1242,12 @@ public class myGUI extends JFrame {
         if (інструкціяButton1Font != null) інструкціяButton1.setFont(інструкціяButton1Font);
         інструкціяButton1.setText("Інструкція");
         gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridx = 2;
+        gbc.gridy = 3;
         gbc.weightx = 1.0;
         gbc.weighty = 0.001;
         gbc.anchor = GridBagConstraints.SOUTH;
-        gbc.insets = new Insets(0, 0, 250, 0);
+        gbc.insets = new Insets(0, 0, 300, 0);
         Task5.add(інструкціяButton1, gbc);
         Task6 = new JPanel();
         Task6.setLayout(new GridBagLayout());
