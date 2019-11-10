@@ -31,10 +31,12 @@ public class PlanPath {
     }
 
     private static int calc_res (int[] res) {
-        int ans = 0;
-        if (!dist[res[0]][res[res.length - 1]]) ++ans;
+        int ans = res.length;
         for (int i = 1; i < res.length; i++) {
-            if (!dist[res[i]][res[i - 1]]) ++ans;
+            if (!dist[res[i]][res[i - 1]]) {
+                ans = i;
+                break;
+            }
         }
         return ans;
     }
@@ -54,35 +56,24 @@ public class PlanPath {
         }
         int cur = calc_res(res);
         for (double t = initialT; t > endT; t *= mul) {
-            if (cur == 0) break;
+            if (cur == res.length) break;
             int[] can = get_can(res);
             int ene = calc_res(can);
-            if (ene < cur) {
+            if (ene >= cur) {
                 cur = ene;
                 res = can;
             }
             else {
-                double pr = Math.exp(-(ene - cur) / t);
+                double pr = Math.exp((ene - cur) / t);
                 if (pr >= rand.nextDouble()) {
                     cur = ene;
                     res = can;
                 }
             }
         }
-        int pos = 0;
+        int[] answer = new int[n];
         for (int i = 0; i < n; i++) {
-            if (res[i] == n - 1) {
-                pos = i;
-                break;
-            }
-        }
-        int[] answer = new int[n - 1];
-        int j = 0;
-        for (int i = pos + 1; i < n; i++) {
-            answer[j++] = res[i];
-        }
-        for (int i = 0; i < pos; i++) {
-            answer[j++] = res[i];
+            answer[i] = res[i];
         }
         return answer;
     }

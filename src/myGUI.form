@@ -206,7 +206,7 @@
                   <focusPainted value="true"/>
                   <font size="16"/>
                   <opaque value="true"/>
-                  <text value="Виконати"/>
+                  <text value="Відкрити карту"/>
                 </properties>
               </component>
               <component id="e9773" class="javax.swing.JButton" binding="buttonTask4Next">

@@ -37,7 +37,7 @@ public class Task4 {
             areaList.add(new Area(temp));
         }
 
-        boolean[][] matrix = new boolean[n + 1][n + 1];
+        boolean[][] matrix = new boolean[n][n];
         for(int i = 0; i < n; ++i) {
             for(int j = 0; j < n; ++j) {
                 if(check(areaList.get(i), areaList.get(j))) {
@@ -50,10 +50,9 @@ public class Task4 {
                 }
             }
         }
-        int[] a = new int[n + 1];
-        for(int i = 0; i <= n; ++i) {
+        int[] a = new int[n];
+        for(int i = 0; i < n; ++i) {
             a[i] = i;
-            matrix[n][i] = matrix[i][n] = true;
         }
         int[] path = PlanPath.init(matrix);
         ok = true;

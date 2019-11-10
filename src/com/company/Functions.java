@@ -38,7 +38,7 @@ public class Functions {
     }
 
     public static Mat reSizeOnlyOne(Mat src) {
-        double normalHeight = 500, normalWidth = 700;
+        double normalHeight = 500, normalWidth = 600;
         double k1 = src.width() / normalWidth;
         double k2 = src.height() / normalHeight;
         if (k1 < 1) k1 = 1;
@@ -74,7 +74,7 @@ public class Functions {
         for (String s : lines) {
             if (s.contains("img_idx")) {
                 int currIndex = 10;
-                String lat = "", lng = "", rel = "", roll = "", pitch = "", yaw = "";
+                String lat = "", lng = "", rel = "", roll = "", pitch = "", yaw = "", pcnt = "";
                 for (; currIndex < s.length(); currIndex++) {
                     if (s.charAt(currIndex) == 't' && s.charAt(currIndex - 1) == 'a' && s.charAt(currIndex - 2) == 'l') {
                         currIndex++;
@@ -138,15 +138,26 @@ public class Functions {
                             currIndex++;
                         }
                     }
+                    if (s.charAt(currIndex) == 'x' && s.charAt(currIndex - 1) == 'd' && s.charAt(currIndex - 2) == 'i' && s.charAt(currIndex - 4) == 'g' && s.charAt(currIndex - 5) == 'm') {
+                        currIndex++;
+                        currIndex++;
+                        pcnt += s.charAt(currIndex);
+                        currIndex++;
+                        while (currIndex < s.length() && ((s.charAt(currIndex) >= '0' && s.charAt(currIndex) <= '9') || s.charAt(currIndex) == ',')) {
+                            if (s.charAt(currIndex) == ',') pcnt += '.';
+                            else pcnt += s.charAt(currIndex);
+                            currIndex++;
+                        }
+                    }
                 }
-                System.out.println(cnt + " cnt");
+                System.out.println(pcnt + " cnt");
                 System.out.println(Double.parseDouble(lat) / 10000000.0 + " lat");
                 System.out.println(Double.parseDouble(lng) / 10000000.0 + " lng");
                 System.out.println(rel + " rel");
                 System.out.println(roll + " roll");
                 System.out.println(pitch + " pitch");
                 System.out.println(yaw + " yaw");
-                photosInfo.receivePhoto((cnt + 1) + "", Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
+                photosInfo.receivePhoto(pcnt, Double.parseDouble(rel), Double.parseDouble(lng) / 10000000.0,
                         Double.parseDouble(lat) / 10000000.0, Double.parseDouble(yaw),
                         Double.parseDouble(roll), Double.parseDouble(pitch));
                 cnt++;

@@ -60,7 +60,7 @@ public class Task23 {
         else {
             isImageSet = false;
         }
-        if(isImageSet){
+        if(isImageSet) {
             ret = fileopen.showDialog(null, "Открыть файл");
             if (ret == JFileChooser.APPROVE_OPTION) {
                 File file = fileopen.getSelectedFile();
@@ -96,13 +96,13 @@ public class Task23 {
     }
 
     static public void setValue() {
-        int cnt = 40;
-        int dx = img.height() / cnt;
-        int dy = img.width() / cnt;
         Mat grey = img.clone();
         Mat grey2 = img2.clone();
         Imgproc.cvtColor(img, grey, Imgproc.COLOR_BGR2GRAY);
         Imgproc.cvtColor(img2, grey2, Imgproc.COLOR_BGR2GRAY);
+        int cnt = 40;
+        int dx = img.height() / cnt;
+        int dy = img.width() / cnt;
         gr = new byte[cnt][cnt][dx * dy];
         gr2 = new byte[cnt][cnt][dx * dy];
         buff = new byte[img.width() * img.height() * img.channels()];
@@ -198,7 +198,6 @@ public class Task23 {
                 list_good.add(list.get(i));
             }
         }
-
         MatOfDMatch mat_good = new MatOfDMatch();
         mat_good.fromList(list_good);
         Collections.sort(list_good, new Comparator<DMatch>() {

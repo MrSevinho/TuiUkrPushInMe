@@ -80,7 +80,7 @@ public class myGUI extends JFrame {
     int currIndex = 0;
     public static String pathToFile = new File("").getAbsolutePath();
     Functions functions = new Functions();
-    private Color color1 = new Color(255, 34, 0), color2 = new Color(255, 149, 0);
+    private Color color1 = new Color(255, 100, 0), color2 = new Color(255, 255, 30);
 
     public myGUI() {
         {
@@ -155,6 +155,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!TestButt.isEnabled()) return;
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     try {
                         String browseTask1 = (pathToFile + "\\htdocs\\index.html").replace('\\', '/');
@@ -163,31 +164,13 @@ public class myGUI extends JFrame {
                         ex.printStackTrace();
                     }
                 }
-                /*SwingUtilities.invokeLater(() -> {
-                    Browser view = new Browser("file:///" + pathToFile + "/htdocs/index.html");
-                    JFrame frame;
-                    frame = new JFrame("Карта");
-                    frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-                    frame.setSize(1200, 775);
-                    view.setSize(1200, 775);
-                    frame.add(view);
-                    frame.setLocationRelativeTo(null);
-                    frame.setVisible(true);
-                    mainFrame.setVisible(false);
-                    frame.addWindowListener(new WindowAdapter() {
-                        @Override
-                        public void windowClosing(WindowEvent e) {
-                            super.windowClosing(e);
-                            mainFrame.setVisible(true);
-                        }
-                    });
-                });*/
             }
         });
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!button1.isEnabled()) return;
                 if (startImageTask6 != null && color1 != null && color2 != null) {
                     Mat src = null;
                     try {
@@ -248,11 +231,9 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!buttonSolveTask23.isEnabled()) return;
                 try {
                     readImages();
-
-                } catch (IOException e1) {
-                    e1.printStackTrace();
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -260,6 +241,7 @@ public class myGUI extends JFrame {
                     buttonSolve23.setEnabled(true);
                     buttonTask23FirstImage.setEnabled(true);
                     buttonTask23SecondImage.setEnabled(true);
+                    buttonTask23FinalImage.setEnabled(false);
                     try {
                         task23ImageFirst = Mat2BufferedImage(reSizeOnlyOne(Task23.img));
                     } catch (Exception e1) {
@@ -270,6 +252,7 @@ public class myGUI extends JFrame {
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
+                    imageTask23.setIcon(new ImageIcon(task23ImageFirst));
                 } else {
                     JOptionPane.showMessageDialog(myGUI.this,
                             new String[]{"Не коректні вхідні данні"},
@@ -376,6 +359,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!task6btnChange.isEnabled()) return;
                 if (!task6) {
                     imageTask6.setIcon(new ImageIcon(startImageTask6));
                     task6btnChange.setText("Фінальне зображення");
@@ -391,6 +375,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!button2.isEnabled()) return;
                 boolean verify = false;
                 PhotosInfo.clearPhotos();
                 JFileChooser fileopen = new JFileChooser();
@@ -467,6 +452,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!buttonTask4Previous.isEnabled()) return;
                 if (currIndex > 0) {
                     currIndex--;
                 }
@@ -487,6 +473,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!buttonTask4Next.isEnabled()) return;
                 if (currIndex + 1 < listOfIndex.size()) {
                     currIndex++;
                 }
@@ -507,36 +494,43 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                buttonTask23FirstImage.setEnabled(false);
-                buttonTask23SecondImage.setEnabled(true);
-//                buttonTask23FinalImage.setEnabled(true);
-                imageTask23.setIcon(new ImageIcon(task23ImageFirst));
+                if (buttonTask23FirstImage.isEnabled()) {
+                    buttonTask23FirstImage.setEnabled(false);
+                    buttonTask23SecondImage.setEnabled(true);
+//                   buttonTask23FinalImage.setEnabled(true);
+                    imageTask23.setIcon(new ImageIcon(task23ImageFirst));
+                }
             }
         });
         buttonTask23SecondImage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                buttonTask23FirstImage.setEnabled(true);
-                buttonTask23SecondImage.setEnabled(false);
-//                buttonTask23FinalImage.setEnabled(true);
-                imageTask23.setIcon(new ImageIcon(task23ImageSecond));
+                if (buttonTask23SecondImage.isEnabled()) {
+                    buttonTask23FirstImage.setEnabled(true);
+                    buttonTask23SecondImage.setEnabled(false);
+//                  buttonTask23FinalImage.setEnabled(true);
+                    imageTask23.setIcon(new ImageIcon(task23ImageSecond));
+                }
             }
         });
         buttonTask23FinalImage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                buttonTask23FirstImage.setEnabled(true);
-                buttonTask23SecondImage.setEnabled(true);
-//                buttonTask23FinalImage.setEnabled(false);
-                imageTask23.setIcon(new ImageIcon(task23Imgage));
+                if (buttonTask23FinalImage.isEnabled()) {
+                    buttonTask23FirstImage.setEnabled(true);
+                    buttonTask23SecondImage.setEnabled(true);
+//                  buttonTask23FinalImage.setEnabled(false);
+                    imageTask23.setIcon(new ImageIcon(task23Imgage));
+                }
             }
         });
         button3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!button3.isEnabled()) return;
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     try {
                         String browseTask4 = (pathToFile + "\\htdocs\\map.html").replace('\\', '/');
@@ -562,6 +556,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!button4.isEnabled()) return;
                 JFileChooser fileopen = new JFileChooser();
                 int ret = fileopen.showDialog(null, "Открыть файл");
                 if (ret == JFileChooser.APPROVE_OPTION) {
@@ -582,6 +577,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!button5.isEnabled()) return;
                 Color newColor = JColorChooser.showDialog(null, "Choose a color", color1);
                 color1 = newColor;
                 task6Color1.setIcon(createIcon(color1, 16, 16));
@@ -591,6 +587,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!button6.isEnabled()) return;
                 Color newColor = JColorChooser.showDialog(null, "Choose a color", color2);
                 color2 = newColor;
                 task6Color2.setIcon(createIcon(color2, 16, 16));
@@ -683,6 +680,7 @@ public class myGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (!imageTask6.isEnabled()) return;
                 if (startImageTask6 != null) {
                     int intColor = startImageTask6.getRGB(e.getX(), e.getY());
                     pipetColor = new Color(intColor);
@@ -693,9 +691,18 @@ public class myGUI extends JFrame {
         buttonPanorama.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (!buttonPanorama.isEnabled()) return;
                 super.mouseClicked(e);
                 double mn_x = 10000, mn_y = 10000, mx_x = -10000, mx_y = -10000;
                 int n = PhotosInfo.photos.size();
+                if (n >= 10) {
+                    JOptionPane.showMessageDialog(myGUI.this,
+                            new String[]{"Неможливо побудувати для такої кількості фотографій",
+                                    "Виберіть менше 10 зображень"},
+                            "Помилка",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
                 for (int i = 0; i < n; ++i) {
                     mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getLeftBottomCorner().x);
                     mn_x = Math.min(mn_x, PhotosInfo.photos.get(i).getLeftTopCorner().x);
@@ -879,6 +886,26 @@ public class myGUI extends JFrame {
                 }
             }
         });
+        imageTask6.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                imageTask6.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+        });
+        інструкціяButton4.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(myGUI.this,
+                        new String[]{"Спочатку виберіть текстовий документ з інформацією про політ.",
+                                "При настиканні на кнопки 'Попереднє/наступне зображання' можна переглянути усі фотографії,",
+                                "при чому, якщо можливо побудувати неперервний маршрут, сусідні фотографії будуть перетинатись.",
+                                "При натисканні на кнопку 'Побудувати панораму', якщо фотографій менше 10, побудується панорама.",
+                                "При натисканні на кнопку 'Відкрити карту', відкривається сайт в браузері, де можна побачити контури фотографій на карті."},
+                        "Інструкція",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
     }
 
     //Mat color1, color2, hsvColor1, hsvColor2;
@@ -960,7 +987,11 @@ public class myGUI extends JFrame {
         інструкціяButton2.setBackground(new Color(-2694187));
         Font інструкціяButton2Font = this.$$$getFont$$$(null, -1, 16, інструкціяButton2.getFont());
         if (інструкціяButton2Font != null) інструкціяButton2.setFont(інструкціяButton2Font);
-        інструкціяButton2.setText("Інструкція");
+        інструкціяButton2.setIcon(new ImageIcon(getClass().getResource("/q_mark.png")));
+        інструкціяButton2.setMaximumSize(new Dimension(80, 80));
+        інструкціяButton2.setMinimumSize(new Dimension(80, 80));
+        інструкціяButton2.setPreferredSize(new Dimension(80, 80));
+        інструкціяButton2.setText("");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -1107,7 +1138,7 @@ public class myGUI extends JFrame {
         Font button3Font = this.$$$getFont$$$(null, -1, 16, button3.getFont());
         if (button3Font != null) button3.setFont(button3Font);
         button3.setOpaque(true);
-        button3.setText("Виконати");
+        button3.setText("Відкрити карту");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
@@ -1408,7 +1439,6 @@ public class myGUI extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return MyPanel;
     }
-
 }
 
 
