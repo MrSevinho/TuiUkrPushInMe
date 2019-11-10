@@ -1,6 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class StartMenu {
     private JButton початиButton;
@@ -29,11 +33,18 @@ public class StartMenu {
     }
 
     public static void main(String[] args) {
-        frame = new JFrame("StartMenu");
+        frame = new JFrame("");
         frame.setContentPane(new StartMenu().Panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(1000, 600);
+        try {
+            BufferedImage img = ImageIO.read(new File(new File("").getAbsolutePath() + "\\src\\drone.png"));
+            frame.setIconImage(img);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         int x, y;
         x = (Toolkit.getDefaultToolkit().getScreenSize().width - frame.getWidth()) / 2;
         y = (Toolkit.getDefaultToolkit().getScreenSize().height - frame.getHeight()) / 2;
@@ -88,6 +99,15 @@ public class StartMenu {
         gbc.weighty = 0.1;
         gbc.anchor = GridBagConstraints.EAST;
         Panel.add(Info, gbc);
+        final JLabel label2 = new JLabel();
+        label2.setText("Турнір Юних Інформатиків");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.05;
+        gbc.anchor = GridBagConstraints.NORTH;
+        Panel.add(label2, gbc);
     }
 
     /**

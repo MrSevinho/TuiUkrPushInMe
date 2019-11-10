@@ -7,37 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2fa6ada6-a918-42c4-a493-0dacfa0f9cd1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TUI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/map.html" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/map.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/solver.js" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/solver.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/StartMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/StartMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Functions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/MathTransform.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Matrices.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Matrices.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo$Photo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo$Photo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PhotosInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/PlanPath.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/PlanPath.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Plane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Plane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task23$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task23$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/Task5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/Task5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/company/getLaplac.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/company/getLaplac.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/LayoutState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/fifth.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/fifth.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/first.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/first.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/fourth.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/fourth.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$11.class" afterDir="false" />
@@ -66,19 +40,10 @@
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TUI/myGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/myGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/secondthird.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/secondthird.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TUI/sixth.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TUI/sixth.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/HorizontalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/LayoutState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/TUI/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fifth.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/fifth.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/first.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/first.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fourth.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/fourth.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StartMenu.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/StartMenu.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StartMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/myGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/myGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/myGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/secondthird.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/secondthird.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sixth.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sixth.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,15 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/StartMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="14" column="21" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="21" />
-              <folding>
-                <element signature="e#267#775#0" expanded="true" />
-                <element signature="e#774#775#0" expanded="true" />
-                <element signature="e#816#1046#0" expanded="true" />
-                <element signature="e#1045#1046#0" expanded="true" />
-                <element signature="initializer##0;class#StartMenu#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="189">
+              <caret line="42" column="36" lean-forward="true" selection-start-line="41" selection-start-column="10" selection-end-line="42" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -107,7 +65,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Functions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
+            <state relative-caret-position="302">
               <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
             </state>
           </provider>
@@ -134,7 +92,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/PhotosInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="544">
               <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -158,16 +116,78 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/myGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="175" column="9" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="9" />
+            <state relative-caret-position="217">
+              <caret line="259" column="51" lean-forward="true" selection-start-line="259" selection-start-column="51" selection-end-line="259" selection-end-column="51" />
               <folding>
-                <element signature="e#5555#7097#0" expanded="true" />
-                <element signature="e#7096#7097#0" expanded="true" />
-                <element signature="e#39957#40137#0" />
-                <element signature="e#39989#58612#0" expanded="true" />
-                <element signature="e#58702#58703#0" expanded="true" />
-                <element signature="e#58732#58733#0" expanded="true" />
+                <element signature="e#5603#7145#0" expanded="true" />
+                <element signature="e#7144#7145#0" expanded="true" />
+                <element signature="e#7146#10261#0" expanded="true" />
+                <element signature="e#10260#10261#0" expanded="true" />
+                <element signature="e#10342#12191#0" expanded="true" />
+                <element signature="e#12190#12191#0" expanded="true" />
+                <element signature="e#12309#13741#0" expanded="true" />
+                <element signature="e#13740#13741#0" expanded="true" />
+                <element signature="e#13786#14443#0" expanded="true" />
+                <element signature="e#14442#14443#0" expanded="true" />
+                <element signature="e#14487#15671#0" expanded="true" />
+                <element signature="e#15670#15671#0" expanded="true" />
+                <element signature="e#15714#16290#0" expanded="true" />
+                <element signature="e#16289#16290#0" expanded="true" />
+                <element signature="e#16326#19768#0" expanded="true" />
+                <element signature="e#19767#19768#0" expanded="true" />
+                <element signature="e#19816#20704#0" expanded="true" />
+                <element signature="e#20703#20704#0" expanded="true" />
+                <element signature="e#20748#21678#0" expanded="true" />
+                <element signature="e#21677#21678#0" expanded="true" />
+                <element signature="e#21729#22130#0" expanded="true" />
+                <element signature="e#22129#22130#0" expanded="true" />
+                <element signature="e#22182#22584#0" expanded="true" />
+                <element signature="e#22583#22584#0" expanded="true" />
+                <element signature="e#22635#23032#0" expanded="true" />
+                <element signature="e#23031#23032#0" expanded="true" />
+                <element signature="e#23068#24353#0" expanded="true" />
+                <element signature="e#24352#24353#0" expanded="true" />
+                <element signature="e#25033#25972#0" expanded="true" />
+                <element signature="e#25971#25972#0" expanded="true" />
+                <element signature="e#26008#26357#0" expanded="true" />
+                <element signature="e#26356#26357#0" expanded="true" />
+                <element signature="e#26393#26742#0" expanded="true" />
+                <element signature="e#26741#26742#0" expanded="true" />
+                <element signature="e#26877#27843#0" expanded="true" />
+                <element signature="e#27842#27843#0" expanded="true" />
+                <element signature="e#27889#28896#0" expanded="true" />
+                <element signature="e#28895#28896#0" expanded="true" />
+                <element signature="e#28941#30173#0" expanded="true" />
+                <element signature="e#30172#30173#0" expanded="true" />
+                <element signature="e#30225#30822#0" expanded="true" />
+                <element signature="e#30821#30822#0" expanded="true" />
+                <element signature="e#30877#31474#0" expanded="true" />
+                <element signature="e#31473#31474#0" expanded="true" />
+                <element signature="e#31513#31941#0" expanded="true" />
+                <element signature="e#31940#31941#0" expanded="true" />
+                <element signature="e#31984#39193#0" expanded="true" />
+                <element signature="e#39192#39193#0" expanded="true" />
+                <element signature="e#39239#39935#0" expanded="true" />
+                <element signature="e#39934#39935#0" expanded="true" />
+                <element signature="e#39977#41593#0" expanded="true" />
+                <element signature="e#41592#41593#0" expanded="true" />
+                <element signature="e#42806#67491#0" expanded="true" />
+                <element signature="e#68314#68315#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StartMenu.form">
+          <provider selected="true" editor-type-id="ui-designer" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Task23.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="812">
+              <caret line="103" selection-start-line="103" selection-end-line="103" />
             </state>
           </provider>
         </entry>
@@ -202,6 +222,7 @@
         <option value="$PROJECT_DIR$/src/com/company/PhotosInfo.java" />
         <option value="$PROJECT_DIR$/src/com/company/Functions.java" />
         <option value="$PROJECT_DIR$/src/StartMenu.java" />
+        <option value="$PROJECT_DIR$/src/StartMenu.form" />
         <option value="$PROJECT_DIR$/src/myGUI.form" />
         <option value="$PROJECT_DIR$/src/myGUI.java" />
       </list>
@@ -220,8 +241,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -377,7 +398,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16187595" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16414523" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -394,11 +415,11 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32827735" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32733223" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="691" y="448" width="618" height="619" id="Palette" order="3" type="FLOATING" weight="0.32942432" />
+      <window_info anchor="right" x="382" y="611" width="618" height="619" id="Palette" order="3" type="FLOATING" weight="0.32942432" />
       <window_info anchor="right" id="Maven" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
@@ -450,27 +471,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/company/Task23.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="29" column="38" lean-forward="true" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Task4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Matrices.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -480,11 +480,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/PhotosInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="544">
           <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Task4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -498,17 +505,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/StartMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="21" />
-          <folding>
-            <element signature="e#267#775#0" expanded="true" />
-            <element signature="e#774#775#0" expanded="true" />
-            <element signature="e#816#1046#0" expanded="true" />
-            <element signature="e#1045#1046#0" expanded="true" />
-            <element signature="initializer##0;class#StartMenu#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="189">
+          <caret line="42" column="36" lean-forward="true" selection-start-line="41" selection-start-column="10" selection-end-line="42" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StartMenu.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Task23.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="812">
+          <caret line="103" selection-start-line="103" selection-end-line="103" />
         </state>
       </provider>
     </entry>
@@ -517,15 +534,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/myGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="175" column="9" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="9" />
+        <state relative-caret-position="217">
+          <caret line="259" column="51" lean-forward="true" selection-start-line="259" selection-start-column="51" selection-end-line="259" selection-end-column="51" />
           <folding>
-            <element signature="e#5555#7097#0" expanded="true" />
-            <element signature="e#7096#7097#0" expanded="true" />
-            <element signature="e#39957#40137#0" />
-            <element signature="e#39989#58612#0" expanded="true" />
-            <element signature="e#58702#58703#0" expanded="true" />
-            <element signature="e#58732#58733#0" expanded="true" />
+            <element signature="e#5603#7145#0" expanded="true" />
+            <element signature="e#7144#7145#0" expanded="true" />
+            <element signature="e#7146#10261#0" expanded="true" />
+            <element signature="e#10260#10261#0" expanded="true" />
+            <element signature="e#10342#12191#0" expanded="true" />
+            <element signature="e#12190#12191#0" expanded="true" />
+            <element signature="e#12309#13741#0" expanded="true" />
+            <element signature="e#13740#13741#0" expanded="true" />
+            <element signature="e#13786#14443#0" expanded="true" />
+            <element signature="e#14442#14443#0" expanded="true" />
+            <element signature="e#14487#15671#0" expanded="true" />
+            <element signature="e#15670#15671#0" expanded="true" />
+            <element signature="e#15714#16290#0" expanded="true" />
+            <element signature="e#16289#16290#0" expanded="true" />
+            <element signature="e#16326#19768#0" expanded="true" />
+            <element signature="e#19767#19768#0" expanded="true" />
+            <element signature="e#19816#20704#0" expanded="true" />
+            <element signature="e#20703#20704#0" expanded="true" />
+            <element signature="e#20748#21678#0" expanded="true" />
+            <element signature="e#21677#21678#0" expanded="true" />
+            <element signature="e#21729#22130#0" expanded="true" />
+            <element signature="e#22129#22130#0" expanded="true" />
+            <element signature="e#22182#22584#0" expanded="true" />
+            <element signature="e#22583#22584#0" expanded="true" />
+            <element signature="e#22635#23032#0" expanded="true" />
+            <element signature="e#23031#23032#0" expanded="true" />
+            <element signature="e#23068#24353#0" expanded="true" />
+            <element signature="e#24352#24353#0" expanded="true" />
+            <element signature="e#25033#25972#0" expanded="true" />
+            <element signature="e#25971#25972#0" expanded="true" />
+            <element signature="e#26008#26357#0" expanded="true" />
+            <element signature="e#26356#26357#0" expanded="true" />
+            <element signature="e#26393#26742#0" expanded="true" />
+            <element signature="e#26741#26742#0" expanded="true" />
+            <element signature="e#26877#27843#0" expanded="true" />
+            <element signature="e#27842#27843#0" expanded="true" />
+            <element signature="e#27889#28896#0" expanded="true" />
+            <element signature="e#28895#28896#0" expanded="true" />
+            <element signature="e#28941#30173#0" expanded="true" />
+            <element signature="e#30172#30173#0" expanded="true" />
+            <element signature="e#30225#30822#0" expanded="true" />
+            <element signature="e#30821#30822#0" expanded="true" />
+            <element signature="e#30877#31474#0" expanded="true" />
+            <element signature="e#31473#31474#0" expanded="true" />
+            <element signature="e#31513#31941#0" expanded="true" />
+            <element signature="e#31940#31941#0" expanded="true" />
+            <element signature="e#31984#39193#0" expanded="true" />
+            <element signature="e#39192#39193#0" expanded="true" />
+            <element signature="e#39239#39935#0" expanded="true" />
+            <element signature="e#39934#39935#0" expanded="true" />
+            <element signature="e#39977#41593#0" expanded="true" />
+            <element signature="e#41592#41593#0" expanded="true" />
+            <element signature="e#42806#67491#0" expanded="true" />
+            <element signature="e#68314#68315#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -36,6 +36,15 @@
           <text value="___"/>
         </properties>
       </component>
+      <component id="6d91b" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.05"/>
+        </constraints>
+        <properties>
+          <text value="Турнір Юних Інформатиків"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

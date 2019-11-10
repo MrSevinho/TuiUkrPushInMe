@@ -43,7 +43,19 @@
                 <properties>
                   <alignmentY value="0.0"/>
                   <background color="-2694187"/>
+                  <font size="16"/>
                   <text value="Запустити"/>
+                </properties>
+              </component>
+              <component id="4df71" class="javax.swing.JButton" binding="інструкціяButton2" default-binding="true">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-2694187"/>
+                  <font size="16"/>
+                  <text value="Інструкція"/>
                 </properties>
               </component>
               <component id="9baac" class="javax.swing.JLabel">
@@ -57,16 +69,6 @@
                   <alignmentY value="0.0"/>
                   <icon value="dron3.jpg"/>
                   <text value=""/>
-                </properties>
-              </component>
-              <component id="4df71" class="javax.swing.JButton" binding="інструкціяButton2" default-binding="true">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <background color="-2694187"/>
-                  <text value="Інструкція"/>
                 </properties>
               </component>
             </children>
@@ -93,18 +95,6 @@
                   <text value=""/>
                 </properties>
               </component>
-              <component id="9ef5c" class="javax.swing.JButton" binding="buttonTask23FirstImage">
-                <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.1"/>
-                </constraints>
-                <properties>
-                  <alignmentY value="0.0"/>
-                  <background color="-2694187"/>
-                  <enabled value="false"/>
-                  <text value="Перше зображення"/>
-                </properties>
-              </component>
               <component id="28ca5" class="javax.swing.JButton" binding="buttonTask23FinalImage">
                 <constraints>
                   <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
@@ -114,6 +104,7 @@
                   <alignmentY value="0.1"/>
                   <background color="-2694187"/>
                   <enabled value="false"/>
+                  <font size="16"/>
                   <text value="Фінальне зображення"/>
                 </properties>
               </component>
@@ -126,6 +117,7 @@
                   <alignmentY value="0.0"/>
                   <background color="-2694187"/>
                   <enabled value="false"/>
+                  <font size="16"/>
                   <text value="Друге зображення"/>
                 </properties>
               </component>
@@ -137,17 +129,44 @@
                 <properties>
                   <alignmentY value="0.1"/>
                   <background color="-2694187"/>
+                  <font size="16"/>
                   <text value="Вибрати зображення"/>
+                </properties>
+              </component>
+              <component id="9ef5c" class="javax.swing.JButton" binding="buttonTask23FirstImage">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.1"/>
+                </constraints>
+                <properties>
+                  <alignmentY value="0.0"/>
+                  <background color="-2694187"/>
+                  <enabled value="false"/>
+                  <font size="16"/>
+                  <text value="Перше зображення"/>
                 </properties>
               </component>
               <component id="5e474" class="javax.swing.JButton" binding="інструкціяButton3" default-binding="true">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
+                  <font size="16"/>
                   <text value="Інструкція"/>
+                </properties>
+              </component>
+              <component id="8e249" class="javax.swing.JButton" binding="buttonSolve23">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-2694187"/>
+                  <enabled value="false"/>
+                  <font size="16"/>
+                  <text value="Виконати"/>
                 </properties>
               </component>
             </children>
@@ -171,13 +190,13 @@
                 <properties>
                   <alignmentY value="0.0"/>
                   <background color="-2694187"/>
-                  <font size="18"/>
+                  <font size="16"/>
                   <text value="Вибрати файл"/>
                 </properties>
               </component>
               <component id="57bba" class="javax.swing.JButton" binding="button3" default-binding="true">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="0.001"/>
                 </constraints>
                 <properties>
@@ -185,34 +204,34 @@
                   <background color="-2694187"/>
                   <enabled value="false"/>
                   <focusPainted value="true"/>
-                  <font size="18"/>
+                  <font size="16"/>
                   <opaque value="true"/>
                   <text value="Виконати"/>
                 </properties>
               </component>
               <component id="e9773" class="javax.swing.JButton" binding="buttonTask4Next">
                 <constraints>
-                  <grid row="2" column="1" row-span="2" col-span="3" vsize-policy="0" hsize-policy="3" anchor="5" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="2" row-span="2" col-span="2" vsize-policy="0" hsize-policy="3" anchor="5" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag top="10" left="0" bottom="0" right="150" weightx="1.0" weighty="0.1"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
                   <background color="-2694187"/>
                   <enabled value="false"/>
-                  <font size="18"/>
+                  <font size="15"/>
                   <text value="Наступне зображення"/>
                 </properties>
               </component>
               <component id="8ef52" class="javax.swing.JButton" binding="buttonTask4Previous">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag top="10" left="150" bottom="0" right="0" weightx="1.0" weighty="0.1"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
                   <background color="-2694187"/>
                   <enabled value="false"/>
-                  <font size="18"/>
+                  <font size="16"/>
                   <text value="Попереднє зображення"/>
                 </properties>
               </component>
@@ -223,30 +242,31 @@
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
-                  <font size="18"/>
+                  <font size="16"/>
                   <text value="Інструкція"/>
-                </properties>
-              </component>
-              <component id="4324e" class="javax.swing.JButton" binding="buttonPanorama">
-                <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="0.001"/>
-                </constraints>
-                <properties>
-                  <background color="-2694187"/>
-                  <font size="18"/>
-                  <text value="Побудувати панораму"/>
                 </properties>
               </component>
               <component id="2ddfd" class="javax.swing.JLabel" binding="imageTask4">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0E-4"/>
+                  <gridbag top="0" left="0" bottom="30" right="0" weightx="0.0" weighty="1.0E-4"/>
                 </constraints>
                 <properties>
                   <alignmentY value="0.0"/>
                   <icon value="dron.jpg"/>
                   <text value=""/>
+                </properties>
+              </component>
+              <component id="4324e" class="javax.swing.JButton" binding="buttonPanorama">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.008"/>
+                </constraints>
+                <properties>
+                  <background color="-2694187"/>
+                  <enabled value="false"/>
+                  <font size="16"/>
+                  <text value="Побудувати панораму"/>
                 </properties>
               </component>
             </children>
@@ -280,7 +300,7 @@
                 <properties>
                   <background color="-2694187"/>
                   <enabled value="false"/>
-                  <font size="18"/>
+                  <font size="16"/>
                   <text value="Друге зображення"/>
                 </properties>
               </component>
@@ -291,7 +311,7 @@
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
-                  <font size="18"/>
+                  <font size="16"/>
                   <text value="Вибрати зображення"/>
                 </properties>
               </component>
@@ -314,7 +334,7 @@
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
-                  <font size="18"/>
+                  <font size="16"/>
                   <text value="Інструкція"/>
                 </properties>
               </component>
@@ -337,6 +357,7 @@
                 <properties>
                   <background color="-2694187"/>
                   <enabled value="false"/>
+                  <font size="16"/>
                   <text value=" Стартове зображення"/>
                 </properties>
               </component>
@@ -357,6 +378,7 @@
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
+                  <font size="16"/>
                   <text value="Вибрати зображення"/>
                 </properties>
               </component>
@@ -367,6 +389,8 @@
                 </constraints>
                 <properties>
                   <background color="-2694187"/>
+                  <enabled value="false"/>
+                  <font size="16"/>
                   <text value="Обробити зображення"/>
                 </properties>
               </component>
@@ -396,6 +420,8 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <focusable value="true"/>
+                      <font size="16"/>
                       <text value="Перший колір"/>
                     </properties>
                   </component>
@@ -413,6 +439,7 @@
                     </constraints>
                     <properties>
                       <background color="-2694187"/>
+                      <font size="16"/>
                       <text value="Виберіть перший колір"/>
                     </properties>
                   </component>
@@ -422,6 +449,7 @@
                     </constraints>
                     <properties>
                       <background color="-2694187"/>
+                      <font size="16"/>
                       <text value="Виберіть другий колір"/>
                     </properties>
                   </component>
@@ -438,6 +466,7 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font size="16"/>
                       <text value="Другий колір"/>
                     </properties>
                   </component>
@@ -447,6 +476,7 @@
                     </constraints>
                     <properties>
                       <background color="-2694187"/>
+                      <font size="16"/>
                       <text value="Взяти колір піпетки"/>
                     </properties>
                   </component>
@@ -456,6 +486,7 @@
                     </constraints>
                     <properties>
                       <background color="-2694187"/>
+                      <font size="16"/>
                       <text value="Взяти колір піпетки"/>
                     </properties>
                   </component>
@@ -464,6 +495,7 @@
                       <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <font size="16"/>
                       <text value="Колір піпетки"/>
                     </properties>
                   </component>
@@ -486,6 +518,7 @@
                   <background color="-2694187"/>
                   <borderPainted value="true"/>
                   <contentAreaFilled value="true"/>
+                  <font size="16"/>
                   <text value="Інструкція"/>
                 </properties>
               </component>
